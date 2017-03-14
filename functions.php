@@ -2,6 +2,8 @@
   $dbhost  = 'localhost';
   $dbname  = 'SealOfHealth';
   $dbuser  = 'root';
+  //Put whatever password you set for root when you installed mysql
+  //into <dbpass>. Everything else should be good (I think)
   $dbpass  = 'dbpass';
 
   $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
