@@ -13,7 +13,7 @@
 
   //Put whatever password you set for root when you installed mysql
   //into <dbpass>. Everything else should be good (I think)
-  $connection = new mysqli('localhost', 'root', 'misty971');
+  $connection = new mysqli('localhost', 'root', 'dbpass');
   if ($connection->connect_error) die($connection->connect_error);
 
   echo "<h4>Connected Successfully.<h4>";
