@@ -1,8 +1,8 @@
 <?php
   $dbhost  = 'localhost';
   $dbname  = 'SealOfHealth';
-  $dbuser  = 'admin';
-  $dbpass  = 'sealofhealth';
+  $dbuser  = 'root';
+  $dbpass  = 'dbpass';
 
   $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
   if ($connection->connect_error) die($connection->connect_error);
