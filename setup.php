@@ -104,7 +104,7 @@
               'FOREIGN KEY (username_patient) REFERENCES Patient(username)',
               'FOREIGN KEY (username_doctor) REFERENCES Doctor(username)',
               'FOREIGN KEY (drug_name) REFERENCES Prescription(drug_name)',
-              'FOREIGN KEY (case_id) REFERENCES Appointment(appointment_id)',
+              'FOREIGN KEY (appointment_id) REFERENCES Appointment(appointment_id)',
               'INDEX(username_patient(6))',
               'INDEX(username_doctor(6))',
               'INDEX(appointment_id(6))');
