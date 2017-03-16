@@ -33,7 +33,7 @@
   //**Discuss the correctness of:
   createTable('Doctor',
               'username VARCHAR(16) PRIMARY KEY',
-              'password VARCHAR(20) NOT NULL',
+              'password VARCHAR(32) NOT NULL',
               'phone_no INT UNSIGNED NOT NULL',
               'sex VARCHAR(6)',
               'name VARCHAR(20) NOT NULL',
@@ -44,7 +44,7 @@
 
   createTable('Patient',
               'username VARCHAR(16) PRIMARY KEY',
-              'password VARCHAR(20) NOT NULL',
+              'password VARCHAR(32) NOT NULL',
               'phone_no INT UNSIGNED NOT NULL',
               'sex VARCHAR(6)',
               'name VARCHAR(20) NOT NULL',
