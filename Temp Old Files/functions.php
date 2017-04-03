@@ -1,5 +1,5 @@
 <?php
-  $dbhost  = 'localhost';
+  $dbhost  = 'localhost:8080';
   $dbname  = 'SealOfHealth';
   $dbuser  = 'root';
   //Put whatever password you set for root when you installed mysql
