@@ -43,7 +43,7 @@ if(isset($_POST['btn-login']))
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>COP4710 Group 6</title>
+    <title>Seal of Health</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -54,6 +54,7 @@ if(isset($_POST['btn-login']))
 
     <!-- CSS Files -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/soh.css" rel="stylesheet"/>
     <link href="assets/css/material-kit.css" rel="stylesheet"/>
 
      <!-- reCAPTCHA -->
@@ -62,7 +63,7 @@ if(isset($_POST['btn-login']))
 </head>
 <body id="login">
 <div class="container">
-       <nav class="navbar navbar-fixed-top">
+       <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -110,7 +111,7 @@ if(isset($_POST['btn-login']))
             <br><br>  
              <div class="g-recaptcha" data-sitekey="6LfgShsUAAAAAE7Q65POO5f3emf8KnEB93g7LUs-"></div>                
             <br><br>
-            <button class="btn btn-large btn-primary" type="submit" name="btn-login">Sign in</button>
+            <button class="btn btn-large btn-inverse" type="submit" name="btn-login">Sign in</button>
             <br>
             <a href="signup.php" >Sign Up</a>
             <br>
