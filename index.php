@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'class.user.php';
+
+// This is call from the class.user.php
 $user_login = new USER();
 
 
@@ -11,31 +13,25 @@ if($user_login->is_logged_in()!="")
 }
 if(isset($_POST['btn-login']))
 {  
-        
+        // saving user info into PHP variables
+          $email = trim($_POST['txtemail']);
+          $upass = trim($_POST['txtupass']);
+
+          // reCAPTCHA check 
         if(isset($_POST['g-recaptcha-response']))
           $captcha=$_POST['g-recaptcha-response'];
 
         if(!$captcha){
           echo '<h2>Please check the the captcha form.</h2>';
           exit;
-        }
-        $response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfgShsUAAAAAAfbrFC91zs_Bp63lVB4QBMCLMgL
-Y&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
-        if($response['success'] == false)
-        {
-          echo '<h2>You are spammer ! Get the @$%K out</h2>';
-        }
-        else
-        {
-    $email = trim($_POST['txtemail']);
-    $upass = trim($_POST['txtupass']);
+        }    
 
-        
+        // if reCAPTCHA has worked continue with the login process   
          if($user_login->login($email,$upass))
     {
         $user_login->redirect('home.php');
     }
-        }
+       
 }
 ?>
 
