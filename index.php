@@ -2,18 +2,40 @@
 session_start();
 require_once 'class.user.php';
 $user_login = new USER();
+
+
+
 if($user_login->is_logged_in()!="")
 {
     $user_login->redirect('home.php');
 }
 if(isset($_POST['btn-login']))
-{
+{  
+        
+        if(isset($_POST['g-recaptcha-response']))
+          $captcha=$_POST['g-recaptcha-response'];
+
+        if(!$captcha){
+          echo '<h2>Please check the the captcha form.</h2>';
+          exit;
+        }
+        $response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfgShsUAAAAAAfbrFC91zs_Bp63lVB4QBMCLMgL
+Y&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+        if($response['success'] == false)
+        {
+          echo '<h2>You are spammer ! Get the @$%K out</h2>';
+        }
+        else
+        {
     $email = trim($_POST['txtemail']);
     $upass = trim($_POST['txtupass']);
-    if($user_login->login($email,$upass))
+
+        
+         if($user_login->login($email,$upass))
     {
         $user_login->redirect('home.php');
     }
+        }
 }
 ?>
 
@@ -37,10 +59,32 @@ if(isset($_POST['btn-login']))
     <!-- CSS Files -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/material-kit.css" rel="stylesheet"/>
+
+     <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body id="login">
 <div class="container">
-    <?php
+       <nav class="navbar navbar-fixed-top">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><h4>Seal of Health</h4></a>
+                </div>                
+            </div>
+        </nav>
+        
+  
+    <form action ="" class="form-signin" method="POST">
+
+      <?php
     if(isset($_GET['inactive']))
     {
         ?>
@@ -50,7 +94,6 @@ if(isset($_POST['btn-login']))
         <?php
     }
     ?>
-    <form class="form-signin" method="post">
         <?php
         if(isset($_GET['error']))
         {
@@ -61,37 +104,19 @@ if(isset($_POST['btn-login']))
             <?php
         }
         ?>
-        <nav class="navbar navbar-fixed-top">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><h4>Group 6</h4></a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navigation">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <h3>COP4710</h3>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+     
         <center>
             </br></br></br></br></br>
             <h2 class="form-signin-heading">Sign In</h2><br><br>
             <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
             <br><br>
             <input type="password" class="input-block-level" placeholder="Password" name="txtupass" required />
+            <br><br>  
+             <div class="g-recaptcha" data-sitekey="6LfgShsUAAAAAE7Q65POO5f3emf8KnEB93g7LUs-"></div>                
             <br><br>
             <button class="btn btn-large btn-primary" type="submit" name="btn-login">Sign in</button>
-            <a href="signup.php" class="btn btn-large">Sign Up</a>
+            <br>
+            <a href="signup.php" >Sign Up</a>
             <br>
             <a href="fpass.php">Lost your Password? </a>
     </form>
