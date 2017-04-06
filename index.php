@@ -22,15 +22,19 @@ if(isset($_POST['btn-login']))
           $captcha=$_POST['g-recaptcha-response'];
 
         if(!$captcha){
-          echo '<h2>Please check the the captcha form.</h2>';
-          exit;
-        }    
+            $msg = "
+            <div class='alert alert-success'>
+                <button class='close' data-dismiss='alert'>&times;</button>
+                <strong>Success!</strong> We've sent an email for super admin authentication.
+                    Please wait while we authenticate your account.
+            </div>";
+        }
 
         // if reCAPTCHA has worked continue with the login process   
-         if($user_login->login($email,$upass))
-    {
+        else if($user_login->login($email,$upass))
+        {
         $user_login->redirect('home.php');
-    }
+        }
        
 }
 ?>
@@ -80,8 +84,7 @@ if(isset($_POST['btn-login']))
         
   
     <form action ="" class="form-signin" method="POST">
-
-      <?php
+        <?php
     if(isset($_GET['inactive']))
     {
         ?>
@@ -101,7 +104,15 @@ if(isset($_POST['btn-login']))
             <?php
         }
         ?>
-     
+        <?php if(isset($msg))
+        {
+            ?>
+            <br><br><br><div class='alert alert-danger'>
+            <strong>Sorry!</strong> Please try reCAPTCHA again.
+        </div>
+            <?php
+        }
+        ?>
         <center>
             </br></br></br></br></br>
             <h2 class="form-signin-heading">Sign In</h2><br><br>
@@ -113,7 +124,7 @@ if(isset($_POST['btn-login']))
             <br><br>
             <button class="btn btn-large btn-inverse" type="submit" name="btn-login">Sign in</button>
             <br>
-            <a href="signup.php" >Sign Up</a>
+            <a href="../../Desktop/soh-master/signup.php" >Sign Up</a>
             <br>
             <a href="fpass.php">Lost your Password? </a>
     </form>
