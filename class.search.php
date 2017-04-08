@@ -1,7 +1,7 @@
 <?php
 
 	require_once 'functions.php';
-	
+
 	class Search
 	{
 		//$result returned is a mysqli_result object (set of rows returned by query)
@@ -15,7 +15,7 @@
 			else
 				return NULL;
 		}
-		
+
 		public function sortByEarlierDate($date, $time)
 		{
 			$result = queryMysql("SELECT * FROM Appointment ORDER BY appDate, startTime");
@@ -24,7 +24,7 @@
 			else
 				return NULL;
 		}
-		
+
 		public function getByDoctor($doctor)
 		{
 			$result = queryMysql("SELECT * FROM ((Lists L INNER JOIN Appointment A ON A.appointmentid = L.appointmentid) 
@@ -35,7 +35,7 @@
 			else
 				return NULL;
 		}
-		
+
 		public function getByAppName($name)
 		{
 			$result = queryMysql("SELECT * FROM Appointment WHERE appName='$name'");
@@ -44,7 +44,7 @@
 			else
 				return NULL;
 		}
-	
+
 		public function filterByPrice($priceLow, $priceHigh)
 		{
 			$result = queryMysql("SELECT * FROM Appointment WHERE price >= '$priceLow' AND price <= '$priceHigh'");
@@ -53,7 +53,7 @@
 			else
 				return NULL;
 		}
-		
+
 		public function filterBySpecialty($specialty)
 		{
 			$result = queryMysql("SELECT * FROM ((Lists L INNER JOIN Appointment A ON A.appointmentid = L.appointmentid) 
@@ -64,7 +64,7 @@
 			else
 				return NULL;
 		}
-		
+
 		public function filterByDate($date)
 		{
 			$result = queryMysql("SELECT * FROM Appointment WHERE appDate = '$appDate'");
@@ -73,7 +73,7 @@
 			else
 				return NULL;
 		}
-		
+
 		public function filterBySex($sex)
 		{
 			$result = queryMysql("SELECT * FROM ((Lists L INNER JOIN Appointment A ON A.appointmentid = L.appointmentid) 
