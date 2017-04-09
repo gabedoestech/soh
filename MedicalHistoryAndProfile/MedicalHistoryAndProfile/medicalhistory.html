@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+
+<head>
+	<title>Profile Information</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="main2.css">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+	<!-- Added -->
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+	<!--Added Finish -->
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="backer">
+			<center><img src="SH_T_trimmed.png" class="img-rounded" alt="Cinque Terre" width="304" height="236"></center>
+		</div>
+
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="editprofilepagestyle2.html">Profile</a></li>
+			<li role="presentation" class="active"><a href="#">Medical History</a></li>
+			<p class="navbar-text">Signed in as Maria Mosquera</p>
+		</ul>
+
+		<ol class="breadcrumb">
+			<li><a href="#">Edit Medical History Information</a></li>
+			<li><a href="#">View Medical History</a></li>
+
+			<h2>Visit Summary</h2>
+			<br>
+			<p>
+				<light> (Your most recent history should be visible within 2 hours of your most recent appointment)</light>
+			</p>
+
+			<!-- Added -->
+			<link rel="stylesheet" type="text/css" href="/Content/font-awesome/css/font-awesome.min.css" />
+			<!-- Added Finish -->
+
+			<div class="table-responsive">
+				<table id="exportTable" class="table table-hover">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Facility</th>
+							<th>Provider</th>
+							<th>Reason</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>04/23/2017</td>
+							<td>3:00 p.m.</td>
+							<td>West Oak St.</td>
+							<td>Dr. Phill </td>
+							<td>Calciphylaxis</td>
+						</tr>
+
+						<tr>
+							<td>04/29/2017</td>
+							<td>4:00 p.m.</td>
+							<td>West Oak St.</td>
+							<td>Dr. Phill </td>
+							<td>Calciphylaxis</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div><br>
+
+			<!-- Added -->
+			<button id="exportButton" class="btn btn-lg clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+			<!-- Added -->
+
+			<h2>Current Prescriptions</h2>
+
+			<table id="exportTable" class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Dosage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Tylenol</td>
+						<td>500 mg</td>
+					</tr>
+
+					<tr>
+						<td>Ibuprofen</td>
+						<td>200 mg</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<br>
+	</div>
+	</ol>
+	</div>
+
+	</div>
+
+
+	<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+	<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+	<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jszip.min.js"></script>
+
+	
+	<script type="text/javascript">
+    // We can stylize pdf later. 
+	jQuery(function ($) {
+        $("#exportButton").click(function () {
+            // Parse the HTML table element having an id=exportTable
+            var dataSource = shield.DataSource.create({
+                data: "#exportTable",
+                schema: {
+                    type: "table",
+                    fields: {
+                        Date: { type: String },
+                        Time: { type: String},
+                        Facility: { type: String },
+						Provider: { type: String },
+						Reason: { type: String }
+                    }
+                }
+            });
+
+            // When parsing is done, export the data to PDF
+            dataSource.read().then(function (data) {
+                var pdf = new shield.exp.PDFDocument({
+                    author: "PrepBootstrap",
+                    created: new Date()
+                });
+
+                pdf.addPage("a4", "portrait");
+
+                pdf.table(
+                    80,
+                    80,
+                    data,
+                    [
+                        { field: "Date", title: "Date", width: 80 },
+                        { field: "Time", title: "Time", width: 80 },
+                        { field: "Facility", title: "Facility", width: 80 },
+						{ field: "Provider", title: "Provider", width: 80 },
+						{ field: "Reason", title: "Reason", width: 80 }
+                    ],
+                    {
+                        margins: {
+                            top: 80,
+                            left: 80
+                        }
+                    }
+                );
+
+                pdf.saveAs({
+                    fileName: "MedicalHistory"
+                });
+            });
+        });
+    });
+</script>
+
+	<style>
+		#exportButton {
+			border-radius: 0;
+		}
+	</style>
+
+	<!-- Export a Table to PDF - END -->
+
+	</div>
+
+
+
+</body>
+
+
+</html>
