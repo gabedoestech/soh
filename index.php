@@ -5,8 +5,6 @@ require_once 'class.user.php';
 // This is call from the class.user.php
 $user_login = new USER();
 
-
-
 if($user_login->is_logged_in()!="")
 {
     $user_login->redirect('home.php');
@@ -17,24 +15,17 @@ if(isset($_POST['btn-login']))
           $email = trim($_POST['txtemail']);
           $upass = trim($_POST['txtupass']);
 
-          // reCAPTCHA check 
-        if(isset($_POST['g-recaptcha-response']))
-          $captcha=$_POST['g-recaptcha-response'];
+    // reCAPTCHA check
+    if(isset($_POST['g-recaptcha-response']))
+        $captcha=$_POST['g-recaptcha-response'];
 
-        if(!$captcha){
-            $msg = "
-            <div class='alert alert-success'>
-                <button class='close' data-dismiss='alert'>&times;</button>
-                <strong>Success!</strong> We've sent an email for super admin authentication.
-                    Please wait while we authenticate your account.
-            </div>";
-        }
-
-        // if reCAPTCHA has worked continue with the login process   
-        else if($user_login->login($email,$upass))
-        {
+    if(!$captcha){
+        $msg = " ";
+    }
+    else if ($user_login->login($email,$upass))
+    {
         $user_login->redirect('home.php');
-        }
+    }
        
 }
 ?>
@@ -84,7 +75,8 @@ if(isset($_POST['btn-login']))
         
   
     <form action ="" class="form-signin" method="POST">
-        <?php
+
+      <?php
     if(isset($_GET['inactive']))
     {
         ?>
@@ -113,22 +105,26 @@ if(isset($_POST['btn-login']))
             <?php
         }
         ?>
+     
         <center>
             </br></br></br></br></br>
             <h2 class="form-signin-heading">Sign In</h2><br><br>
             <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
             <br><br>
             <input type="password" class="input-block-level" placeholder="Password" name="txtupass" required />
-            <br><br>  
+            <br><br>              
              <div class="g-recaptcha" data-sitekey="6LfgShsUAAAAAE7Q65POO5f3emf8KnEB93g7LUs-"></div>                
-            <br><br>
+            <br>
             <button class="btn btn-large btn-inverse" type="submit" name="btn-login">Sign in</button>
             <br>
-            <a href="../../Desktop/soh-master/signup.php" >Sign Up</a>
+            <a href="terms.php" >Sign Up</a>
             <br>
-            <a href="fpass.php">Lost your Password? </a>
+            <a href="fpass.php">Lost your Password?</a>
+            <br>
+            <a href="faq.php">FAQ Page</a>
+            </center>
     </form>
-    </center>
+    
 
 </div> <!-- /container -->
 <script src="bootstrap/js/jquery-1.9.1.min.js"></script>

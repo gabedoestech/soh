@@ -39,6 +39,37 @@ class USER
             echo $ex->getMessage();
         }
     }
+
+    public function registerPatient($userID)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO patient(userID) 
+              VALUES (:userID)");
+            $stmt->bindparam(":userID",$userID);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert student into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function registerDoctor($userID)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO doctor(userID) 
+              VALUES (:userID)");
+            $stmt->bindparam(":userID",$userID);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert super admin into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
     public function login($email,$upass)
     {
         try
@@ -77,6 +108,18 @@ class USER
         {
             echo $ex->getMessage();
         }
+    }
+    public function is_doctor()
+    {
+        $adminCheck = $this->conn->prepare("SELECT * FROM doctor WHERE userID = :user_id");
+        $adminCheck->execute(array(":user_id"=>$_SESSION['userSession']));
+        $row2 = $adminCheck->fetch(PDO::FETCH_ASSOC);
+
+        if($adminCheck->rowCount() > 0)
+        {
+            return true;
+        }
+
     }
     public function is_logged_in()
     {
