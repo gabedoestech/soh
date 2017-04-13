@@ -70,6 +70,79 @@ class USER
         }
     }
 
+    public function updateUser($userID, $name, $sex, $address, $phone_no)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE users SET name=:name, sex=:sex, address=:address, phone_no=:phone_no
+                                                    WHERE userID=:userID ");
+            $stmt->bindparam(":userID",$userID);
+            $stmt->bindparam(":name",$name);
+            $stmt->bindparam(":sex",$sex);
+            $stmt->bindparam(":address",$address);
+            $stmt->bindparam(":phone_no",$phone_no);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert super admin into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function updatePatient($userID, $birth_date, $ethnicity)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE patient SET birth_date=:birth_date, ethnicity=:ethnicity
+                                                    WHERE userID=:userID ");
+            $stmt->bindparam(":userID",$userID);
+            $stmt->bindparam(":birth_date",$birth_date);
+            $stmt->bindparam(":ethnicity",$ethnicity);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert super admin into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function updateDoctor($userID, $specialty)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE doctor SET specialty=:specialty WHERE userID=:userID ");
+            $stmt->bindparam(":userID",$userID);
+            $stmt->bindparam(":specialty",$specialty);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert super admin into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function createAppointment($userID, $app_name, $location, $app_date, $start_time, $end_time, $price, $taken)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO appointment(userID,app_name,location,app_date,start_time,end_time,price,taken)
+                                                VALUES(:userID,:app_name,:location,:app_date,:start_time,:end_time,:price,:taken)");
+            $stmt->bindparam(":userID",$userID);
+            $stmt->bindparam(":app_name",$app_name);
+            $stmt->bindparam(":location",$location);
+            $stmt->bindparam(":app_date",$app_date);
+            $stmt->bindparam(":start_time",$start_time);
+            $stmt->bindparam(":end_time",$end_time);
+            $stmt->bindparam(":price",$price);
+            $stmt->bindparam(":taken",$taken);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert super admin into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
     public function login($email,$upass)
     {
         try

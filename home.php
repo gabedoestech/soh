@@ -10,9 +10,20 @@ else if($user_home->is_doctor())
 {
     $user_home->redirect('doctorhome.php');
 }
+
+$userID = $_SESSION['userSession'];
+
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
+$query->execute(array($_SESSION['userSession']));
+$row2 = $query->fetch(PDO::FETCH_ASSOC);
+
+$query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
+$query2->execute(array($_SESSION['userSession']));
+$row3 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -44,22 +55,20 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         </ul>
     </div>
-    <li class="nav nav-tabs">
+    <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="searchapp.php">Search for Appointment</a></li>
         <li role="presentation"><a href="medicalhistory.html">Medical History</a></li>
         <li role="presentation"><a href="logout.php">Logout</a></li>
 
-        <p class="navbar-text">Signed in as Maria Mosquera</p>
+        <p class="navbar-text">Signed in as <?php echo $row2['userName']; ?></p>
     </ul>
 
     <ol class="breadcrumb ">
-
-
         <br>
-        <li><a href="editprofilepatient.php">Edit Profile Information</a>></li>>
-        <li><a href="# ">View Profile</a></li>
-        </br>
-
+        <li><a href="editprofilepatient.php">Edit Profile Information</a></li>
+        <li><a href="#">View Profile</a></li>
+        <br><br>
 
         <h2>User Profile</h2>
         <br>
@@ -67,35 +76,35 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
             <tbody>
             <tr>
                 <th scope="row ">Username:</th>
-                <td colspan="2 ">mariamosquera</td>
+                <td colspan="2 "><?php echo $row2['userName']; ?></td>
             </tr>
             <tr>
                 <th scope="row ">Full Legal Name:</th>
-                <td>Maria</td>
+                <td><?php echo $row2['name']; ?></td>
             </tr>
             <tr>
                 <th scope="row ">Date of Birth:</th>
-                <td>4/10/2017</td>
+                <td><?php echo $row3['birth_date']; ?></td>
             </tr>
             <tr>
                 <th scope="row ">Sex:</th>
-                <td colspan="2 ">Female</td>
+                <td colspan="2 "><?php echo $row2['sex']; ?></td>
             </tr>
             <tr>
-                <th scope="row ">Race/Ethnicity:</th>
-                <td colspan="2 ">Hispanic</td>
+                <th scope="row ">Ethnicity:</th>
+                <td colspan="2 "><?php echo $row3['ethnicity']; ?></td>
             </tr>
             <tr>
                 <th scope="row ">Address:</th>
-                <td colspan="2 ">1234 Idont Remember Drive, Orlando, FL, 33333</td>
+                <td colspan="2 "><?php echo $row2['address']; ?></td>
             </tr>
             <tr>
                 <th scope="row ">Phone Number:</th>
-                <td colspan="2 ">445-454-4455</td>
+                <td colspan="2 "><?php echo $row2['phone_no']; ?></td>
             </tr>
             <tr>
                 <th scope="row ">Email Adress:</th>
-                <td colspan="2 ">sealofhealth@gmail.com</td>
+                <td colspan="2 "><?php echo $row2['userEmail']; ?></td>
             </tr>
             </tbody>
         </table>
