@@ -126,14 +126,14 @@ if(isset($_POST['btn-save']))
             <div class="form-group row">
                 <label for="addressInput" class="col-sm-2 col-sm-form-label">Street Address:</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" name="address" placeholder="Enter your full address" id="example-name-input" required>
+                    <input class="form-control" type="text" name="address" placeholder="Enter your full office address" id="example-name-input" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="phoneInput" class="col-sm-2 col-sm-form-label">Phone Number:</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" name="phone_no" placeholder="Enter your phone number" id="example-name-input" required>
+                    <input class="form-control" type="text" name="phone_no" placeholder="Enter your office's contact phone number" id="example-name-input" required>
                 </div>
             </div>
 

@@ -24,6 +24,12 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
+
+$query3 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.name, U.phone_no FROM appointment A, users U, doctor D, sees S 
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
+                                    AND A.appointment_id=S.appointment_id GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
+$query3->execute(array($_SESSION['userSession']));
+$row4 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!doctype html>
@@ -110,7 +116,94 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
         </table>
 
         <h2>Appointments</h2>
+        <br>
+        <nav class="navbar navbar-transparent navbar-absolute">
 
+            <?php
+            while ($row4 = $query3->fetch(PDO::FETCH_ASSOC)) {
+                $button1 = "btn-cancel".$i;
+                $doctorID = $row4['userID'];
+                $appID = $row4['appointment_id'];
+
+                if(isset($_POST[$button1]))
+                {
+                    if($user_home->patientCancelAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 0))
+                    {
+                        $name = $row4['app_name'];
+                        $stime = "".$row4['start_time'];
+                        $etime = "".$row4['end_time'];
+                        $date = "".$row4['app_date'];
+                        $email = "".$row4['userEmail'];
+                        /*$message = "
+                        Hello,
+                        <br /><br />
+                        The appointment, $name, scheduled from $stime to $etime on $date has been canceled and is available
+                        for selection by others. Please delete the appointment if you would not like others to be able
+                        to schedule it.
+                        <br /><br />
+                        Thank you,
+                            Seal of Health Team
+                        ";
+                        $subject = "Appointment Cancellation - ".$row4['app_name'];
+                        $reg_user->send_mail($email,$message,$subject);*/
+                        echo " yay you did it";
+                        $user_home->redirect('home.php');
+                    }
+                    else
+                    {
+                        die("fml you failed");
+                    }
+                }
+                ?>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" data-background-color="blue">
+                            <h4 class="title"><?php echo $row4['app_name']; ?></h4>
+                        </div>
+                        <div class="card-content table-responsive">
+
+                            <table class="table">
+                                <thead class="text-primary">
+                                <th>Doctor</th>
+                                <th>Specialty</th>
+                                <th>Location</th>
+                                <th>Contact Phone Number</th>
+                                </thead>
+                                <tbody>
+                                <td><?php echo $row4['name'];?></td>
+                                <td><?php echo $row4['specialty'];?></td>
+                                <td><?php echo $row4['location'];?></td>
+                                <td><?php echo $row4['phone_no'];?></td>
+                                <br>
+                                </tbody>
+                            </table>
+
+                            <table class="table">
+                                <thead class="text-primary">
+                                <th>Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Price</th>
+                                </thead>
+                                <tbody>
+                                <td><?php echo $row4['app_date'];?></td>
+                                <td><?php echo $row4['start_time'];?></td>
+                                <td><?php echo $row4['end_time'];?></td>
+                                <td><?php echo "$".$row4['price'];?></td>
+                                <br>
+                                </tbody>
+                            </table>
+                            <div>
+                                <form action="" method="POST">
+                                    <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Cancel
+                                </form>
+                            </div><br><br>
+                        </div>
+                    </div>
+                </div>
+                <?php $i++; } ?>
+
+        </nav>
         <h2>Medical Records</h2>
 
     </ol>

@@ -50,7 +50,7 @@ class USER
             return $stmt;
         }
         catch(PDOException $ex) {
-            die("Wasn't able to insert student into the database.");
+            die("Wasn't able to register patient into the database.");
             echo $ex->getMessage();
         }
     }
@@ -65,7 +65,7 @@ class USER
             return $stmt;
         }
         catch(PDOException $ex) {
-            die("Wasn't able to insert super admin into the database.");
+            die("Wasn't able to insert register doctor into the database.");
             echo $ex->getMessage();
         }
     }
@@ -84,7 +84,7 @@ class USER
             return $stmt;
         }
         catch(PDOException $ex) {
-            die("Wasn't able to insert super admin into the database.");
+            die("Wasn't able to insert update user into the database.");
             echo $ex->getMessage();
         }
     }
@@ -93,7 +93,7 @@ class USER
     {
         try{
             $stmt = $this->conn->prepare("UPDATE patient SET birth_date=:birth_date, ethnicity=:ethnicity
-                                                    WHERE userID=:userID ");
+                                                    WHERE userID=:userID");
             $stmt->bindparam(":userID",$userID);
             $stmt->bindparam(":birth_date",$birth_date);
             $stmt->bindparam(":ethnicity",$ethnicity);
@@ -101,7 +101,7 @@ class USER
             return $stmt;
         }
         catch(PDOException $ex) {
-            die("Wasn't able to insert super admin into the database.");
+            die("Wasn't able to insert update patient into the database.");
             echo $ex->getMessage();
         }
     }
@@ -109,14 +109,14 @@ class USER
     public function updateDoctor($userID, $specialty)
     {
         try{
-            $stmt = $this->conn->prepare("UPDATE doctor SET specialty=:specialty WHERE userID=:userID ");
+            $stmt = $this->conn->prepare("UPDATE doctor SET specialty=:specialty WHERE userID=:userID");
             $stmt->bindparam(":userID",$userID);
             $stmt->bindparam(":specialty",$specialty);
             $stmt->execute();
             return $stmt;
         }
         catch(PDOException $ex) {
-            die("Wasn't able to insert super admin into the database.");
+            die("Wasn't able to insert update doctor into the database.");
             echo $ex->getMessage();
         }
     }
@@ -138,7 +138,70 @@ class USER
             return $stmt;
         }
         catch(PDOException $ex) {
-            die("Wasn't able to insert super admin into the database.");
+            die("Wasn't able to insert create appointment into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function scheduleAppointment($userID_patient, $userID_doctor, $appointment_id)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO sees(userID_patient,userID_doctor,appointment_id)
+                                                VALUES(:userID_patient,:userID_doctor,:appointment_id)");
+            $stmt->bindparam(":userID_patient",$userID_patient);
+            $stmt->bindparam(":userID_doctor",$userID_doctor);
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert sees into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function patientCancelAppointment($userID_patient, $userID_doctor, $appointment_id)
+    {
+        try{
+            $stmt = $this->conn->prepare("DELETE FROM sees WHERE userID_patient=:userID_patient 
+                                                    AND userID_doctor=:userID_doctor AND appointment_id=:appointment_id");
+            $stmt->bindparam(":userID_patient",$userID_patient);
+            $stmt->bindparam(":userID_doctor",$userID_doctor);
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert update to appointment into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function deleteAppointment($appointment_id)
+    {
+        try{
+            $stmt = $this->conn->prepare("DELETE FROM appointment WHERE appointment_id=:appointment_id");
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert update to appointment into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function takenAppointment($appointment_id, $taken)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE appointment SET taken=:taken WHERE appointment_id=:appointment_id");
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->bindparam(":taken",$taken);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert update to appointment into the database.");
             echo $ex->getMessage();
         }
     }

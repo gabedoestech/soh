@@ -22,7 +22,8 @@ $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
-$query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.name, U.phone_no FROM appointment A, users U, doctor D WHERE U.userID = A.userID AND D.userID = U.userID AND A.taken = 0 GROUP BY A.app_name");
+$query2 = $user_home->runQuery("SELECT A.*, D.userID, D.specialty, U.name, U.phone_no FROM appointment A, users U, doctor D 
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND A.taken = 0 GROUP BY A.app_name");
 $query2->execute(array($_SESSION['userSession']));
 ?>
 
@@ -75,12 +76,29 @@ $query2->execute(array($_SESSION['userSession']));
         <nav class="navbar navbar-transparent navbar-absolute">
 
             <?php
-            while ($row3 = $query2->fetch(PDO::FETCH_ASSOC)) {?>
+            while ($row3 = $query2->fetch(PDO::FETCH_ASSOC)) {
+                $button1 = "btn-schedule".$i;
+                $doctorID = $row3['userID'];
+                $appID = $row3['appointment_id'];
+
+                if(isset($_POST[$button1]))
+                {
+                        if($user_home->scheduleAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 1))
+                        {
+                            echo " yay you did it";
+                            $user_home->redirect('home.php');
+                        }
+                        else
+                        {
+                            die("fml you failed");
+                        }
+                }
+                ?>
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header" data-background-color="blue">
                             <h4 class="title"><?php echo $row3['app_name']; ?></h4>
-                        </div><br>
+                        </div>
                         <div class="card-content table-responsive">
 
                             <table class="table">
@@ -98,7 +116,6 @@ $query2->execute(array($_SESSION['userSession']));
                                 <br>
                                 </tbody>
                             </table>
-                            <br><br>
 
                             <table class="table">
                                 <thead class="text-primary">
@@ -111,14 +128,13 @@ $query2->execute(array($_SESSION['userSession']));
                                 <td><?php echo $row3['app_date'];?></td>
                                 <td><?php echo $row3['start_time'];?></td>
                                 <td><?php echo $row3['end_time'];?></td>
-                                <td><?php echo $row3['price'];?></td>
+                                <td><?php echo "$".$row3['price'];?></td>
                                 <br>
                                 </tbody>
                             </table>
-                            <br><br>
                             <div>
                                 <form action="" method="POST">
-                                    <button class="btn btn-medium btn-info" type="submit" name="btn-approve<?php echo $i; ?>" style="text-align:right" color="blue">Schedule
+                                    <button class="btn btn-medium btn-info" type="submit" name="btn-schedule<?php echo $i; ?>" style="text-align:right" color="blue">Schedule
                                 </form>
                             </div><br><br>
                         </div>
