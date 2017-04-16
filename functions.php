@@ -1,10 +1,10 @@
 <?php
   $dbhost  = 'localhost';
-  $dbname  = 'SealOfHealth';
-  $dbuser  = 'root';
+  $dbname  = 'sealofhe_sealofhealth';
+  $dbuser  = 'sealofhe_root';
   //Put whatever password you set for root when you installed mysql
   //into <dbpass>. Everything else should be good (I think)
-  $dbpass  = '0000';
+  $dbpass  = 'D1eT2b7}aTzy';
 
   $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
   if ($connection->connect_error) die($connection->connect_error);
