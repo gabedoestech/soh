@@ -37,7 +37,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
 
     <head>
-        <title>Profile Information</title>
+        <title>Medical Records</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="main2.css">
@@ -154,8 +154,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="#">Home</a></li>
         <li><a href="home.php">Profile</a></li>
         <li class="active"><a href="#">Medical Records<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Appointments</a></li>
+        <li><a href="searchapp.php">Appointments</a></li>
         <li><a href="help.php">Help</a></li>
+        <li><a href="logout.php">Logout</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right" id="log">

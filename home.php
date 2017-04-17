@@ -149,11 +149,12 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <b><ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
+        <li><a href="home.php">Home</a></li>
         <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
         <li><a href="medicalrecords.php">Medical Records</a></li>
-        <li><a href="#">Appointments</a></li>
+        <li><a href="searchapp.php">Appointments</a></li>
         <li><a href="help.php">Help</a></li>
+        <li><a href="logout.php">Logout</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right" id="log">
@@ -166,6 +167,17 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
         <!-- OLD NAVBAR -->
         <div class="container">
+
+             <!-- Title of Profile -->
+        <div>
+          <div>
+            <h2>User Profile</h2>
+          </div>
+          <div>
+            <a href="editprofilepatient.php">Edit Profile</a>
+          </div>
+        </div>
+        <!-- End of Title of Profile -->
 
             <ol class="breadcrumb" id="bc1">
                 <br>
