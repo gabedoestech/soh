@@ -11,11 +11,11 @@ Updates
 
 Bugs 
 ----
-- editprofilepatient.php doesn't save the fields entered.
+- editprofilepatient.php doesn't save the fields entered
 
 Inquiries 
 ---------
-- Medical history form fill in. (Please let me know which tables to keep and/or remove from medicalrecords.php)
+- Before I start the medical history form fill in, I want to know what information you guys think we should keep from medicalrecords.php 
 
 
 
