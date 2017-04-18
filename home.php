@@ -39,7 +39,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
     <head>
         <title>Profile Information</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="main2.css">
 
         <!-- Latest compiled and minified CSS -->
@@ -117,7 +117,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
                 color: #000000;
             }
             
-            @media (max-width: 767px) {
+            @media only screen 
+            and (min-device-width : 320px) 
+            and (max-device-width : 568px){
                 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
                     color: #03ccfe;
                 }
@@ -139,7 +141,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
     <body>
         <!-- Logo -->
         <div class="mylogo">
-            <center><img src="Design2.png" width="608" height="230"></center>
+            <center><img src="Design2.png" width="45%"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -166,18 +168,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
 
         <!-- OLD NAVBAR -->
-        <div class="container">
-
-             <!-- Title of Profile -->
-        <div>
-          <div>
-            <h2>User Profile</h2>
-          </div>
-          <div>
-            <a href="editprofilepatient.php">Edit Profile</a>
-          </div>
-        </div>
-        <!-- End of Title of Profile -->
+        <div class="container">         
 
             <ol class="breadcrumb" id="bc1">
                 <br>
@@ -231,7 +222,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
                                 </tr>
                                 <tr>
                                     <th scope="row ">Email Adress:</th>
-                                    <td colspan="2 ">
+                                    <td colspan="3 ">
                                         <?php echo $row2['userEmail']; ?>
                                     </td>
                                 </tr>
