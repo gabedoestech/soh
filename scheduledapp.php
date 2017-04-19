@@ -39,7 +39,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
     <head>
         <meta charset="utf-8">
         <meta http-equiv-"X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head;
         any other head content must come *after* these tags -->
         
@@ -153,8 +153,8 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <body>
         <!-- Logo -->
-        <!-- added a class in css - logo-img -->
-       <div class="mylogo">
+        <!-- logo updated -->
+        <div class="mylogo">
             <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
         </div>
 
@@ -166,7 +166,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <b><ul class="nav navbar-nav">
         <li><a href="home.php">Home</a></li>
-        <li><a href="#">Profile<span class="sr-only">(current)</span></a></li>
+        <li><a href="home.php">Profile</a></li>
         <li><a href="medicalrecords.php">Medical Records</a></li>
         
         <!-- Dropdown for appointments -->
@@ -185,6 +185,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="logout.php">Logout</a></li>
         </ul>
 
+        <!--Logged in user-->
         <ul class="nav navbar-nav navbar-right" id="log">
         <li>Logged in as: <?php echo $row2['userName']; ?></li>
         </ul>
@@ -197,67 +198,118 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <div class="container">         
 
             <ol class="breadcrumb" id="bc1">
+                <br>                 
+                   
+                    <!--This is where patient information was located;
+                    incase something goes wrong (original file: home.php)-->   
+
                 <br>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><b>Profile Information</b></div>
-                    <div class="panel-body">
-                        <table class="table table-hover ">
-                                <col width="10">
-                                <col width="10">
-                                <tr>
-                                    <th scope="row ">Username:</th>
-                                    <td colspan="2">
-                                        <?php echo $row2['userName']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Full Legal Name:</th>
-                                    <td>
-                                        <?php echo $row2['name']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Date of Birth:</th>
-                                    <td>
-                                        <?php echo $row3['birth_date']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Sex:</th>
-                                    <td colspan="2 ">
-                                        <?php echo $row2['sex']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Ethnicity:</th>
-                                    <td colspan="2 ">
-                                        <?php echo $row3['ethnicity']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Address:</th>
-                                    <td colspan="2 ">
-                                        <?php echo $row2['address']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Phone Number:</th>
-                                    <td colspan="2 ">
-                                        <?php echo $row2['phone_no']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row ">Email Adress:</th>
-                                    <td colspan="3 ">
-                                        <?php echo $row2['userEmail']; ?>
-                                    </td>
-                                </tr>
-                        </table>
-                
-                <div align="right"><li><a href="editprofilepatient.php"><button class="btn btn-medium btn-info"><b>Edit Profile Information</b></button></right></a></li>
+                <nav class="navbar navbar-transparent navbar-absolute">
+
+                    <?php
+            while ($row4 = $query3->fetch(PDO::FETCH_ASSOC)) {
+                $button1 = "btn-cancel".$i;
+                $doctorID = $row4['userID'];
+                $appID = $row4['appointment_id'];
+
+                if(isset($_POST[$button1]))
+                {
+                    if($user_home->patientCancelAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 0))
+                    {
+                        $name = $row4['app_name'];
+                        $stime = "".$row4['start_time'];
+                        $etime = "".$row4['end_time'];
+                        $date = "".$row4['app_date'];
+                        $email = "".$row4['userEmail'];
+                        /*$message = "
+                        Hello,
+                        <br /><br />
+                        The appointment, $name, scheduled from $stime to $etime on $date has been canceled and is available
+                        for selection by others. Please delete the appointment if you would not like others to be able
+                        to schedule it.
+                        <br /><br />
+                        Thank you,
+                            Seal of Health Team
+                        ";
+                        $subject = "Appointment Cancellation - ".$row4['app_name'];
+                        $reg_user->send_mail($email,$message,$subject);*/
+                        echo " yay you did it";
+                        $user_home->redirect('home.php');
+                    }
+                    else
+                    {
+                        die("fml you failed");
+                    }
+                }
+                ?>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header" data-background-color="blue">
+                                    <h4 class="title">
+                                        <?php echo $row4['app_name']; ?>
+                                    </h4>
+                                </div>
+                                <div class="card-content table-responsive">
+
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Doctor</th>
+                                            <th>Specialty</th>
+                                            <th>Location</th>
+                                            <th>Contact Phone Number</th>
+                                        </thead>
+                                        <tbody>
+                                            <td>
+                                                <?php echo $row4['name'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row4['specialty'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row4['location'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row4['phone_no'];?>
+                                            </td>
+                                            <br>
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Price</th>
+                                        </thead>
+                                        <tbody>
+                                            <td>
+                                                <?php echo $row4['app_date'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row4['start_time'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row4['end_time'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo "$".$row4['price'];?>
+                                            </td>
+                                            <br>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <form action="" method="POST">
+                                            <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Cancel
+                                </form>
+                            </div><br><br>
+                        </div>
                     </div>
-                    </div>
-                </div>                           
+                </div>
+                <?php $i++; } ?>
+
+        </nav>
+        
     </ol>
 
     <br> 

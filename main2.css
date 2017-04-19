@@ -3,6 +3,13 @@
     background-attachment: scroll;
 }
 
+
+/* added by gabe to track keep logo size in check*/
+
+.logo-img {
+    max-height: 200px;
+}
+
 .mylogo::after {
     content: "";
     background-image: url("http://www.baptistmedicalgroup.org/sites/default/files/images/article/iStock_000009314470Medium_1.jpg") no-repeat center center fixed;

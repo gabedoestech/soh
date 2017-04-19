@@ -32,24 +32,35 @@ $query3->execute(array($_SESSION['userSession']));
 $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
-    <!doctype html>
+    <!DOCTYPE html>
     <html>
 
 
-    <head>
-        <title>Medical Records</title>
+    <head>       
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv-"X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        <!-- The above 3 meta tags *must* come first in the head;
+        any other head content must come *after* these tags -->
+        
+        <!--personalized CSS file by Maria -->
         <link rel="stylesheet" href="main2.css">
-
+        <title>Seal of Health</title>
+       
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--Need the above to run dropdown menu -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
         <!-- Styles nav bar -->
         <style>
             .navbar-default {
@@ -119,7 +130,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
                 color: #000000;
             }
             
-            @media (max-width: 767px) {
+           @media only screen 
+            and (min-device-width : 320px) 
+            and (max-device-width : 568px){
                 .navbar-default .navbar-nav .open .dropdown-menu > li > a {
                     color: #03ccfe;
                 }
@@ -140,8 +153,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <body>
         <!-- Logo -->
+        <div >
         <div class="mylogo">
-            <center><img src="Design2.png" width="608" height="230"></center>
+            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -154,7 +168,19 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="#">Home</a></li>
         <li><a href="home.php">Profile</a></li>
         <li><a href="medicalrecords.php">Medical Records</a></li>
-        <li class="active"><a href="#">Appointments<span class="sr-only">(current)</span></a></li>
+       
+        <!-- Dropdown for appointments -->
+         <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                Appointments <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
+                </ul>
+            </li>
+        <!--End Dropdown for appointments -->
+
         <li><a href="help.php">Help</a></li>
         <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -239,8 +265,4 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
 
 </body>
-
-
-
-
 </html>
