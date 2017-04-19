@@ -166,7 +166,7 @@ $query4->execute(array($_SESSION['userSession']));
 <li><a href="#">Home</a></li>
 <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
 <li><a href="createapp.php">Appointments</a></li>
-<li><a href="help.php">Help</a></li>
+<li><a href="helpdoctor.php">Help</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>  
 <ul class="nav navbar-right" id="log">
@@ -182,53 +182,60 @@ $query4->execute(array($_SESSION['userSession']));
 
       <ol class="breadcrumb ">       
         <br>
-        <table class="table table-hover ">
-          <tbody>
-            <tr>
-              <th scope="row ">Username:</th>
-              <td colspan="2 ">
-                <?php echo $row2['userName']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Full Legal Name:</th>
-              <td>
-                <?php echo $row2['name']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Specialty:</th>
-              <td colspan="2 ">
-                <?php echo $row3['specialty']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Sex:</th>
-              <td colspan="2 ">
-                <?php echo $row2['sex']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Address:</th>
-              <td colspan="2 ">
-                <?php echo $row2['address']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Phone Number:</th>
-              <td colspan="2 ">
-                <?php echo $row2['phone_no']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Email Adress:</th>
-              <td colspan="2 ">
-                <?php echo $row2['userEmail']; ?>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="panel panel-default">
+          <div class="panel-heading"><b>Profile Information</b></div>
+          <div class="panel-body">
+              <table class="table table-hover ">
+                <tbody>
+                  <tr>
+                    <th scope="row ">Username:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['userName']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Full Legal Name:</th>
+                    <td>
+                      <?php echo $row2['name']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Specialty:</th>
+                    <td colspan="2 ">
+                      <?php echo $row3['specialty']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Sex:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['sex']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Address:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['address']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Phone Number:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['phone_no']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Email Adress:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['userEmail']; ?>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
+              <div align="right"><li><a href="editprofiledoctor.php"><button class="btn btn-medium btn-info"><b>Edit Profile Information</b></button></right></a></li>
+                  </div>
+                  </div>
+                </div>
         <h2>Unscheduled Appointments</h2>
         <br>
         <nav class="navbar navbar-transparent navbar-absolute">
@@ -252,7 +259,7 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
         }
     }
     ?>
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-header" data-background-color="blue">
                   <h4 class="title"><?php echo $row4['app_name']; ?></h4>
@@ -264,7 +271,6 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
                       <th>Doctor</th>
                       <th>Specialty</th>
                       <th>Location</th>
-                      <th>Contact Phone Number</th>
                     </thead>
                     <tbody>
                       <td>
@@ -276,21 +282,22 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
                       <td>
                         <?php echo $row4['location'];?>
                       </td>
-                      <td>
-                        <?php echo $row4['phone_no'];?>
-                      </td>
                       <br>
                     </tbody>
                   </table>
 
                   <table class="table">
                     <thead class="text-primary">
+                      <th>Contact Phone Number</th>
                       <th>Date</th>
                       <th>Start Time</th>
                       <th>End Time</th>
                       <th>Price</th>
                     </thead>
                     <tbody>
+                      <td>
+                        <?php echo $row4['phone_no'];?>
+                      </td>
                       <td>
                         <?php echo $row4['app_date'];?>
                       </td>
@@ -307,10 +314,18 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
                     </tbody>
                   </table>
                   <div>
+
                     <form action="" method="POST">
-                      <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Delete
+                      <button class="btn btn-medium btn-danger" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="red">Delete
+                    </form>
+                    
+                    <th>
+                    <form action="" method="POST">
+                      <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Edit
                     </form>
                   </div>
+
+
                   <br>
                   <br>
                 </div>
