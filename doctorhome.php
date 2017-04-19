@@ -182,53 +182,60 @@ $query4->execute(array($_SESSION['userSession']));
 
       <ol class="breadcrumb ">       
         <br>
-        <table class="table table-hover ">
-          <tbody>
-            <tr>
-              <th scope="row ">Username:</th>
-              <td colspan="2 ">
-                <?php echo $row2['userName']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Full Legal Name:</th>
-              <td>
-                <?php echo $row2['name']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Specialty:</th>
-              <td colspan="2 ">
-                <?php echo $row3['specialty']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Sex:</th>
-              <td colspan="2 ">
-                <?php echo $row2['sex']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Address:</th>
-              <td colspan="2 ">
-                <?php echo $row2['address']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Phone Number:</th>
-              <td colspan="2 ">
-                <?php echo $row2['phone_no']; ?>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row ">Email Adress:</th>
-              <td colspan="2 ">
-                <?php echo $row2['userEmail']; ?>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="panel panel-default">
+          <div class="panel-heading"><b>Profile Information</b></div>
+          <div class="panel-body">
+              <table class="table table-hover ">
+                <tbody>
+                  <tr>
+                    <th scope="row ">Username:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['userName']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Full Legal Name:</th>
+                    <td>
+                      <?php echo $row2['name']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Specialty:</th>
+                    <td colspan="2 ">
+                      <?php echo $row3['specialty']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Sex:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['sex']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Address:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['address']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Phone Number:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['phone_no']; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row ">Email Adress:</th>
+                    <td colspan="2 ">
+                      <?php echo $row2['userEmail']; ?>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
+              <div align="right"><li><a href="editprofiledoctor.php"><button class="btn btn-medium btn-info"><b>Edit Profile Information</b></button></right></a></li>
+                  </div>
+                  </div>
+                </div>
         <h2>Unscheduled Appointments</h2>
         <br>
         <nav class="navbar navbar-transparent navbar-absolute">

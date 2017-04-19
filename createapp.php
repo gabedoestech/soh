@@ -177,9 +177,6 @@ if(isset($_POST['btn-create']))
     <div class="container">
 
       <ol class="breadcrumb">
-        <br>
-        <li><a href="#">Edit Profile Information</a></li>       
-        <br>
 
         <h2>Create Appointment</h2>
         <br>
