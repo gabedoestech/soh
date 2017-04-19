@@ -264,7 +264,6 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
                       <th>Doctor</th>
                       <th>Specialty</th>
                       <th>Location</th>
-                      <th>Contact Phone Number</th>
                     </thead>
                     <tbody>
                       <td>
@@ -276,21 +275,22 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
                       <td>
                         <?php echo $row4['location'];?>
                       </td>
-                      <td>
-                        <?php echo $row4['phone_no'];?>
-                      </td>
                       <br>
                     </tbody>
                   </table>
 
                   <table class="table">
                     <thead class="text-primary">
+                      <th>Contact Phone Number</th>
                       <th>Date</th>
                       <th>Start Time</th>
                       <th>End Time</th>
                       <th>Price</th>
                     </thead>
                     <tbody>
+                      <td>
+                        <?php echo $row4['phone_no'];?>
+                      </td>
                       <td>
                         <?php echo $row4['app_date'];?>
                       </td>
