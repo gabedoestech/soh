@@ -198,8 +198,7 @@ $query2->execute(array($_SESSION['userSession']));
                         </div>
                         <div class="card-content table-responsive">
 
-                            <table class="table">
-                                <thead class="text-primary">
+                            <table class="table table-bordered">
                                 <th>Doctor</th>
                                 <th>Specialty</th>
                                 <th>Location</th>
@@ -211,7 +210,6 @@ $query2->execute(array($_SESSION['userSession']));
                                 <td><?php echo $row3['location'];?></td>
                                 <td><?php echo $row3['phone_no'];?></td>
                                 <br>
-                                </tbody>
                             </table>
 
                             <table class="table">

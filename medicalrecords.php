@@ -154,7 +154,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="#">Home</a></li>
         <li><a href="home.php">Profile</a></li>
         <li class="active"><a href="#">Medical Records<span class="sr-only">(current)</span></a></li>
-        <li><a href="searchapp.php">Appointments</a></li>
+        <li><a href="searchapp_styleupdated.php">Appointments</a></li>
         <li><a href="help.php">Help</a></li>
         <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -177,121 +177,56 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
                     <div class="panel-body">
               
                <ul style="list-style-type:disc">
-                <li>Problems</li>
-                <li>Allergies</li>
                 <li>Vitals</li>
                 <li>Medications</li>
                 <li>Appointment Summaries</li>
                 </ul>  
 
                 <br><br>
-                    
-                <div class="panel panel-default">
-                    <div class="panel-heading" id="ph"><b>Problems</b></div>
-                    <div class="panel-body">
-                    <br>
-                    
-                    <!-- Table will grow accordingly as data submitted -->
-                    <table id="exportTable" class="table table-bordered" style="width:100%">
-                    <tr>
-                        <th>Type</th>
-                        <th>Condition</th> 
-                        <th>Condition Status</th>
-                    </tr>
-                    <tr>
-                        <td>Assessment</td>
-                        <td>Hypercholesterolemia</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>Problem</td>
-                        <td>Lactose intolerance</td>
-                        <td>Active</td>
-                    </tr>
-                    <tr>
-                        <td>Assessment</td>
-                        <td>Cancer</td>
-                        <td>Inactive</td>
-                    </tr>
-                    </table>
-                    
-                    </div>
-                    </div>
-
-                        
-                <div class="panel panel-default">
-                    <div class="panel-heading" id="ph"><b>Allergies</b></div>
-                    <div class="panel-body">
-                    <br>
-                    
-                    <!-- Table will grow accordingly as data submitted -->
-                    <table id="exportTable1" class="table table-bordered" style="width:100%">
-                    <tr>
-                        <th>Substance</th>
-                        <th>Reaction</th> 
-                        <th>Condition Status</th>
-                    </tr>
-                    <tr>
-                        <td>Pineapple</td>
-                        <td>Anaphylaxis</td>
-                        <td>Active</td>
-                    </tr>
-                    </table>
-                    
-                    </div>
-                    </div>
-
+        
                 <div class="panel panel-default">
                     <div class="panel-heading" id="ph"><b>Vitals</b></div>
                     <div class="panel-body">
-                    <br>
                     
+                    Last updated: 4/18/2017 
+                    <br><br>
                     <!-- Table will grow accordingly as data submitted -->
                     <table class="table table-bordered" style="width:100%">
                     <tr>
                         <th>Temperature</th>
                         <td>97 degress Fahrenheit</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>Heart Rate</th>
                         <td>78 /min</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>Height</th>
                         <td>5 ft 0 in</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>Weight</th>
                         <td>5000 lbs</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>BMI</th>
                         <td>50.32 kg/m2</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
-                        <th>Resporatory Rate</th>
+                        <th>Respiratory Rate</th>
                         <td>30 / min</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>Oximetry</th>
                         <td>94%</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>Blood pressure systolic</th>
                         <td>120 mm Hg</td>
-                        <td>04/23/17</td>
                     </tr>
                     <tr>
                         <th>Blood pressure diastolic</th>
                         <td>60 mm Hg</td>
-                        <td>04/23/17</td>
                     </tr>
                     </table>
                     
@@ -329,7 +264,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
                     </div>
 
                 <div class="panel panel-default">
-                    <div class="panel-heading" id="ph"><b>Allergies</b></div>
+                    <div class="panel-heading" id="ph"><b>Appointment Summaries</b></div>
                     <div class="panel-body">
                     <br>
                     
@@ -353,7 +288,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 			<button id="exportButton" class="btn btn-lg clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
 			<!-- Added -->
 
-                    <div align="right"><li><a href="editprofilepatient.php"><button class="button button1"><b>Edit Medical History</b></button></right></a></li>
+                    <div align="right"><li><a href="medicalhistoryfillin.php"><button class="btn btn-medium btn-info"><b>Edit Medical History</b></button></right></a></li>
                     </div>
                 </div>        
     </ol>

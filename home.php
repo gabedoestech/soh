@@ -154,7 +154,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="home.php">Home</a></li>
         <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
         <li><a href="medicalrecords.php">Medical Records</a></li>
-        <li><a href="searchapp.php">Appointments</a></li>
+        <li><a href="searchapp_styleupdated.php">Appointments</a></li>
         <li><a href="help.php">Help</a></li>
         <li><a href="logout.php">Logout</a></li>
         </ul>
@@ -228,7 +228,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
                                 </tr>
                         </table>
                 
-                <div align="right"><li><a href="editprofilepatient.php"><button class="button button1"><b>Edit Profile Information</b></button></right></a></li>
+                <div align="right"><li><a href="editprofilepatient.php"><button class="btn btn-medium btn-info"><b>Edit Profile Information</b></button></right></a></li>
                     </div>
                     </div>
                 </div>

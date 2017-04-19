@@ -7,55 +7,52 @@
 	function doSearch($city, $doctor, $app_name, $priceLow, $priceHigh, $specialty, $date, $sex, $sort_date)
 	{
 
-		if ($sort_date == "date")	
-			$sort = "app_date";
-		else 
-			$sort = "price";
+		if ($sort_date == "date")	$sort = "app_date";
+		else $sort = "price";
 
 		if ($doctor == "" && $specialty == "" && $sex == "")
-			$stmt = queryMysql("SELECT * FROM Appointment WHERE location = '$city' AND taken = '0' ORDER BY $sort");
+			$stmt = queryMysql("SELECT * FROM Appointment WHERE location = '$city' ORDER BY $sort");
 		elseif ($doctor == "" && $sex == "")
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.specialty = '$specialty' AND A.location = '$city' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+													 WHERE D.specialty = '$specialty' AND A.location = '$city' ORDER BY $sort");
 		}
 		elseif ($doctor == "" && $specialty == "")
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.sex = '$sex' AND A.location = '$city' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+														 WHERE D.sex = '$sex' AND A.location = '$city' ORDER BY $sort");
 		}
 		elseif ($specialty == "" && $sex == "")
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.doctor = '$doctor' AND A.location = '$city' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+													 WHERE D.doctor = '$doctor' AND A.location = '$city' ORDER BY $sort");
 		}
 		elseif ($specialty == "")
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.doctor = '$doctor' AND D.sex = '$sex' AND A.location = '$city' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+													 WHERE D.doctor = '$doctor' AND D.sex = '$sex' AND A.location = '$city' ORDER BY $sort");
 		}
 		elseif ($sex == "")
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.doctor = '$doctor' AND A.location = '$city' AND D.specialty = '$specialty' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+													 WHERE D.doctor = '$doctor' AND A.location = '$city' AND D.specialty = '$specialty' ORDER BY $sort");
 		}
 		elseif ($doctor == "")
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.specialty = '$specialty' AND A.location = '$city' AND D.sex = '$sex' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+													 WHERE D.specialty = '$specialty' AND A.location = '$city' AND D.sex = '$sex' ORDER BY $sort");
 		}
 		else
 		{
 			$stmt = queryMysql("SELECT * FROM (Appointment A
-					    INNER JOIN Doctor D ON D.username = A.username)
-					    WHERE D.specialty = '$specialty' AND A.location = '$city' AND D.sex = '$sex' 
-					    AND D.doctor = '$doctor' AND taken = '0' ORDER BY $sort");
+													 INNER JOIN Doctor D ON D.username = A.username)
+													 WHERE D.specialty = '$specialty' AND A.location = '$city' AND D.sex = '$sex' AND D.doctor = '$doctor' ORDER BY $sort");
 		}
 
 		$appointments = array();

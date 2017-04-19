@@ -6,6 +6,10 @@ if(!$user_home->is_logged_in())
 {
     $user_home->redirect('index.php');
 }
+else if($user_home->is_doctor())
+{
+    $user_home->redirect('doctorhome.php');
+}
 
 $userID = $_SESSION['userSession'];
 
@@ -33,7 +37,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
 
     <head>
-        <title>Help</title>
+        <title>Medical Records</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="main2.css">
@@ -44,6 +48,8 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
+        <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+        
         <!-- Styles nav bar -->
         <style>
             .navbar-default {
@@ -148,8 +154,8 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="#">Home</a></li>
         <li><a href="home.php">Profile</a></li>
         <li><a href="medicalrecords.php">Medical Records</a></li>
-        <li><a href="searchapp_styleupdated.php">Appointments</a></li>
-        <li class="active"><a href="#">Help<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#">Appointments<span class="sr-only">(current)</span></a></li>
+        <li><a href="help.php">Help</a></li>
         <li><a href="logout.php">Logout</a></li>
         </ul>
 
@@ -160,42 +166,67 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
       </div> <!-- /.container-fluid -->
         </nav>
 
+
+        <!-- OLD NAVBAR -->
         <div class="container">
 
             <ol class="breadcrumb" id="bc1">
                 <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><b>Frequently Asked Questions</b></div>
+                    <div class="panel-heading" id="ph"><b>Appointments</b></div>
                     <div class="panel-body">
-                        
-                    <b> Do I have to create an account in order to search for doctors? </b><br>
-                    <p>In order for users to search for doctors and create appointments, we do require the creation of an account on Seal of Health. By creratin gan account you allow us to streamline the search process and tailor the results to match your needs and requirements so that you, the user, gets the absolute best experience we can provide.</p><hr>
+                  
+                  <!-- Add carousel here for potential appointment candidates -->
 
-                    <b>Am I, as a patient, able to cancel an appointment after I create one? </b><br><br>
-                    <p>Absolutely! Our product aims to help patients connect with doctors whenever is most convientient for you. Should you choose to cancel an appointment, we will make sure the doctor recieves a notification about your cancellation so that that spot may be choosen by another patient if needed.</p><hr>
+                  <br><br>
 
-                    <b>Am I, as a doctor, able to cancel an appointment after a patient creates one?</b><br><br>
-                    <p>Our system currently does not allow for doctors to cancel appointments appointments once a patient has scheduled one. If you do need to cancel a previously schedualed appointment is is the doctor's responsiblity to notify the patient. However, we do highly encourage doctors to verify the appointment times and dates they list in order to avoid these situations entirely.</p><hr>
+                    <!-- Table will grow accordingly as data submitted -->
+                  <table class="table table-bordered">
+                  <tr>
+                        <th>Doctor</th>
+                        <th>Specialty</th>
+                        <th>Location</th>
+                        <th>Contact Phone Number</th>
+                  </tr>
+                  <tr>
+                        <td><?php echo $row3['name'];?></td>
+                        <td><?php echo $row3['specialty'];?></td>
+                        <td><?php echo $row3['location'];?></td>
+                        <td><?php echo $row3['phone_no'];?></td>
+                  </tr> 
+                    </table>
 
-                    <b>I can't remember my password! What should I do?</b><br><br>
-                    <p>You can recover your password by clicking on the 'Forgot your password?' link at the bottom of the login page. If you find for any reason that you are unable to log into your account, please contacttc our support team at sealofhealth@gmail.com for further instructions.
-                    </p><hr>
+                   <br>
 
-                    <b>I didn't recieve an appointment confirmation. Was my appointment still created?</b><br><br>
-                    <p>If you did not recieve an appointment confirmation email after schedualing an appointment, you should not assume that the appointment was created. Check your 'Current Appointments' tab in your profile and if you do not see the appointment, try to rescheduale the appointment. If you continue to have issues, please contact our support team at sealofhealth@gmail.com.</p><br>
+                     <table class="table table-bordered">
+                     <tr>
+                         <th>Date</th>
+                         <th>Start Time</th>
+                         <th>End Time</th>
+                         <th>Price</th>
+                     </tr>
+                     <tr>
+                         <td><?php echo $row3['app_date'];?></td>
+                         <td><?php echo $row3['start_time'];?></td>
+                         <td><?php echo $row3['end_time'];?></td>
+                         <td><?php echo "$".$row3['price'];?></td>
+                     </tr>
+                   </table>
+
+                   <div align="right">
+                    <form action="" method="POST">
+                        <button class="btn btn-medium btn-info" type="submit" name="btn-schedule<?php echo $i; ?>" style="text-align:right" color="blue">Schedule
+                    </form>
+                    </div><br><br>
 
                     </div>
-                </div>
 
-
-                <br>
-            
-        
+                    
+                    </div>                       
     </ol>
-
-    <br> 
-   
 </div>
+
+	
 
 
  <center><footer class="container-fluid" id="footer">
@@ -203,7 +234,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
   </footer></center>
 
 
-  
+
+	<!-- Export a Table to PDF - END -->
+
 
 </body>
 

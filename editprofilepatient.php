@@ -152,7 +152,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         <li><a href="#">Home</a></li>
         <li class="active"><a href="home.php">Profile<span class="sr-only">(current)</span></a></li>
         <li><a href="medicalrecords.php">Medical Records</a></li>
-        <li><a href="appointments.php">Appointments</a></li>
+        <li><a href="searchapp_styleupdated.php">Appointments</a></li>
         <li><a href="help.php">Help</a></li>
         </ul>
 
@@ -249,7 +249,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
 
-        <div align="right"><button class="button button1" type="submit" name='btn-save'><b>Save Profile</b></button></div>
+        <div align="right"><button class="btn btn-medium btn-info" type="submit" name='btn-save'><b>Save Profile</b></button></div>
         </form>
                 
              
