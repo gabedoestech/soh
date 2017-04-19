@@ -178,9 +178,12 @@ if(isset($_POST['btn-create']))
 
       <ol class="breadcrumb">
 
-        <h2>Create Appointment</h2>
         <br>
+        <div class="panel panel-default">
+        <div class="panel-heading"><b>Create Appointment</b></div>
+        <div class="panel-body">
         <form action="" method="POST">
+          
           <div class="form-group row">
             <label for="nameInput" class="col-sm-2 col-sm-form-label">Name:</label>
             <div class="col-sm-4">
@@ -224,7 +227,7 @@ if(isset($_POST['btn-create']))
             </div>
           </div>
 
-          <button class="btn btn-info" type="submit" name='btn-create'>Create</button>
+          <div align="right"><button class="btn btn-info" type="submit" name='btn-create'>Create</button>
         </form>
       </ol>
     </div>
