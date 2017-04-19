@@ -56,6 +56,91 @@ if(isset($_POST['btn-create']))
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
+    <!-- Styles nav bar -->
+        <style>
+            .navbar-default {
+                background-color: #ffffff;
+                border-color: #fefefe;
+            }
+            
+            .navbar-default .navbar-brand {
+                color: #03ccfe;
+            }
+            
+            .navbar-default .navbar-brand:hover,
+            .navbar-default .navbar-brand:focus {
+                color: #000000;
+            }
+            
+            .navbar-default .navbar-text {
+                color: #03ccfe;
+            }
+            
+            .navbar-default .navbar-nav > li > a {
+                color: #03ccfe;
+            }
+            
+            .navbar-default .navbar-nav > li > a:hover,
+            .navbar-default .navbar-nav > li > a:focus {
+                color: #000000;
+            }
+            
+            .navbar-default .navbar-nav > .active > a,
+            .navbar-default .navbar-nav > .active > a:hover,
+            .navbar-default .navbar-nav > .active > a:focus {
+                color: #000000;
+                background-color: #fefefe;
+            }
+            
+            .navbar-default .navbar-nav > .open > a,
+            .navbar-default .navbar-nav > .open > a:hover,
+            .navbar-default .navbar-nav > .open > a:focus {
+                color: #000000;
+                background-color: #fefefe;
+            }
+            
+            .navbar-default .navbar-toggle {
+                border-color: #fefefe;
+            }
+            
+            .navbar-default .navbar-toggle:hover,
+            .navbar-default .navbar-toggle:focus {
+                background-color: #fefefe;
+            }
+            
+            .navbar-default .navbar-toggle .icon-bar {
+                background-color: #03ccfe;
+            }
+            
+            .navbar-default .navbar-collapse,
+            .navbar-default .navbar-form {
+                border-color: #03ccfe;
+            }
+            
+            .navbar-default .navbar-link {
+                color: #03ccfe;
+            }
+            
+            .navbar-default .navbar-link:hover {
+                color: #000000;
+            }
+            
+            @media (max-width: 767px) {
+                .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+                    color: #03ccfe;
+                }
+                .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+                .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+                    color: #000000;
+                }
+                .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+                    color: #000000;
+                    background-color: #fefefe;
+                }
+            }
+        </style>
 
   </head>
 
@@ -75,8 +160,8 @@ if(isset($_POST['btn-create']))
           <b><ul class="nav navbar-nav">
             <li><a href="#">Home</a></li>
             <li><a href="doctorhome.php">Profile</a></li>
-            <li class="active"><a href="createapp.php">Appointment<span class="sr-only">(current)</span></a></li>
-            <li><a href="help.php">Help</a></li>
+            <li class="active"><a href="createapp.php">Appointments<span class="sr-only">(current)</span></a></li>
+            <li><a href="helpdoctor.php">Help</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         

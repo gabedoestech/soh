@@ -166,7 +166,7 @@ $query4->execute(array($_SESSION['userSession']));
 <li><a href="#">Home</a></li>
 <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
 <li><a href="createapp.php">Appointments</a></li>
-<li><a href="help.php">Help</a></li>
+<li><a href="helpdoctor.php">Help</a></li>
 <li><a href="logout.php">Logout</a></li>
 </ul>  
 <ul class="nav navbar-right" id="log">
@@ -252,7 +252,7 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
         }
     }
     ?>
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div class="card">
                 <div class="card-header" data-background-color="blue">
                   <h4 class="title"><?php echo $row4['app_name']; ?></h4>
@@ -307,10 +307,18 @@ while ($row4 = $query3->fetch(PDO::FETCH_ASSOC))
                     </tbody>
                   </table>
                   <div>
+
                     <form action="" method="POST">
-                      <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Delete
+                      <button class="btn btn-medium btn-danger" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="red">Delete
+                    </form>
+                    
+                    <th>
+                    <form action="" method="POST">
+                      <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Edit
                     </form>
                   </div>
+
+
                   <br>
                   <br>
                 </div>
