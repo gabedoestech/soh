@@ -121,7 +121,7 @@
             </li>
         <!--End Dropdown for appointments -->
 
-        <li><a href="faq.html">Help</a></li>        
+        <li><a href="help.php">Help</a></li>        
         </ul>
 
             
@@ -183,6 +183,6 @@
       </div>
       </footer>
     </center>
-    
+
 </body>
 </html>
