@@ -8,10 +8,11 @@ if(!$user_home->is_logged_in())
 }
 else if($user_home->is_doctor())
 {
-    $user_home->redirect('doctorhome.php');
+    $user_home->redirect('createapp.php');
 }
 
 $userID = $_SESSION['userSession'];
+$i = 1;
 
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
@@ -21,9 +22,9 @@ $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
-$query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
+$query2 = $user_home->runQuery("SELECT A.*, D.userID, D.specialty, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D 
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND A.taken = 0 GROUP BY A.app_name");
 $query2->execute(array($_SESSION['userSession']));
-$row3 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
     <!DOCTYPE html>
@@ -200,8 +201,30 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
                   <br><br>
 
+                        <?php
+                        while ($row3 = $query2->fetch(PDO::FETCH_ASSOC)) {
+                        $button1 = "btn-schedule".$i;
+                        $doctorID = $row3['userID'];
+                        $appID = $row3['appointment_id'];
+
+                        if(isset($_POST[$button1]))
+                        {
+                            if($user_home->scheduleAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 1))
+                            {
+                                echo " yay you did it";
+                                $user_home->redirect('home.php');
+                            }
+                            else
+                            {
+                                die("fml you failed");
+                            }
+                        }
+                        ?>
                     <!-- Table will grow accordingly as data submitted -->
-                  <table class="table table-bordered">
+
+                   <table class="table table-bordered">
+                       <h4><b><?php echo $row3['app_name'];?></b></h4>
+                       <table class="table table-bordered">
                   <tr>
                         <th>Doctor</th>
                         <th>Specialty</th>
@@ -209,9 +232,9 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
                         <th>Contact Phone Number</th>
                   </tr>
                   <tr>
-                        <td><?php echo $row3['name'];?></td>
+                        <td><?php echo $row3['firstName']." ";?><?php echo $row3['lastName'];?></td>
                         <td><?php echo $row3['specialty'];?></td>
-                        <td><?php echo $row3['location'];?></td>
+                        <td><?php echo $row3['streetAddress'].", ";?><?php echo $row3['city'].", ";?><?php echo $row3['state']." ";?><?php echo $row3['zipcode'];?></td>
                         <td><?php echo $row3['phone_no'];?></td>
                   </tr> 
                     </table>
@@ -232,6 +255,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
                          <td><?php echo "$".$row3['price'];?></td>
                      </tr>
                    </table>
+                   </table>
 
                    <div align="right">
                     <form action="" method="POST">
@@ -239,10 +263,11 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
                     </form>
                     </div><br><br>
 
+                            <?php $i++; } ?>
                     </div>
 
                     
-                    </div>                       
+                    </div>
     </ol>
 </div>
 
