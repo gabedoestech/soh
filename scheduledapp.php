@@ -229,7 +229,7 @@ $query2->execute(array($_SESSION['userSession']));
 
         <!--Logged in user-->
         <ul class="nav navbar-nav navbar-right" id="log">
-        <li><a href="#" style="color:black">Logged in as: <?php echo $row2['userName']; ?></a></li>
+        <li><a href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
         </ul>      
       </div> <!-- /.container-fluid -->
 =======
