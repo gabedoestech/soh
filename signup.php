@@ -36,7 +36,7 @@ if(isset($_POST['btn-signup']))
                 $stmt->execute();
                 $userID = $stmt->fetchColumn();
 
-                $id = $reg_user->lasdID();
+                $id = $userID;
                 $key = base64_encode($id);
                 $id = $key;
                 $message = "
@@ -82,7 +82,7 @@ if(isset($_POST['btn-signup']))
                 $stmt->execute();
                 $userID = $stmt->fetchColumn();
 
-                $id = $reg_user->lasdID();
+                $id = $userID;
                 $key = base64_encode($id);
                 $id = $key;
                 $message = "

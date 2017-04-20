@@ -284,19 +284,19 @@ class USER
         $mail = new PHPMailer; // fill in your email information here
         $mail->IsSMTP();
         $mail->SMTPDebug  = 0;
-        $mail->Host       = 'mail.google.com';
-        $mail->Port       = 587;
-        $mail->SMTPSecure = 'tls';
+        $mail->Host       = 'mail.notdevin.com';
+        $mail->Port       = 465;
+        $mail->SMTPSecure = 'ssl';
         $mail->SMTPAuth   = true;
-        $mail->Username="emailAccount_here@gmail.com";
-        $mail->Password="password_here";
+        $mail->Username="_mainaccount@notdevin.com";
+        $mail->Password="PJQ_E_sc3y07";
         $mail->AddAddress($email);
         $mail->SetFrom('NoReply@Group6.com','Group 6');
         $mail->AddReplyTo('NoReply@Group6.com','Group 6');
         $mail->Subject    = $subject;
         $mail->MsgHTML($message);
         if (!$mail->send()){
-            echo "Mailer Error: " .$mail->ErrorInfo;
+            echo "Mailer Error: ".$mail->ErrorInfo;
         } else {
             echo "Message sent!";
         }
