@@ -180,7 +180,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
         <!--Logged in user-->
         <ul class="nav navbar-nav navbar-right" id="log">
-        <li><a href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+        <li><a href="#" style="color:black">Logged in as: <?php echo $row2['userName']; ?></a></li>
         </ul>      
       </div> <!-- /.container-fluid -->
     </nav>
