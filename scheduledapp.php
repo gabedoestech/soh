@@ -24,16 +24,10 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
-
-$query3 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.name, U.phone_no FROM appointment A, users U, doctor D, sees S 
-                                    WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
-                                    AND A.appointment_id=S.appointment_id GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
-$query3->execute(array($_SESSION['userSession']));
-$row4 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
-    <!DOCTYPE html>
-    <html>
+<!DOCTYPE html>
+<html>
 
 
     <head>
@@ -153,7 +147,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <body>
         <!-- Logo -->
-        <!-- logo updated -->
+        <div >
         <div class="mylogo">
             <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
         </div>
@@ -163,10 +157,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
             <div class="container-fluid">
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <b><ul class="nav navbar-nav">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="home.php">Profile</a></li>
+        
+        <ul class="nav navbar-nav">
+        <li><a href="home.php">Home</a></li>        
         <li><a href="medicalrecords.php">Medical Records</a></li>
         
         <!-- Dropdown for appointments -->
@@ -187,11 +180,10 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
 
         <!--Logged in user-->
         <ul class="nav navbar-nav navbar-right" id="log">
-        <li>Logged in as: <?php echo $row2['userName']; ?></li>
-        </ul>
-      </div><!-- /.navbar-collapse --></b>
+        <li><a href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+        </ul>      
       </div> <!-- /.container-fluid -->
-        </nav>
+    </nav>
 
 
         <!-- OLD NAVBAR -->
@@ -316,17 +308,9 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
    
 </div>
 
-
  <center><footer class="container-fluid" id="footer">
     <p><h4>Copyright © Software Seals, 2017.</h4></p>
   </footer></center>
 
-
-  
-
 </body>
-
-
-
-
 </html>
