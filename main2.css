@@ -67,6 +67,10 @@ body::after {
     opacity: .725;
 }
 
+.nav-tabs {
+    background-image: url("https://s-media-cache-ak0.pinimg.com/originals/72/21/1d/72211d6b555afea993fd8ddc39bc2172.jpg");
+}
+
 .table-responsive {
     background-color: white;
 }
