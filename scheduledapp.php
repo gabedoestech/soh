@@ -138,101 +138,6 @@ $query2->execute(array($_SESSION['userSession']));
                 color: #000000;
                 background-color: #fefefe;
             }
-<<<<<<< HEAD
-            
-            .navbar-default .navbar-nav > .open > a,
-            .navbar-default .navbar-nav > .open > a:hover,
-            .navbar-default .navbar-nav > .open > a:focus {
-                color: #000000;
-                background-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle {
-                border-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle:hover,
-            .navbar-default .navbar-toggle:focus {
-                background-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle .icon-bar {
-                background-color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-collapse,
-            .navbar-default .navbar-form {
-                border-color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-link {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-link:hover {
-                color: #000000;
-            }
-            
-            @media only screen 
-            and (min-device-width : 320px) 
-            and (max-device-width : 568px){
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-                    color: #03ccfe;
-                }
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-                    color: #000000;
-                }
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-                    color: #000000;
-                    background-color: #fefefe;
-                }
-            }
-        </style>
-
-    </head>
-
-    <body>
-        <!-- Logo -->
-        <div >
-        <div class="mylogo">
-            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
-        </div>
-
-        <!-- NEW NAVBAR -->
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        
-        <ul class="nav navbar-nav">
-        <li><a href="home.php">Home</a></li>        
-        <li><a href="medicalrecords.php">Medical Records</a></li>
-        
-        <!-- Dropdown for appointments -->
-         <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                Appointments <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
-                </ul>
-            </li>
-        <!--End Dropdown for appointments -->
-
-        <li><a href="help.php">Help</a></li>
-        <li><a href="logout.php">Logout</a></li>
-        </ul>
-
-        <!--Logged in user-->
-        <ul class="nav navbar-nav navbar-right" id="log">
-        <li><a href="#" style="color:black">Logged in as: <?php echo $row2['userName']; ?></a></li>
-        </ul>      
-      </div> <!-- /.container-fluid -->
-=======
         }
     </style>
 
@@ -277,7 +182,6 @@ $query2->execute(array($_SESSION['userSession']));
                     </ul>
             </div><!-- /.navbar-collapse --></b>
         </div> <!-- /.container-fluid -->
->>>>>>> origin/new_page_gabe
     </nav>
 
 

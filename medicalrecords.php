@@ -24,14 +24,20 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
+
+$query3 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.name, U.phone_no FROM appointment A, users U, doctor D, sees S 
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
+                                    AND A.appointment_id=S.appointment_id GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
+$query3->execute(array($_SESSION['userSession']));
+$row4 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html>
+    <!doctype html>
     <html>
 
 
     <head>
-        <title></title>
+        <title>Medical Records</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="main2.css">

@@ -25,6 +25,11 @@ $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
+$query3 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D, sees S 
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
+                                    AND A.appointment_id=S.appointment_id GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
+$query3->execute(array($_SESSION['userSession']));
+$row4 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -150,7 +155,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
         <!-- Logo -->
         <!-- added a class in css - logo-img -->
        <div class="mylogo">
-            <center><img class="logo-img" src="Design2.png"></center>
+            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -267,10 +272,8 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 </div>
 
 
- <center><footer class="footer">
-    <div class="container">
+ <center><footer class="container-fluid" id="footer">
     <p><h4>Copyright © Software Seals, 2017.</h4></p>
-    </div> <!--/container-->
   </footer></center>
 
 
