@@ -6,10 +6,6 @@ if(!$user_home->is_logged_in())
 {
     $user_home->redirect('index.php');
 }
-else if($user_home->is_doctor())
-{
-    $user_home->redirect('doctorhome.php');
-}
 
 $userID = $_SESSION['userSession'];
 
@@ -20,10 +16,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
-
-$query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
-$query2->execute(array($_SESSION['userSession']));
-$row3 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
     <!doctype html>

@@ -159,7 +159,15 @@ $query2->execute(array($_SESSION['userSession']));
                 <b><ul class="nav navbar-nav">
                         <li><a href="#">Home</a></li>
                         <li><a href="home.php">Profile</a></li>
-                        <li><a href="medicalrecords.php">Medical Records</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                Medical Records <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="medicalrecords.php">View Records</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="addrecords.php">Add to Records</a></li>
+                            </ul>
+                        </li>
 
                         <!-- Dropdown for appointments -->
                         <li class="dropdown">
