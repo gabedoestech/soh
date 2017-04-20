@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 14, 2017 at 03:15 AM
+-- Generation Time: Apr 20, 2017 at 12:05 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.0.13
 
@@ -29,23 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `appointment` (
   `appointment_id` int(10) unsigned NOT NULL,
   `userID` int(11) NOT NULL,
+  `summary` varchar(500) NOT NULL,
   `price` double NOT NULL,
-  `location` varchar(50) NOT NULL,
+  `streetAddress` varchar(100) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(25) NOT NULL,
+  `zipcode` varchar(15) NOT NULL,
   `app_name` varchar(50) DEFAULT NULL,
   `app_date` date NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   `taken` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `appointment`
---
-
-INSERT INTO `appointment` (`appointment_id`, `userID`, `price`, `location`, `app_name`, `app_date`, `start_time`, `end_time`, `taken`) VALUES
-(4, 12, 30, 'Jujubean Lane, Gainesville, FL 32601', 'Wart Removal', '2017-04-27', '14:00:00', '14:15:00', 1),
-(10, 12, 25, 'vawrvrawbraw', 'rgvawca', '2017-04-21', '16:24:00', '17:34:00', 0),
-(11, 12, 50, 'artbaertbarvtaw', 'erawgavegva', '2017-04-29', '14:31:00', '16:00:00', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -58,18 +53,6 @@ CREATE TABLE IF NOT EXISTS `doctor` (
   `specialty` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `doctor`
---
-
-INSERT INTO `doctor` (`userID`, `specialty`) VALUES
-(6, NULL),
-(7, NULL),
-(8, NULL),
-(9, NULL),
-(10, NULL),
-(12, 'Neurology');
-
 -- --------------------------------------------------------
 
 --
@@ -79,7 +62,7 @@ INSERT INTO `doctor` (`userID`, `specialty`) VALUES
 CREATE TABLE IF NOT EXISTS `history` (
   `case_id` int(10) unsigned NOT NULL,
   `case_name` varchar(20) DEFAULT NULL,
-  `text` varchar(20) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
   `doctor` varchar(20) NOT NULL,
   `doc_specialty` varchar(20) NOT NULL,
   `date` date DEFAULT NULL,
@@ -95,20 +78,21 @@ CREATE TABLE IF NOT EXISTS `history` (
 CREATE TABLE IF NOT EXISTS `patient` (
   `userID` int(11) NOT NULL,
   `birth_date` date DEFAULT NULL,
-  `ethnicity` varchar(15) DEFAULT NULL
+  `ethnicity` varchar(15) DEFAULT NULL,
+  `age` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `patient`
+-- Table structure for table `prescribes`
 --
 
-INSERT INTO `patient` (`userID`, `birth_date`, `ethnicity`) VALUES
-(1, NULL, NULL),
-(2, NULL, NULL),
-(3, NULL, NULL),
-(4, NULL, NULL),
-(5, NULL, NULL),
-(11, '1986-07-17', 'Native American');
+CREATE TABLE IF NOT EXISTS `prescribes` (
+  `userID_doctor` int(11) NOT NULL,
+  `userID_patient` int(11) NOT NULL,
+  `drugId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -118,8 +102,12 @@ INSERT INTO `patient` (`userID`, `birth_date`, `ethnicity`) VALUES
 
 CREATE TABLE IF NOT EXISTS `prescription` (
   `drugId` int(11) NOT NULL,
-  `drug_name` varchar(50) NOT NULL,
-  `drug_amount` varchar(30) NOT NULL
+  `drugName` varchar(100) NOT NULL,
+  `instructions` varchar(500) NOT NULL,
+  `dosage` varchar(100) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `duration` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -134,13 +122,17 @@ CREATE TABLE IF NOT EXISTS `sees` (
   `appointment_id` int(10) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `sees`
+-- Table structure for table `updates`
 --
 
-INSERT INTO `sees` (`userID_patient`, `userID_doctor`, `appointment_id`) VALUES
-(11, 12, 4),
-(11, 12, 11);
+CREATE TABLE IF NOT EXISTS `updates` (
+  `userID_doctor` int(11) NOT NULL,
+  `userID_patient` int(11) NOT NULL,
+  `vitalsId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -166,30 +158,29 @@ CREATE TABLE IF NOT EXISTS `users` (
   `userPass` varchar(50) DEFAULT NULL,
   `phone_no` varchar(13) DEFAULT NULL,
   `sex` varchar(6) DEFAULT NULL,
-  `name` varchar(20) DEFAULT NULL,
+  `firstName` varchar(100) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   `userEmail` varchar(100) NOT NULL,
-  `userStatus` enum('Y','N') DEFAULT NULL,
+  `userStatus` enum('Y','N') NOT NULL,
   `tokenCode` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `users`
+-- Table structure for table `vitals`
 --
 
-INSERT INTO `users` (`userID`, `userName`, `userPass`, `phone_no`, `sex`, `name`, `address`, `userEmail`, `userStatus`, `tokenCode`) VALUES
-(1, 'Plawson123', '63bac83f8958ae71f7fb2b8ad892f423', NULL, NULL, NULL, NULL, 'phillylawson@gmail.com', 'Y', '506d458ccb11cf2fb3115078745f8cd3'),
-(2, 'SadHoshi', '39af8eae4e0ce9eef5189ec615acdb28', NULL, NULL, NULL, NULL, 'shoshi@comcast.net', 'Y', 'f4961ae414d33b38bf2c5b7d66c09778'),
-(3, 'MarinerMaria', '879c433ebb4807da4cd55a67b62b42c0', NULL, NULL, NULL, NULL, 'marmar@knights.ucf.edu', 'Y', '25b19d4cc1f43130252893c25c81ea18'),
-(4, 'Governance', '275f97851b5f5eaf2799aabc36be81ef', NULL, NULL, NULL, NULL, 'groverlane@gmail.com', 'Y', '67bfb321252dd0b87aeaef17d5525d10'),
-(5, 'MiaowLady', '2b31f0b0514b53937440c70bfc0ad29d', NULL, NULL, NULL, NULL, 'missmiaow@yahoo.com', 'Y', '59f0979255aeaddd4c775a3f0eefd197'),
-(6, 'DrRinnebaker', '2b3720c30bee49f9507f482a56253232', NULL, NULL, NULL, NULL, 'drrplantation@gmail.com', 'Y', '58f59524794b43163ed1f86afaa6cd87'),
-(7, 'ENTGuy', '4a1c488d7011f4c4bf9b152418a2f891', NULL, NULL, NULL, NULL, 'doctordoctor@yahoo.com', 'Y', '2cbec9912c31abd0951fd8df5707e30e'),
-(8, 'emergencydoctor', '61ba8a6f6b00da1136e0608452251e46', NULL, NULL, NULL, NULL, 'ERemergency@gmail.com', 'Y', 'af1bc31c4c39d44e1c02d97a982bf127'),
-(9, 'PatchAdams', '8beb9d2259a5c838f2ceaf69fd1a647c', NULL, NULL, NULL, NULL, 'rednoseadams@comcast.net', 'Y', '0ae64f9d8a1a510f925bfd5cafd8187a'),
-(10, 'HeartRepair', '92c13ebbc6cdb02e70ebcf40dff084d1', NULL, NULL, NULL, NULL, 'lifesaver@yahoo.com', 'Y', 'a927e8cca1234c207516ae5d2062c494'),
-(11, 'dshmao', 'ebcc96376289ed92e2a7563460ab057c', '432-432-5325', 'Male', 'Devin Cole', '213 huefha, lald, fl 42341', 'devmcole1991@knights.ucf.edu', 'Y', '031dcf2461b366158595a208fc7dd549'),
-(12, 'Failure', 'ebcc96376289ed92e2a7563460ab057c', '541-463-5374', 'Male', 'Devin Sag', 'Hi There Mister', 'DevinDevinC@comcast.net', 'Y', '27608b6983a6a79fb44ec3a042e6f858');
+CREATE TABLE IF NOT EXISTS `vitals` (
+  `vitalsId` int(11) NOT NULL,
+  `temperature` varchar(100) NOT NULL,
+  `heartrate` varchar(100) NOT NULL,
+  `bloodpressure` varchar(100) NOT NULL,
+  `height` varchar(100) NOT NULL,
+  `weight` varchar(100) NOT NULL,
+  `BMI` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -202,8 +193,7 @@ ALTER TABLE `appointment`
   ADD PRIMARY KEY (`appointment_id`),
   ADD KEY `userID` (`userID`),
   ADD KEY `price` (`price`),
-  ADD KEY `app_date` (`app_date`),
-  ADD KEY `location` (`location`(6));
+  ADD KEY `app_date` (`app_date`);
 
 --
 -- Indexes for table `doctor`
@@ -227,11 +217,19 @@ ALTER TABLE `patient`
   ADD PRIMARY KEY (`userID`);
 
 --
+-- Indexes for table `prescribes`
+--
+ALTER TABLE `prescribes`
+  ADD PRIMARY KEY (`userID_doctor`,`userID_patient`,`drugId`),
+  ADD KEY `prescribes_ibfk_2` (`userID_patient`),
+  ADD KEY `prescribes_ibfk_3` (`drugId`);
+
+--
 -- Indexes for table `prescription`
 --
 ALTER TABLE `prescription`
   ADD PRIMARY KEY (`drugId`),
-  ADD KEY `drug_name` (`drug_name`(6));
+  ADD KEY `drug_name` (`drugName`(6));
 
 --
 -- Indexes for table `sees`
@@ -240,6 +238,14 @@ ALTER TABLE `sees`
   ADD PRIMARY KEY (`userID_patient`,`userID_doctor`,`appointment_id`),
   ADD KEY `userID_doctor` (`userID_doctor`),
   ADD KEY `appointment_id` (`appointment_id`);
+
+--
+-- Indexes for table `updates`
+--
+ALTER TABLE `updates`
+  ADD PRIMARY KEY (`userID_doctor`,`userID_patient`,`vitalsId`),
+  ADD KEY `updates_ibfk_2` (`userID_patient`),
+  ADD KEY `updates_ibfk_3` (`vitalsId`);
 
 --
 -- Indexes for table `uploads`
@@ -258,6 +264,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `userName_UNIQUE` (`userName`);
 
 --
+-- Indexes for table `vitals`
+--
+ALTER TABLE `vitals`
+  ADD PRIMARY KEY (`vitalsId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -265,7 +277,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `appointment_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `history`
 --
@@ -280,7 +292,12 @@ ALTER TABLE `prescription`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `vitals`
+--
+ALTER TABLE `vitals`
+  MODIFY `vitalsId` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -304,20 +321,36 @@ ALTER TABLE `patient`
   ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `prescribes`
+--
+ALTER TABLE `prescribes`
+  ADD CONSTRAINT `prescribes_ibfk_1` FOREIGN KEY (`userID_doctor`) REFERENCES `doctor` (`userID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `prescribes_ibfk_2` FOREIGN KEY (`userID_patient`) REFERENCES `patient` (`userID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `prescribes_ibfk_3` FOREIGN KEY (`drugId`) REFERENCES `prescription` (`drugId`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `sees`
 --
 ALTER TABLE `sees`
-  ADD CONSTRAINT `sees_ibfk_1` FOREIGN KEY (`userID_patient`) REFERENCES `patient` (`userID`),
-  ADD CONSTRAINT `sees_ibfk_2` FOREIGN KEY (`userID_doctor`) REFERENCES `doctor` (`userID`),
+  ADD CONSTRAINT `sees_ibfk_1` FOREIGN KEY (`userID_patient`) REFERENCES `patient` (`userID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `sees_ibfk_2` FOREIGN KEY (`userID_doctor`) REFERENCES `doctor` (`userID`) ON DELETE CASCADE,
   ADD CONSTRAINT `sees_ibfk_3` FOREIGN KEY (`appointment_id`) REFERENCES `appointment` (`appointment_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `updates`
+--
+ALTER TABLE `updates`
+  ADD CONSTRAINT `updates_ibfk_1` FOREIGN KEY (`userID_doctor`) REFERENCES `doctor` (`userID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `updates_ibfk_2` FOREIGN KEY (`userID_patient`) REFERENCES `patient` (`userID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `updates_ibfk_3` FOREIGN KEY (`vitalsId`) REFERENCES `vitals` (`vitalsId`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `uploads`
 --
 ALTER TABLE `uploads`
-  ADD CONSTRAINT `uploads_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `patient` (`userID`),
-  ADD CONSTRAINT `uploads_ibfk_2` FOREIGN KEY (`case_id`) REFERENCES `history` (`case_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `uploads_ibfk_3` FOREIGN KEY (`drugId`) REFERENCES `prescription` (`drugId`);
+  ADD CONSTRAINT `uploads_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `patient` (`userID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `uploads_ibfk_2` FOREIGN KEY (`case_id`) REFERENCES `history` (`case_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `uploads_ibfk_3` FOREIGN KEY (`drugId`) REFERENCES `prescription` (`drugId`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

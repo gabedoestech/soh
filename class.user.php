@@ -70,13 +70,14 @@ class USER
         }
     }
 
-    public function updateUser($userID, $name, $sex, $address, $phone_no)
+    public function updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no)
     {
         try{
-            $stmt = $this->conn->prepare("UPDATE users SET name=:name, sex=:sex, address=:address, phone_no=:phone_no
+            $stmt = $this->conn->prepare("UPDATE users SET firstName=:firstName, lastName=:lastName, sex=:sex, address=:address, phone_no=:phone_no
                                                     WHERE userID=:userID ");
             $stmt->bindparam(":userID",$userID);
-            $stmt->bindparam(":name",$name);
+            $stmt->bindparam(":firstName",$firstName);
+            $stmt->bindparam(":lastName",$lastName);
             $stmt->bindparam(":sex",$sex);
             $stmt->bindparam(":address",$address);
             $stmt->bindparam(":phone_no",$phone_no);
@@ -89,14 +90,15 @@ class USER
         }
     }
 
-    public function updatePatient($userID, $birth_date, $ethnicity)
+    public function updatePatient($userID, $birth_date, $ethnicity, $age)
     {
         try{
-            $stmt = $this->conn->prepare("UPDATE patient SET birth_date=:birth_date, ethnicity=:ethnicity
+            $stmt = $this->conn->prepare("UPDATE patient SET birth_date=:birth_date, ethnicity=:ethnicity, age=:age
                                                     WHERE userID=:userID");
             $stmt->bindparam(":userID",$userID);
             $stmt->bindparam(":birth_date",$birth_date);
             $stmt->bindparam(":ethnicity",$ethnicity);
+            $stmt->bindparam(":age",$age);
             $stmt->execute();
             return $stmt;
         }
@@ -121,14 +123,17 @@ class USER
         }
     }
 
-    public function createAppointment($userID, $app_name, $location, $app_date, $start_time, $end_time, $price, $taken)
+    public function createAppointment($userID, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price, $taken)
     {
         try{
-            $stmt = $this->conn->prepare("INSERT INTO appointment(userID,app_name,location,app_date,start_time,end_time,price,taken)
-                                                VALUES(:userID,:app_name,:location,:app_date,:start_time,:end_time,:price,:taken)");
+            $stmt = $this->conn->prepare("INSERT INTO appointment(userID,app_name,streetAddress,city,state,zipcode,app_date,start_time,end_time,price,taken)
+                                                VALUES(:userID,:app_name,:streetAddress,:city,:state,:zipcode,:app_date,:start_time,:end_time,:price,:taken)");
             $stmt->bindparam(":userID",$userID);
             $stmt->bindparam(":app_name",$app_name);
-            $stmt->bindparam(":location",$location);
+            $stmt->bindparam(":streetAddress",$streetAddress);
+            $stmt->bindparam(":city",$city);
+            $stmt->bindparam(":state",$state);
+            $stmt->bindparam(":zipcode",$zipcode);
             $stmt->bindparam(":app_date",$app_date);
             $stmt->bindparam(":start_time",$start_time);
             $stmt->bindparam(":end_time",$end_time);
