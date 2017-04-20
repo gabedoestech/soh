@@ -229,9 +229,58 @@ if(isset($_POST['btn-save']))
             <!-- ADD DATE PICKER LATER TO MAKE ENTRY FANCY -->
             <div class="form-group row">
                 <label for="birthdayInput" class="col-sm-2 col-sm-form-label">Specialty:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" name="specialty" placeholder="Enter your medical specialty" id="example-name-input" required>
-                </div>
+                <select name="specialty">
+                    <option value="Allergology">Allergology</option>
+                    <option value="Andrology">Andrology</option>
+                    <option value="Angiology">Angiology</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Dentistry">Dentistry</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Emergency Medicine">Emergency Medicine</option>
+                    <option value="Endocrinology">Endocrinology</option>
+                    <option value="Family Medicine">Family Medicine</option>
+                    <option value="Gastoenterology">Gastoenterology</option>
+                    <option value="General Practice">General Practice</option>
+                    <option value="Medical Genetics">Medical Genetics</option>
+                    <option value="Geriatrics">Geriatrics</option>
+                    <option value="Gerontology">Gerontology</option>
+                    <option value="Gynaecology">Gynaecology</option>
+                    <option value="Hematology">Hematology</option>
+                    <option value="Hepatology">Hepatology</option>
+                    <option value="Immunology">Immunology</option>
+                    <option value="Infectious Diseases">Infectious Diseases</option>
+                    <option value="Intensive Care Medicine">Intensive Care Medicine</option>
+                    <option value="Internal Medicine">Internal Medicine</option>
+                    <option value="Men's Health">Men's Health</option>
+                    <option value="Nephrology">Nephrology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Nuclear Medicine">Nuclear Medicine</option>
+                    <option value="Obstetrics">Obstetrics</option>
+                    <option value="Oncology">Oncology</option>
+                    <option value="Ophthalmology">Ophthalmology</option>
+                    <option value="Otorhinolaryngology (ENT)">Otorhinolaryngology (ENT)</option>
+                    <option value="Pallative Medicine">Pallative Medicine</option>
+                    <option value="Pathology">Pathology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Podiatry">Podiatry</option>
+                    <option value="Preventative Medicine">Preventative Medicine</option>
+                    <option value="Psychiatry">Psychiatry</option>
+                    <option value="Pulmonology">Pulmonology</option>
+                    <option value="Radiology">Radiology</option>
+                    <option value="Rehabilitation Medicine">Rehabilitation Medicine</option>
+                    <option value="Rheumatology">Rheumatology</option>
+                    <option value="Serology">Serology</option>
+                    <option value="Sexual Health">Sexual Health</option>
+                    <option value="Sleep Medicine">Sleep Medicine</option>
+                    <option value="Sports Medicine">Sports Medicine</option>
+                    <option value="Surgery">Surgery</option>
+                    <option value="Toxicology">Toxicology</option>
+                    <option value="Transplantation Medicine">Transplantation Medicine</option>
+                    <option value="Trichology">Trichology</option>
+                    <option value="Tropical Medicine">Tropical Medicine</option>
+                    <option value="Urology">Urology</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
 
             <div class="form-group row">
