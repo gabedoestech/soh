@@ -147,7 +147,7 @@ $query2->execute(array($_SESSION['userSession']));
         <!-- Logo -->
         <div >
         <div class="mylogo">
-            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
+            <center><img class="logo-img img-responsive" src="Design2.png"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -172,13 +172,13 @@ $query2->execute(array($_SESSION['userSession']));
             </li>
         <!--End Dropdown for appointments -->
 
-        <li><a href="help.php">Help</a></li>
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="help.php">Help</a></li>        
         </ul>
 
         <!--Logged in user-->
-        <ul class="nav navbar-nav navbar-right" id="log">
-        <li><a href="#" style="color:black" >Logged in as: <?php echo $row2['userName']; ?></a></li>
+        <ul class="nav navbar-nav navbar-right" id="log">        
+        <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+        <li><a href="logout.php">Logout</a></li>
         </ul>      
       </div> <!-- /.container-fluid -->
     </nav>
