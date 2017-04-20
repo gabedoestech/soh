@@ -148,9 +148,9 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <body>
         <!-- Logo -->
-        <!-- added a class in css - logo-img -->
-       <div class="mylogo">
-            <center><img class="logo-img" src="Design2.png"></center>
+        <div >
+        <div class="mylogo">
+            <center><img class="logo-img img-responsive" src="Design2.png"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -158,10 +158,9 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
             <div class="container-fluid">
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <b><ul class="nav navbar-nav">
-        <li><a href="home.php">Home</a></li>
-        <li><a href="#">Profile<span class="sr-only">(current)</span></a></li>
+        
+        <ul class="nav navbar-nav">
+        <li><a href="home.php">Home</a></li>        
         <li><a href="medicalrecords.php">Medical Records</a></li>
         
         <!-- Dropdown for appointments -->
@@ -176,18 +175,16 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
             </li>
         <!--End Dropdown for appointments -->
 
-        <li><a href="help.php">Help</a></li>
+        <li><a href="help.php">Help</a></li>        
+        </ul>
+
+        <!--Logged in user-->
+        <ul class="nav navbar-nav navbar-right" id="log">        
+        <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
         <li><a href="logout.php">Logout</a></li>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right" id="log">
-        <li>Logged in as: <?php echo $row2['userName']; ?></li>
-        </ul>
-      </div><!-- /.navbar-collapse --></b>
+        </ul>      
       </div> <!-- /.container-fluid -->
-        </nav>
-
-
+    </nav>
         <!-- OLD NAVBAR -->
         <div class="container">         
 
@@ -267,9 +264,13 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 </div>
 
 
- <center><footer class="container-fluid" id="footer">
-    <p><h4>Copyright © Software Seals, 2017.</h4></p>
-  </footer></center>
+  <center>
+      <footer class="footer" id="footer">
+        <div class="container">
+        <h4>Copyright © Software Seals, 2017.</h4>
+      </div>
+      </footer>
+    </center>
 
 
   

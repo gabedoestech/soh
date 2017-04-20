@@ -284,10 +284,13 @@ $query2->execute(array($_SESSION['userSession']));
 
 
 
-
-    <center><footer class="container-fluid" id="footer">
-            <p><h4>Copyright © Software Seals, 2017.</h4></p>
-        </footer></center>
+ <center>
+      <footer class="footer" id="footer">
+        <div class="container">
+        <h4>Copyright © Software Seals, 2017.</h4>
+      </div>
+      </footer>
+    </center>
 
 
 

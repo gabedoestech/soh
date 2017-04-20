@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Title Page</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="main2.css">
+        <meta charset="utf-8">
+        <meta http-equiv-"X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        <!-- The above 3 meta tags *must* come first in the head;
+        any other head content must come *after* these tags -->
+        
+        <!--personalized CSS file by Maria -->
+        <link rel="stylesheet" href="main2.css">
+        <title>Seal of Health</title>
+       
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">        
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--Need the above to run dropdown menu -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
         
   <style>
@@ -132,28 +143,22 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-        <img src="doctors.jpg" alt="Chania" width="460" height="345">
+        <img src="img/doctors2.png" alt="Chania" width="460" height="345">
         <div class="carousel-caption">
         </div>
       </div>
 
       <div class="item">
-        <img src="health.jpg" alt="Chania" width="460" height="345">
+        <img src="img/meds.png" alt="Chania" width="460" height="345">
         <div class="carousel-caption">
         </div>
       </div>
     
       <div class="item">
-        <img src="babyseal.jpg" alt="Flower" width="460" height="345">
+        <img src="img/doctorh2.png" alt="Flower" width="460" height="345">
         <div class="carousel-caption">
         </div>
-      </div>
-
-      <div class="item">
-        <img src="seals.jpg" alt="Flower" width="460" height="345">
-        <div class="carousel-caption">
-        </div>
-      </div>
+      </div>      
   
     </div>
 
@@ -170,12 +175,14 @@
 </div>
 
 <br>
+
 <center>
-   
-    
-      <footer class="container-fluid" id="footer">
-        <p>
-          <h4>Copyright © Software Seals, 2017.</h4></p>
+      <footer class="footer" id="footer">
+        <div class="container">
+        <h4>Copyright © Software Seals, 2017.</h4>
+      </div>
       </footer>
+    </center>
+    
 </body>
 </html>
