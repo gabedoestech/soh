@@ -212,7 +212,7 @@ $query2->execute(array($_SESSION['userSession']));
                             if($user_home->scheduleAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 1))
                             {
                                 echo " yay you did it";
-                                $user_home->redirect('home.php');
+                                $user_home->redirect('searchapp_styleupdated.php');
                             }
                             else
                             {
