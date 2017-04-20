@@ -6,10 +6,6 @@ if(!$user_home->is_logged_in())
 {
     $user_home->redirect('index.php');
 }
-else if($user_home->is_doctor())
-{
-    $user_home->redirect('doctorhome.php');
-}
 
 $userID = $_SESSION['userSession'];
 
@@ -25,11 +21,27 @@ $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
-$query3 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.name, U.phone_no FROM appointment A, users U, doctor D, sees S 
-                                    WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
-                                    AND A.appointment_id=S.appointment_id GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
-$query3->execute(array($_SESSION['userSession']));
-$row4 = $query2->fetch(PDO::FETCH_ASSOC);
+if(isset($_POST['btn-save']))
+{
+    $firstName = trim($_POST['firstName']);
+    $lastName = trim($_POST['lastName']);
+    $birth_date = trim($_POST['birth_date']);
+    $ethnicity = trim($_POST['ethnicity']);
+    $age = trim($_POST['age']);
+    $sex = trim($_POST['sex']);
+    $address = trim($_POST['address']);
+    $phone_no = trim($_POST['phone_no']);
+
+    if($user_home->updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no) && $user_home->updatePatient($userID, $birth_date, $ethnicity, $age))
+    {
+        echo " yay you did it";
+        $user_home->redirect('home.php');
+    }
+    else
+    {
+        die("fml you failed");
+    }
+}
 ?>
 
     <!doctype html>
@@ -197,13 +209,26 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
             </div>
 
         <div class="form-group row">
-            <label for="nameInput" class="col-sm-2 col-sm-form-label">Full Name:</label>
+            <label for="nameInput" class="col-sm-2 col-sm-form-label">First Name:</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" placeholder="Enter your full name" name="name" required>
+                <input class="form-control" type="text" placeholder="Enter your first name" name="firstName" required>
             </div>
         </div>
 
-        <!-- ADD DATE PICKER LATER TO MAKE ENTRY FANCY -->
+                           <div class="form-group row">
+                               <label for="nameInput" class="col-sm-2 col-sm-form-label">Last Name:</label>
+                               <div class="col-sm-4">
+                                   <input class="form-control" type="text" placeholder="Enter your last name" name="lastName" required>
+                               </div>
+                           </div>
+
+                           <div class="form-group row">
+                               <label for="ageInput" class="col-sm-2 col-sm-form-label">Age:</label>
+                               <div class="col-sm-4">
+                                   <input class="form-control" type="text" placeholder="Enter your age" name="age" required>
+                               </div>
+                           </div>
+                           <!-- ADD DATE PICKER LATER TO MAKE ENTRY FANCY -->
         <div class="form-group row">
             <label for="birthdayInput" class="col-sm-2 col-sm-form-label">Date of Birth:</label>
             <div class="col-sm-4">
@@ -236,7 +261,7 @@ $row4 = $query2->fetch(PDO::FETCH_ASSOC);
         </div>
 
         <div class="form-group row">
-            <label for="addressInput" class="col-sm-2 col-sm-form-label">Street Address:</label>
+            <label for="addressInput" class="col-sm-2 col-sm-form-label">Address:</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="address" placeholder="Enter your full address" id="example-name-input" required>
             </div>

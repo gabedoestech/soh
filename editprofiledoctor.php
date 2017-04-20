@@ -6,13 +6,17 @@ if(!$user_home->is_logged_in())
 {
     $user_home->redirect('index.php');
 }
+
 $userID = $_SESSION['userSession'];
+
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
+
 if(isset($_POST['btn-save']))
 {
     $firstName = trim($_POST['firstName']);
@@ -49,30 +53,142 @@ if(isset($_POST['btn-save']))
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <!-- Styles nav bar -->
+    <style>
+
+
+        .navbar-default {
+            background-color: #ffffff;
+            border-color: #fefefe;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-text {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-collapse,
+        .navbar-default .navbar-form {
+            border-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link:hover {
+            color: #000000;
+        }
+
+        @media (max-width: 767px) {
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+                color: #03ccfe;
+            }
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+                color: #000000;
+            }
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+                color: #000000;
+                background-color: #fefefe;
+            }
+
+            /* navigation bar alignments */
+            .inside-full-height {
+                height: 100%;
+            }
+
+        }
+    </style>
+
 </head>
 
 <body>
 
-<div class="container">
-    <div class="backer">
-        <center><img src="SH_T_trimmed.png" class="img-rounded" alt="Cinque Terre" width="304" height="236"></center>
+<!-- Logo -->
+<div class="mylogo">
+    <center><img src="Design2.png" width="608" height="230"></center>
+</div>
+
+<!-- NEW NAVBAR -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <b>
+
+                <ul class="nav navbar-nav inside-full-height">
+                    <li><a href="#">Home</a></li>
+                    <li class="active"><a href="#">Profile<span class="sr-only">(current)</span></a></li>
+                    <li><a href="createapp.php">Appointments</a></li>
+                    <li><a href="help.php">Help</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+                <ul class="nav navbar-right" id="log">
+                    <li>Logged in as: <?php echo $row2['userName']; ?></li>
+                </ul>
+        </div><!-- /.navbar-collapse --></b>
     </div>
+    <!-- /.container-fluid -->
+</nav>
 
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="createapp.php">Create Appointment</a></li>
-        <li role="presentation"><a href="logout.php">Logout</a></li>
+<!-- OLD NAVBAR -->
+<div class="container">
 
-        <p class="navbar-text">Signed in as <?php echo $row2['userName']; ?></p>
-    </ul>
-
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" id="bc1">
         <br>
-        <li><a href="#">Edit Profile Information</a></li>
-        <li><a href="doctorhome.php">View Profile</a></li>
-        <br><br>
-
-        <form action="" method="POST">
+        <div class="panel panel-default">
+            <div class="panel-heading"><b>Profile Information</b></div>
+            <div class="panel-body">
+                <form action="" method="POST">
             <!-- Profile Information: User input -->
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Username:</label>
@@ -127,7 +243,7 @@ if(isset($_POST['btn-save']))
             </div>
 
             <div class="form-group row">
-                <label for="addressInput" class="col-sm-2 col-sm-form-label">Street Address:</label>
+                <label for="addressInput" class="col-sm-2 col-sm-form-label">Address:</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" name="address" placeholder="Enter your full office address" id="example-name-input" required>
                 </div>
@@ -140,18 +256,33 @@ if(isset($_POST['btn-save']))
                 </div>
             </div>
 
-            <button class="btn btn-info" type="submit" name='btn-save'>Save Profile</button>
-        </form>
+                    <div align="right"><button class="btn btn-medium btn-info" type="submit" name='btn-save'><b>Save Profile</b></button></div>
+                </form>
+
+
+            </div>
+        </div>
+
+
+        <br>
+
     </ol>
-</div>
+
+    <br>
 
 </div>
 
 
-</div>
-</div>
+<center><footer class="container-fluid" id="footer">
+        <p><h4>Copyright © Software Seals, 2017.</h4></p>
+    </footer></center>
+
+
+
 
 </body>
+
+
 
 
 </html>
