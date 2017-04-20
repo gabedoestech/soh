@@ -8,7 +8,6 @@ if(!$user_home->is_logged_in())
 }
 
 $userID = $_SESSION['userSession'];
-$i = 1;
 
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
@@ -23,11 +22,12 @@ $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
-  <!doctype html>
-  <html>
+<!DOCTYPE html>
+<html>
 
 
-  <head>
+<head>
+
     <meta charset="utf-8">
     <meta http-equiv-"X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
@@ -54,139 +54,134 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <!-- Styles nav bar -->
     <style>
-
-     
-      .navbar-default {
-        background-color: #ffffff;
-        border-color: #fefefe;
-      }
-      
-      .navbar-default .navbar-brand {
-        color: #03ccfe;
-      }
-      
-      .navbar-default .navbar-brand:hover,
-      .navbar-default .navbar-brand:focus {
-        color: #000000;
-      }
-      
-      .navbar-default .navbar-text {
-        color: #03ccfe;
-      }
-      
-      .navbar-default .navbar-nav > li > a {
-        color: #03ccfe;
-      }
-      
-      .navbar-default .navbar-nav > li > a:hover,
-      .navbar-default .navbar-nav > li > a:focus {
-        color: #000000;
-      }
-      
-      .navbar-default .navbar-nav > .active > a,
-      .navbar-default .navbar-nav > .active > a:hover,
-      .navbar-default .navbar-nav > .active > a:focus {
-        color: #000000;
-        background-color: #fefefe;
-      }
-      
-      .navbar-default .navbar-nav > .open > a,
-      .navbar-default .navbar-nav > .open > a:hover,
-      .navbar-default .navbar-nav > .open > a:focus {
-        color: #000000;
-        background-color: #fefefe;
-      }
-      
-      .navbar-default .navbar-toggle {
-        border-color: #fefefe;
-      }
-      
-      .navbar-default .navbar-toggle:hover,
-      .navbar-default .navbar-toggle:focus {
-        background-color: #fefefe;
-      }
-      
-      .navbar-default .navbar-toggle .icon-bar {
-        background-color: #03ccfe;
-      }
-      
-      .navbar-default .navbar-collapse,
-      .navbar-default .navbar-form {
-        border-color: #03ccfe;
-      }
-      
-      .navbar-default .navbar-link {
-        color: #03ccfe;
-      }
-      
-      .navbar-default .navbar-link:hover {
-        color: #000000;
-      }
-      
-      @media (max-width: 767px) {
-        .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-          color: #03ccfe;
-        }
-        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-          color: #000000;
-        }
-        .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-        .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-        .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-          color: #000000;
-          background-color: #fefefe;
+        .navbar-default {
+            background-color: #ffffff;
+            border-color: #fefefe;
         }
 
-        /* navigation bar alignments */
-         .inside-full-height {
-          height: 100%;          
+        .navbar-default .navbar-brand {
+            color: #03ccfe;
         }
 
-      }
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-text {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: #fefefe;
+        }
+
+
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-collapse,
+        .navbar-default .navbar-form {
+            border-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link:hover {
+            color: #000000;
+        }
+
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 568px){
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+                color: #03ccfe;
+            }
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+                color: #000000;
+            }
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+                color: #000000;
+                background-color: #fefefe;
+            }
+        }
     </style>
 
-  </head>
+</head>
 
-  <body>
-
-      <!-- Logo -->    
-      <div class="mylogo">
-            <center><img class="logo-img img-responsive" src="Design2.png"></center>
-      </div>
-    
+<body>
+<!-- Logo -->
+<!-- added a class in css - logo-img -->
+<div class="mylogo">
+    <center><img class="logo-img img-responsive" src="Design2.png"></center>
+</div>
 
     <!-- NEW NAVBAR -->
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
+        <div class="container-fluid">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-             
-        <ul class="nav navbar-nav inside-full-height">
-        <li><a href="doctorhome.php">Home</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
 
-      <!-- Dropdown for appointments -->
-              <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                      Appointments <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
+            <ul class="nav navbar-nav inside-full-height">
+                <li><a href="doctorhome.php">Home</a></li>
+
+                <!-- Dropdown for appointments -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                        Appointments <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
                         <li><a href="createapp.php">Create Appointment</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="scheduledapp.php">Unscheduled Appointments</a></li>
-                        <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
-                        <li><a href="scheduledapp.php">Past Appointments</a></li>
-                      </ul>
-                  </li>
-      <!--End Dropdown for appointments -->
-    <li><a href="helpdoctor.php">Help</a></li>
-    </ul>  
+                        <li><a href="doctorunscheduled.php">Unscheduled Appointments</a></li>
+                        <li><a href="doctorscheduled.php">Scheduled Appointments</a></li>
+                        <li><a href="pastapp.php">Past Appointments</a></li>
+                    </ul>
+                </li>
+                <!--End Dropdown for appointments -->
+                <li><a href="helpdoctor.php">Help</a></li>
+            </ul>
 
-  <!--Logged in user-->
-        <ul class="nav navbar-nav navbar-right" id="log">        
-        <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
-        <li><a href="logout.php">Logout</a></li>
-        </ul>              
-      </div> <!-- /.container-fluid -->   
+            <!--Logged in user-->
+            <ul class="nav navbar-nav navbar-right" id="log">
+                <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </div> <!-- /.container-fluid -->
     </nav> <!-- /.navbar -->
 
     <!-- OLD NAVBAR -->

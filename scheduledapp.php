@@ -7,6 +7,17 @@ if(!$user_home->is_logged_in())
     $user_home->redirect('index.php');
 }
 
+date_default_timezone_set('America/New_York');
+$info = getdate();
+$day = $info['mday'];
+$month = $info['mon'];
+$year = $info['year'];
+$hour = $info['hours'];
+$min = $info['minutes'];
+
+$currentdate = "$year-$month-$day";
+$currenttime = "$hour:$min:00";
+
 $userID = $_SESSION['userSession'];
 $i = 1;
 
@@ -20,7 +31,9 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
 $query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D, sees S 
                                     WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
-                                    AND A.appointment_id=S.appointment_id GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
+                                    AND A.appointment_id=S.appointment_id 
+                                    AND (A.app_date > CAST('$currentdate' as DATE) OR (A.app_date = CAST('$currentdate' as DATE) AND A.end_time > CAST('$currenttime' as TIME)))
+                                    GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
 $query2->execute(array($_SESSION['userSession']));
 ?>
 
@@ -139,6 +152,7 @@ $query2->execute(array($_SESSION['userSession']));
                 background-color: #fefefe;
             }
         }
+
         </style>
 
     </head>
@@ -181,6 +195,7 @@ $query2->execute(array($_SESSION['userSession']));
         <li><a href="logout.php">Logout</a></li>
         </ul>      
       </div> <!-- /.container-fluid -->
+
     </nav>
 
 

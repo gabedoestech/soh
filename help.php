@@ -20,114 +20,129 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
-
 ?>
 
-    <!doctype html>
-    <html>
+
+<!DOCTYPE html>
+<html>
 
 
-    <head>
-        <title>Help</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="main2.css">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv-"X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <!-- The above 3 meta tags *must* come first in the head;
+    any other head content must come *after* these tags -->
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--personalized CSS file by Maria -->
+    <link rel="stylesheet" href="main2.css">
+    <title>Seal of Health</title>
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!-- Styles nav bar -->
-        <style>
-            .navbar-default {
-                background-color: #ffffff;
-                border-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-brand {
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--Need the above to run dropdown menu -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Styles nav bar -->
+    <style>
+        .navbar-default {
+            background-color: #ffffff;
+            border-color: #fefefe;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-text {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-collapse,
+        .navbar-default .navbar-form {
+            border-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link:hover {
+            color: #000000;
+        }
+
+        @media only screen
+        and (min-device-width : 320px)
+        and (max-device-width : 568px){
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a {
                 color: #03ccfe;
             }
-            
-            .navbar-default .navbar-brand:hover,
-            .navbar-default .navbar-brand:focus {
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
                 color: #000000;
             }
-            
-            .navbar-default .navbar-text {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-nav > li > a {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-nav > li > a:hover,
-            .navbar-default .navbar-nav > li > a:focus {
-                color: #000000;
-            }
-            
-            .navbar-default .navbar-nav > .active > a,
-            .navbar-default .navbar-nav > .active > a:hover,
-            .navbar-default .navbar-nav > .active > a:focus {
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
                 color: #000000;
                 background-color: #fefefe;
             }
-            
-            .navbar-default .navbar-nav > .open > a,
-            .navbar-default .navbar-nav > .open > a:hover,
-            .navbar-default .navbar-nav > .open > a:focus {
-                color: #000000;
-                background-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle {
-                border-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle:hover,
-            .navbar-default .navbar-toggle:focus {
-                background-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle .icon-bar {
-                background-color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-collapse,
-            .navbar-default .navbar-form {
-                border-color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-link {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-link:hover {
-                color: #000000;
-            }
-            
-            @media (max-width: 767px) {
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-                    color: #03ccfe;
-                }
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-                    color: #000000;
-                }
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-                    color: #000000;
-                    background-color: #fefefe;
-                }
-            }
-        </style>
+        }
+    </style>
 
-    </head>
+</head>
 
-    <body>
+<body>
         <!-- Logo -->
         <div class="mylogo">
             <center><img src="Design2.png" width="608" height="230"></center>
@@ -137,20 +152,39 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
         <nav class="navbar navbar-default">
             <div class="container-fluid">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <b><ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="home.php">Profile</a></li>
-        <li><a href="medicalrecords.php">Medical Records</a></li>
-        <li><a href="searchapp_styleupdated.php">Appointments</a></li>
-        <li class="active"><a href="#">Help<span class="sr-only">(current)</span></a></li>
-        <li><a href="logout.php">Logout</a></li>
-        </ul>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <ul class="nav navbar-nav inside-full-height">
+                    <li><a href="home.php">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            Medical Records <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medicalrecords.php">View Records</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="addrecords.php">Add to Records</a></li>
+                        </ul>
+                    </li>
 
-        <ul class="nav navbar-nav navbar-right" id="log">
-        <li>Logged in as: <?php echo $row2['userName']; ?></li>
-        </ul>
+                    <!-- Dropdown for appointments -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            Appointments <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
+                        </ul>
+                    </li>
+                    <!--End Dropdown for appointments -->
+
+                    <li><a href="help.php">Help</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" id="log">
+                    <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+
       </div><!-- /.navbar-collapse --></b>
       </div> <!-- /.container-fluid -->
         </nav>
@@ -164,20 +198,30 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
                     <div class="panel-body">
                         
                     <b> Do I have to create an account in order to search for doctors? </b><br>
-                    <p>In order for users to search for doctors and create appointments, we do require the creation of an account on Seal of Health. By creratin gan account you allow us to streamline the search process and tailor the results to match your needs and requirements so that you, the user, gets the absolute best experience we can provide.</p><hr>
+                    <p>In order for users to search for doctors and create appointments, we do require the creation of an account on
+                        Seal of Health. By creating an account, you allow us to streamline the search process and tailor the results to
+                        match your needs and requirements so that you, the user, gets the absolute best experience we can provide.</p><hr>
 
-                    <b>Am I, as a patient, able to cancel an appointment after I create one? </b><br><br>
-                    <p>Absolutely! Our product aims to help patients connect with doctors whenever is most convientient for you. Should you choose to cancel an appointment, we will make sure the doctor recieves a notification about your cancellation so that that spot may be choosen by another patient if needed.</p><hr>
+                    <b>Am I, as a patient, able to cancel an appointment after I select one? </b><br><br>
+                    <p>Absolutely! Our product aims to help patients connect with doctors whenever it is most convenient for you. Should you
+                        choose to cancel an appointment, we will make sure the doctor recieves a notification about your cancellation so that
+                        that spot may be choosen by another patient if needed.</p><hr>
 
-                    <b>Am I, as a doctor, able to cancel an appointment after a patient creates one?</b><br><br>
-                    <p>Our system currently does not allow for doctors to cancel appointments appointments once a patient has scheduled one. If you do need to cancel a previously schedualed appointment is is the doctor's responsiblity to notify the patient. However, we do highly encourage doctors to verify the appointment times and dates they list in order to avoid these situations entirely.</p><hr>
+                    <b>Am I, as a doctor, able to cancel an appointment after a patient schedules one?</b><br><br>
+                    <p>Our system currently does not allow for doctors to cancel appointments once a patient has scheduled one.
+                        if you do need to cancel a previously scheduled appointment, it is the doctor's responsibility to notify the patient. However,
+                        we do highly encourage doctors to verify the appointment times and dates they list in order to avoid these situations entirely.</p><hr>
 
                     <b>I can't remember my password! What should I do?</b><br><br>
-                    <p>You can recover your password by clicking on the 'Forgot your password?' link at the bottom of the login page. If you find for any reason that you are unable to log into your account, please contacttc our support team at sealofhealth@gmail.com for further instructions.
+                    <p>You can recover your password by clicking on the 'Forgot your password?' link at the bottom of the login page.
+                        If you find for any reason that you are unable to log into your account, please contact our support team at sealofhealth@gmail.com
+                        for further instructions.
                     </p><hr>
 
                     <b>I didn't recieve an appointment confirmation. Was my appointment still created?</b><br><br>
-                    <p>If you did not recieve an appointment confirmation email after schedualing an appointment, you should not assume that the appointment was created. Check your 'Current Appointments' tab in your profile and if you do not see the appointment, try to rescheduale the appointment. If you continue to have issues, please contact our support team at sealofhealth@gmail.com.</p><br>
+                    <p>If you did not recieve an appointment confirmation email after scheduling an appointment, you should not assume that the appointment
+                        was created. Check your 'Current Appointments' tab in your profile and if you do not see the appointment, try to reschedule the appointment.
+                        If you continue to have issues, please contact our support team at sealofhealth@gmail.com.</p><br>
 
                     </div>
                 </div>

@@ -22,7 +22,7 @@ $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
-$query2 = $user_home->runQuery("SELECT A.*, D.userID, D.specialty, U.name, U.phone_no FROM appointment A, users U, doctor D 
+$query2 = $user_home->runQuery("SELECT A.*, D.userID, D.specialty, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D 
                                     WHERE U.userID = A.userID AND D.userID = U.userID AND A.taken = 0 GROUP BY A.app_name");
 $query2->execute(array($_SESSION['userSession']));
 ?>
@@ -205,7 +205,7 @@ $query2->execute(array($_SESSION['userSession']));
                                 <th>Contact Phone Number</th>
                                 </thead>
                                 <tbody>
-                                <td><?php echo $row3['name'];?></td>
+                                <td><?php echo $row3['firstName']." ";?><?php echo $row3['lastName'];?></td>
                                 <td><?php echo $row3['specialty'];?></td>
                                 <td><?php echo $row3['location'];?></td>
                                 <td><?php echo $row3['phone_no'];?></td>

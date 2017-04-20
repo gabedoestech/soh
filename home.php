@@ -24,7 +24,6 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
@@ -148,41 +147,57 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <body>
         <!-- Logo -->
-        <div >
-        <div class="mylogo">
+
+        <!-- added a class in css - logo-img -->
+       <div class="mylogo">
             <center><img class="logo-img img-responsive" src="Design2.png"></center>
+
         </div>
 
         <!-- NEW NAVBAR -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        
-        <ul class="nav navbar-nav">
-        <li><a href="home.php">Home</a></li>        
-        <li><a href="medicalrecords.php">Medical Records</a></li>
-        
-        <!-- Dropdown for appointments -->
-         <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                Appointments <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
+
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <ul class="nav navbar-nav inside-full-height">
+                    <li><a href="home.php">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            Medical Records <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medicalrecords.php">View Records</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="addrecords.php">Add to Records</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Dropdown for appointments -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            Appointments <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
+                        </ul>
+                    </li>
+                    <!--End Dropdown for appointments -->
+
+                    <li><a href="help.php">Help</a></li>
+
                 </ul>
-            </li>
-        <!--End Dropdown for appointments -->
 
-        <li><a href="help.php">Help</a></li>        
-        </ul>
 
-        <!--Logged in user-->
-        <ul class="nav navbar-nav navbar-right" id="log">        
-        <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
-        <li><a href="logout.php">Logout</a></li>
-        </ul>      
+
+                <ul class="nav navbar-nav navbar-right" id="log">
+                    <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+
+      </div><!-- /.navbar-collapse --></b>
+
       </div> <!-- /.container-fluid -->
     </nav>
         <!-- OLD NAVBAR -->
@@ -264,20 +279,15 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 </div>
 
 
+
   <center>
       <footer class="footer" id="footer">
         <div class="container">
         <h4>Copyright © Software Seals, 2017.</h4>
       </div>
       </footer>
-    </center>
-
-
-  
+    </center>  
 
 </body>
-
-
-
 
 </html>
