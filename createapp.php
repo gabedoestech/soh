@@ -20,14 +20,17 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 if(isset($_POST['btn-create']))
 {
     $app_name = trim($_POST['app_name']);
-    $location = trim($_POST['location']);
+    $streetAddress = trim($_POST['streetAddress']);
+    $city = trim($_POST['city']);
+    $state = trim($_POST['state']);
+    $zipcode = trim($_POST['zipcode']);
     $app_date = trim($_POST['app_date']);
     $start_time = trim($_POST['start_time']);
     $end_time = trim($_POST['end_time']);
     $price = trim($_POST['price']);
     $taken = 0;
     
-    if($user_home->createAppointment($userID, $app_name, $location, $app_date, $start_time, $end_time, $price, $taken))
+    if($user_home->createAppointment($userID, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price, $taken))
     {
         echo " yay you did it";
         $user_home->redirect('doctorhome.php');
@@ -40,12 +43,12 @@ if(isset($_POST['btn-create']))
 }
 ?>
 
-  <!doctype html>
-  <html>
+<!doctype html>
+<html>
 
 
-  <head>
-    <title>Appointments</title>
+<head>
+    <title>Profile Information</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="main2.css">
@@ -57,133 +60,140 @@ if(isset($_POST['btn-create']))
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
     <!-- Styles nav bar -->
-        <style>
-            .navbar-default {
-                background-color: #ffffff;
-                border-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-brand {
+    <style>
+
+
+        .navbar-default {
+            background-color: #ffffff;
+            border-color: #fefefe;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-text {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #000000;
+        }
+
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+            color: #000000;
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #fefefe;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-collapse,
+        .navbar-default .navbar-form {
+            border-color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link {
+            color: #03ccfe;
+        }
+
+        .navbar-default .navbar-link:hover {
+            color: #000000;
+        }
+
+        @media (max-width: 767px) {
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a {
                 color: #03ccfe;
             }
-            
-            .navbar-default .navbar-brand:hover,
-            .navbar-default .navbar-brand:focus {
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
                 color: #000000;
             }
-            
-            .navbar-default .navbar-text {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-nav > li > a {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-nav > li > a:hover,
-            .navbar-default .navbar-nav > li > a:focus {
-                color: #000000;
-            }
-            
-            .navbar-default .navbar-nav > .active > a,
-            .navbar-default .navbar-nav > .active > a:hover,
-            .navbar-default .navbar-nav > .active > a:focus {
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
                 color: #000000;
                 background-color: #fefefe;
             }
-            
-            .navbar-default .navbar-nav > .open > a,
-            .navbar-default .navbar-nav > .open > a:hover,
-            .navbar-default .navbar-nav > .open > a:focus {
-                color: #000000;
-                background-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle {
-                border-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle:hover,
-            .navbar-default .navbar-toggle:focus {
-                background-color: #fefefe;
-            }
-            
-            .navbar-default .navbar-toggle .icon-bar {
-                background-color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-collapse,
-            .navbar-default .navbar-form {
-                border-color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-link {
-                color: #03ccfe;
-            }
-            
-            .navbar-default .navbar-link:hover {
-                color: #000000;
-            }
-            
-            @media (max-width: 767px) {
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-                    color: #03ccfe;
-                }
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-                .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-                    color: #000000;
-                }
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
-                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-                    color: #000000;
-                    background-color: #fefefe;
-                }
-            }
-        </style>
 
-  </head>
+            /* navigation bar alignments */
+            .inside-full-height {
+                height: 100%;
+            }
 
-  <body>
+        }
+    </style>
 
-    <!-- Logo -->
-    <div class="mylogo">
-      <center><img src="Design2.png" width="608" height="230"></center>
-    </div>
+</head>
 
-    <!-- NEW NAVBAR -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
+<body>
+
+<!-- Logo -->
+<div class="mylogo">
+    <center><img src="Design2.png" width="608" height="230"></center>
+</div>
+
+<!-- NEW NAVBAR -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <b><ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="doctorhome.php">Profile</a></li>
-            <li class="active"><a href="createapp.php">Appointments<span class="sr-only">(current)</span></a></li>
-            <li><a href="helpdoctor.php">Help</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-        
-<ul class="nav navbar-nav navbar-right" id="log">
-<li>Logged in as: <?php echo $row2['userName']; ?></li>
-</ul>
-</div><!-- /.navbar-collapse --></b>
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+            <b>
 
- <!-- OLD NAVBAR -->
-    <div class="container">
+                <ul class="nav navbar-nav inside-full-height">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li class="active"><a href="createapp.php">Appointments<span class="sr-only">(current)</span></a></li>
+                    <li><a href="help.php">Help</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+                <ul class="nav navbar-right" id="log">
+                    <li>Logged in as: <?php echo $row2['userName']; ?></li>
+                </ul>
+        </div><!-- /.navbar-collapse --></b>
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
-      <ol class="breadcrumb">
+<!-- OLD NAVBAR -->
+<div class="container">
 
+    <ol class="breadcrumb" id="bc1">
         <br>
         <div class="panel panel-default">
-        <div class="panel-heading"><b>Create Appointment</b></div>
-        <div class="panel-body">
+            <div class="panel-heading"><b>Create Appointment</b></div>
+            <div class="panel-body">
         <form action="" method="POST">
-          
           <div class="form-group row">
             <label for="nameInput" class="col-sm-2 col-sm-form-label">Name:</label>
             <div class="col-sm-4">
@@ -193,11 +203,28 @@ if(isset($_POST['btn-create']))
 
           <!-- ADD DATE PICKER LATER TO MAKE ENTRY FANCY -->
           <div class="form-group row">
-            <label for="birthdayInput" class="col-sm-2 col-sm-form-label">Location:</label>
+            <label for="addressInput" class="col-sm-2 col-sm-form-label">Street Address:</label>
             <div class="col-sm-4">
-              <input class="form-control" type="text" name="location" placeholder="Enter the address of the appointment" id="example-name-input" required>
+              <input class="form-control" type="text" name="streetAddress" placeholder="Enter the street address of the appointment" id="example-name-input" required>
             </div>
           </div>
+
+            <div class="form-group row">
+                <label for="cityInput" class="col-sm-2 col-sm-form-label">City:</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" name="city" placeholder="Enter the city" id="example-name-input" required>
+                </div>
+
+                <label for="stateInput" class="col-sm-1 col-sm-form-label">State:</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" name="state" placeholder="Enter the state" id="example-name-input" required>
+                </div>
+
+                <label for="zipcodeInput" class="col-sm-1 col-sm-form-label">Zip:</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" name="zipcode" placeholder="Enter the zipcode" id="example-name-input" required>
+                </div>
+            </div>
 
           <div class="form-group row">
             <label for="birthdayInput" class="col-sm-2 col-sm-form-label">Date:</label>
@@ -227,7 +254,7 @@ if(isset($_POST['btn-create']))
             </div>
           </div>
 
-          <div align="right"><button class="btn btn-info" type="submit" name='btn-create'>Create</button>
+            <div align="right"><button class="btn btn-info" type="submit" name='btn-create'><b>Create</b></button></div>
         </form>
       </ol>
     </div>
