@@ -29,7 +29,7 @@ $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
-$query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.firstName AS doc_firstname, U.lastName AS doc_lastname, U.phone_no AS doc_phone_no, U2.firstName, U2.lastName, U2.userEmail, U2.phone_no
+$query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.firstName AS doc_firstname, U.lastName AS doc_lastname, U.phone_no AS doc_phone_no, U2.firstName, U2.lastName, U2.userEmail, U2.phone_no, U2.userID
                                     FROM appointment A, users U, users U2, doctor D, sees S
                                     WHERE S.userID_doctor=$userID AND S.userID_patient=U2.userID AND U.userID=$userID
                                     AND S.appointment_id=A.appointment_id AND D.userID=$userID 
@@ -214,12 +214,8 @@ $query2->execute(array($_SESSION['userSession']));
                 <?php
                 while ($row3 = $query2->fetch(PDO::FETCH_ASSOC))
                 {
-                    $button1 = "btn-medrecords".$i;
-
-                    if(isset($_POST[$button1]))
-                    {
-
-                    }
+                    $patientID = $row3['userID'];
+                    $app_id = $row3['appointment_id'];
                     ?>
                     <!-- Table will grow accordingly as data submitted -->
 
@@ -275,7 +271,7 @@ $query2->execute(array($_SESSION['userSession']));
 
                     <div align="right">
                         <form action="" method="POST">
-                            <button class="btn btn-medium btn-info" type="submit" name="btn-medrecords<?php echo $i; ?>" style="text-align:right" color="blue">Edit Medical Records</button>
+                            <?php echo "<a href='add_app.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info'>Add App. Summary</a>";?>
                         </form>
                     </div><br><br>
 
