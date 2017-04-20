@@ -211,6 +211,58 @@ class USER
         }
     }
 
+    public function addAppointmentSummary($appointment_id, $summary)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE appointment SET summary=:summary WHERE appointment_id=:appointment_id");
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->bindparam(":summary",$summary);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert update to appointment into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function addPrescription($drugName, $instructions, $dosage, $startDate, $endDate, $duration)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO prescription(drugName,instructions,dosage,startDate,endDate,duration)
+                                                VALUES(:drugName,:instructions,:dosage,:startDate,:endDate,:duration)");
+            $stmt->bindparam(":drugName",$drugName);
+            $stmt->bindparam(":instructions",$instructions);
+            $stmt->bindparam(":dosage",$dosage);
+            $stmt->bindparam(":startDate",$startDate);
+            $stmt->bindparam(":endDate",$endDate);
+            $stmt->bindparam(":duration",$duration);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert prescription into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function prescribe($userID_doctor, $userID_patient, $drugId)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO prescribes(userID_doctor,userID_patient,drugId)
+                                                VALUES(:userID_doctor,:userID_patient,:drugId)");
+            $stmt->bindparam(":userID_doctor",$userID_doctor);
+            $stmt->bindparam(":userID_patient",$userID_patient);
+            $stmt->bindparam(":drugId",$drugId);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert prescribes into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
     public function login($email,$upass)
     {
         try
