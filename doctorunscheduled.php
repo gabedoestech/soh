@@ -8,6 +8,7 @@ if(!$user_home->is_logged_in())
 }
 
 $userID = $_SESSION['userSession'];
+$i = 1;
 
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
@@ -17,11 +18,11 @@ $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
-$query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
+$query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D
+WHERE A.userID = $userID AND D.userID = $userID AND U.userID = $userID AND A.taken=0
+GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
 $query2->execute(array($_SESSION['userSession']));
-$row3 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -179,67 +180,111 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </div><!-- /.navbar-collapse --></b>
-    </div> <!-- /.container-fluid -->
-</nav>
+        </div> <!-- /.container-fluid -->
+    </nav>
 
-<div class="container">
 
-    <ol class="breadcrumb" id="bc1">
-        <br>
-        <div class="panel panel-default">
-            <div class="panel-heading"><b>Frequently Asked Questions</b></div>
-            <div class="panel-body">
+    <!-- OLD NAVBAR -->
+    <div class="container">
 
-                <b> Do I have to create an account in order to search for doctors? </b><br>
-                <p>In order for users to search for doctors and create appointments, we do require the creation of an account on
-                    Seal of Health. By creating an account, you allow us to streamline the search process and tailor the results to
-                    match your needs and requirements so that you, the user, gets the absolute best experience we can provide.</p><hr>
+        <ol class="breadcrumb" id="bc1">
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading" id="ph"><b>Unscheduled Appointments</b></div>
+                <div class="panel-body">
 
-                <b>Am I, as a patient, able to cancel an appointment after I select one? </b><br><br>
-                <p>Absolutely! Our product aims to help patients connect with doctors whenever it is most convenient for you. Should you
-                    choose to cancel an appointment, we will make sure the doctor recieves a notification about your cancellation so that
-                    that spot may be choosen by another patient if needed.</p><hr>
+                    <!-- Add carousel here for potential appointment candidates -->
 
-                <b>Am I, as a doctor, able to cancel an appointment after a patient schedules one?</b><br><br>
-                <p>Our system currently does not allow for doctors to cancel appointments once a patient has scheduled one.
-                    if you do need to cancel a previously scheduled appointment, it is the doctor's responsibility to notify the patient. However,
-                    we do highly encourage doctors to verify the appointment times and dates they list in order to avoid these situations entirely.</p><hr>
+                    <br><br>
 
-                <b>I can't remember my password! What should I do?</b><br><br>
-                <p>You can recover your password by clicking on the 'Forgot your password?' link at the bottom of the login page.
-                    If you find for any reason that you are unable to log into your account, please contact our support team at sealofhealth@gmail.com
-                    for further instructions.
-                </p><hr>
+                    <?php
+                    while ($row3 = $query2->fetch(PDO::FETCH_ASSOC))
+                    {
+                    $button1 = "btn-cancel".$i;
+                        $button2 = "btn-edit".$i;
+                    $appID = $row3['appointment_id'];
 
-                <b>I didn't recieve an appointment confirmation. Was my appointment still created?</b><br><br>
-                <p>If you did not recieve an appointment confirmation email after scheduling an appointment, you should not assume that the appointment
-                    was created. Check your 'Current Appointments' tab in your profile and if you do not see the appointment, try to reschedule the appointment.
-                    If you continue to have issues, please contact our support team at sealofhealth@gmail.com.</p><br>
+                    if(isset($_POST[$button1]))
+                    {
+                        if($user_home->deleteAppointment($appID))
+                        {
+                            echo " yay you did it";
+                            $user_home->redirect('doctorunscheduled.php');
+                        }
+                        else
+                        {
+                            die("fml you failed");
+                        }
+                    }
+
+                    if(isset($_POST[$button2]))
+                    {
+
+                    }
+                    ?>
+                        <!-- Table will grow accordingly as data submitted -->
+
+                        <table class="table table-bordered">
+                            <h4><b><?php echo $row3['app_name'];?></b></h4>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Doctor</th>
+                                    <th>Specialty</th>
+                                    <th>Location</th>
+                                    <th>Contact Phone Number</th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $row3['firstName']." ";?><?php echo $row3['lastName'];?></td>
+                                    <td><?php echo $row3['specialty'];?></td>
+                                    <td><?php echo $row3['streetAddress'].", ";?><?php echo $row3['city'].", ";?><?php echo $row3['state']." ";?><?php echo $row3['zipcode'];?></td>
+                                    <td><?php echo $row3['phone_no'];?></td>
+                                </tr>
+                            </table>
+
+                            <br>
+
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Price</th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo $row3['app_date'];?></td>
+                                    <td><?php echo $row3['start_time'];?></td>
+                                    <td><?php echo $row3['end_time'];?></td>
+                                    <td><?php echo "$".$row3['price'];?></td>
+                                </tr>
+                            </table>
+                        </table>
+
+                        <div align="right">
+                            <form action="" method="POST">
+                                <button class="btn btn-medium btn-info" type="submit" name="btn-edit<?php echo $i; ?>" style="text-align:right" color="green">Edit</button>
+                                <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Delete</button>
+                            </form>
+                        </div><br><br>
+
+                        <?php $i++; } ?>
+                </div>
+
 
             </div>
-        </div>
+        </ol>
+    </div>
 
 
-        <br>
 
 
-    </ol>
-
-    <br>
-
-</div>
+    <center><footer class="container-fluid" id="footer">
+            <p><h4>Copyright © Software Seals, 2017.</h4></p>
+        </footer></center>
 
 
-<center><footer class="container-fluid" id="footer">
-        <p><h4>Copyright © Software Seals, 2017.</h4></p>
-    </footer></center>
 
-
+    <!-- Export a Table to PDF - END -->
 
 
 </body>
-
-
-
-
 </html>

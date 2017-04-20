@@ -153,39 +153,38 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
             <div class="container-fluid">
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <b><ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="home.php">Profile</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                                    Medical Records <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="medicalrecords.php">View Records</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="addrecords.php">Add to Records</a></li>
-                                </ul>
-                            </li>
-
-                            <!-- Dropdown for appointments -->
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                                    Appointments <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
-                                </ul>
-                            </li>
-                            <!--End Dropdown for appointments -->
-
-                            <li><a href="help.php">Help</a></li>
-                            <li><a href="logout.php">Logout</a></li>
+                <ul class="nav navbar-nav inside-full-height">
+                    <li><a href="home.php">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            Medical Records <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="medicalrecords.php">View Records</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="addrecords.php">Add to Records</a></li>
                         </ul>
+                    </li>
 
-        <ul class="nav navbar-nav navbar-right" id="log">
-        <li>Logged in as: <?php echo $row2['userName']; ?></li>
-        </ul>
+                    <!-- Dropdown for appointments -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            Appointments <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
+                        </ul>
+                    </li>
+                    <!--End Dropdown for appointments -->
+
+                    <li><a href="help.php">Help</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" id="log">
+                    <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+
       </div><!-- /.navbar-collapse --></b>
       </div> <!-- /.container-fluid -->
         </nav>

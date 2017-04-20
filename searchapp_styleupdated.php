@@ -6,10 +6,17 @@ if(!$user_home->is_logged_in())
 {
     $user_home->redirect('index.php');
 }
-else if($user_home->is_doctor())
-{
-    $user_home->redirect('createapp.php');
-}
+
+date_default_timezone_set('America/New_York');
+$info = getdate();
+$day = $info['mday'];
+$month = $info['mon'];
+$year = $info['year'];
+$hour = $info['hours'];
+$min = $info['minutes'];
+
+$currentdate = "$year-$month-$day";
+$currenttime = "$hour:$min:00";
 
 $userID = $_SESSION['userSession'];
 $i = 1;
@@ -23,7 +30,9 @@ $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
 $query2 = $user_home->runQuery("SELECT A.*, D.userID, D.specialty, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D 
-                                    WHERE U.userID = A.userID AND D.userID = U.userID AND A.taken = 0 GROUP BY A.app_name");
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND A.taken = 0 
+                                    AND (A.app_date > CAST('$currentdate' as DATE) OR (A.app_date = CAST('$currentdate' as DATE) AND A.end_time > CAST('$currenttime' as TIME)))
+                                    GROUP BY A.app_name");
 $query2->execute(array($_SESSION['userSession']));
 ?>
 
@@ -158,39 +167,38 @@ $query2->execute(array($_SESSION['userSession']));
                 <div class="container-fluid">
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <b><ul class="nav navbar-nav">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="home.php">Profile</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                                        Medical Records <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="medicalrecords.php">View Records</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="addrecords.php">Add to Records</a></li>
-                                    </ul>
-                                </li>
-
-                                <!-- Dropdown for appointments -->
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                                        Appointments <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
-                                    </ul>
-                                </li>
-                                <!--End Dropdown for appointments -->
-
-                                <li><a href="help.php">Help</a></li>
-                                <li><a href="logout.php">Logout</a></li>
+                    <ul class="nav navbar-nav inside-full-height">
+                        <li><a href="home.php">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                Medical Records <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="medicalrecords.php">View Records</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="addrecords.php">Add to Records</a></li>
                             </ul>
+                        </li>
 
-        <ul class="nav navbar-nav navbar-right" id="log">
-        <li>Logged in as: <?php echo $row2['userName']; ?></li>
-        </ul>
+                        <!-- Dropdown for appointments -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                Appointments <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
+                            </ul>
+                        </li>
+                        <!--End Dropdown for appointments -->
+
+                        <li><a href="help.php">Help</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right" id="log">
+                        <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
+                        <li><a href="logout.php">Logout</a></li>
+                    </ul>
+
       </div><!-- /.navbar-collapse --></b>
       </div> <!-- /.container-fluid -->
         </nav>
@@ -217,7 +225,15 @@ $query2->execute(array($_SESSION['userSession']));
 
                         if(isset($_POST[$button1]))
                         {
-                            if($user_home->scheduleAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 1))
+                            if ($row3['taken'] == 1)
+                            {
+                                ?>
+                                <div class='alert alert-danger'>
+                                <strong>That Appointment Has Already Been Taken</strong>
+                                </div>
+                                <?php
+                            }
+                            else if($user_home->scheduleAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 1))
                             {
                                 echo " yay you did it";
                                 $user_home->redirect('searchapp_styleupdated.php');
