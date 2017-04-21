@@ -34,7 +34,7 @@ if(isset($_POST['btn-save']))
 
     if($user_home->updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no) && $user_home->updatePatient($userID, $birth_date, $ethnicity, $age))
     {
-        echo " yay you did it";
+        
         $user_home->redirect('home.php');
     }
     else
@@ -165,7 +165,7 @@ if(isset($_POST['btn-save']))
     <body>
         <!-- Logo -->
         <div class="mylogo">
-            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
+            <center><img class="logo-img img-responsive" src="Design2.png" ></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -317,10 +317,7 @@ if(isset($_POST['btn-save']))
 </div>
 
 
- <center><footer class="container-fluid" id="footer">
-    <p><h4>Copyright © Software Seals, 2017.</h4></p>
-  </footer></center>
-
+ 
 
   
 

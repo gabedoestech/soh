@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once 'class.user.php';
 $user = new USER();
@@ -14,22 +14,22 @@ if(isset($_POST['btn-submit']))
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if($stmt->rowCount() == 1)
     {
-        $id = base64_encode($row['userID']);
+        $id = $row['userID'];
         $code = md5(uniqid(rand()));
         $stmt = $user->runQuery("UPDATE users SET tokenCode=:token WHERE userEmail=:email");
         $stmt->execute(array(":token"=>$code,"email"=>$email));
         $message= "
-       Hello , $email
-       <br /><br />
+       
        We recieved a request to reset your password.  If you did not request a password reset, please disregard this message. Otherwise
        click on the following link to reset your password.
-       <br /><br />
-       <a href='https://notdevin.com/resetpass.php?id=$id&code=$code'>click here to reset your password</a>
-       <br /><br />
+       
+       https://www.sealofhealth.com/resetpass.php?id=$id&code=$code
+       
        Thank you.
        ";
         $subject = "Password Reset";
-        $user->send_mail($email,$message,$subject);
+        $headers = 'From: noreply@sealofhealth.com' . "\r\n";
+        mail($email, $subject, $message, $headers);
         $msg = "<div class='alert alert-success'>
      <button class='close' data-dismiss='alert'>&times;</button>
      We've sent an email to $email.

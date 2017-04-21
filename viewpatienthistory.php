@@ -35,7 +35,7 @@ $weight = $row4['weight'];
 $bmi = $row4['BMI'];
 $bp = $row4['bloodpressure'];
 
-$query4 = $user_home->runQuery("SELECT P1.* FROM prescription P1, prescribes P2 WHERE P1.drugId=P2.drugId AND P2.userID_patient = '$id'");
+$query4 = $user_home->runQuery("SELECT P1.* FROM prescription P1, prescribes P2 WHERE P1.drugId=P2.drugId AND P2.userID_patient = '$id' ORDER BY P1.startDate ASC");
 $query4->execute(array($_SESSION['userSession']));
 
 $query5 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D, sees S

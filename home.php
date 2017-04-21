@@ -32,7 +32,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <head>
         <meta charset="utf-8">
-        <meta http-equiv-"X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
         <!-- The above 3 meta tags *must* come first in the head;
         any other head content must come *after* these tags -->
@@ -149,7 +149,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
         <!-- Logo -->
         <!-- added a class in css - logo-img -->
        <div class="mylogo">
-            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
+            <center><img class="logo-img img-responsive" src="Design2.png"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -262,19 +262,8 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <br> 
    
-</div>
-
-
- <center><footer class="container-fluid" id="footer">
-    <p><h4>Copyright © Software Seals, 2017.</h4></p>
-  </footer></center>
-
-
-  
+</div>  
 
 </body>
-
-
-
 
 </html>

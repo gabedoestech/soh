@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once 'class.user.php';
 $user_home = new USER();
@@ -28,7 +28,7 @@ if(isset($_POST['btn-save']))
 
     if($user_home->updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no) && $user_home->updateDoctor($userID, $specialty))
     {
-        echo " yay you did it";
+        
         $user_home->redirect('doctorhome.php');
     }
     else

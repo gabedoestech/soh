@@ -1,0 +1,19 @@
+a:hover {
+    color: black;
+}
+
+a:link {
+    color: black;
+}
+
+a:focus {
+    color: black;
+}
+
+a:active {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}

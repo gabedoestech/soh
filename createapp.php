@@ -282,13 +282,6 @@ if(isset($_POST['btn-create']))
     </div>
     </div>
 
-<center><footer class="container-fluid" id="footer">
-        <p><h4>Copyright © Software Seals, 2017.</h4></p>
-    </footer></center>
-
-
-
-
 </body>
 
 

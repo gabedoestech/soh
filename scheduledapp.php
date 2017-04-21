@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once 'class.user.php';
 $user_home = new USER();
@@ -43,7 +43,7 @@ $query2->execute(array($_SESSION['userSession']));
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv-"X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <!-- The above 3 meta tags *must* come first in the head;
     any other head content must come *after* these tags -->
@@ -160,7 +160,7 @@ $query2->execute(array($_SESSION['userSession']));
 <!-- Logo -->
 <div >
     <div class="mylogo">
-        <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
+        <center><img class="logo-img img-responsive" src="Design2.png"></center>
     </div>
 
     <!-- NEW NAVBAR -->
@@ -218,6 +218,7 @@ $query2->execute(array($_SESSION['userSession']));
 
                 if(isset($_POST[$button1]))
                 {
+
                     if($user_home->patientCancelAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 0))
                     {
                         $name = $row3['app_name'];
@@ -225,19 +226,23 @@ $query2->execute(array($_SESSION['userSession']));
                         $etime = "".$row3['end_time'];
                         $date = "".$row3['app_date'];
                         $email = "".$row3['userEmail'];
-                        /*$message = "
-                        Hello,
-                        <br /><br />
-                        The appointment, $name, scheduled from $stime to $etime on $date has been canceled and is available
-                        for selection by others. Please delete the appointment if you would not like others to be able
-                        to schedule it.
-                        <br /><br />
-                        Thank you,
-                            Seal of Health Team
-                        ";
-                        $subject = "Appointment Cancellation - ".$row4['app_name'];
-                        $reg_user->send_mail($email,$message,$subject);*/
-                        echo " yay you did it";
+                        $message = "
+                		Your Appointment has been canceled!
+
+				--------------------------------------
+				Appointment name: $name
+				Date: $date
+				--------------------------------------
+					";
+                $subject = "Appointment Canceled!";
+                $headers = 'From: noreply@sealofhealth.com' . "\r\n";
+                mail($email, $subject, $message, $headers);
+                $msg = "
+                <div class='alert alert-success'>
+                <button class='close' data-dismiss='alert'>&times;</button>
+                <strong>Success!</strong> Appointment has been canceled. We've sent an email to your doctor.</div>
+                ";
+                        echo " $msg";
                         $user_home->redirect('scheduledapp.php');
                     }
                     else
@@ -294,18 +299,6 @@ $query2->execute(array($_SESSION['userSession']));
             </div>
         </ol>
     </div>
-
-
-
-
-    <center><footer class="container-fluid" id="footer">
-            <p><h4>Copyright © Software Seals, 2017.</h4></p>
-        </footer></center>
-
-
-
-    <!-- Export a Table to PDF - END -->
-
 
 </body>
 </html>

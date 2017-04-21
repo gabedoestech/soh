@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once 'class.user.php';
 $user = new USER();
 if(empty($_GET['id']) && empty($_GET['code']))
@@ -7,7 +7,7 @@ if(empty($_GET['id']) && empty($_GET['code']))
 }
 if(isset($_GET['id']) && isset($_GET['code']))
 {
-    $id = base64_decode($_GET['id']);
+    $id = $_GET['id'];
     $code = $_GET['code'];
     $stmt = $user->runQuery("SELECT * FROM users WHERE userID=:uid AND tokenCode=:token");
     $stmt->execute(array(":uid"=>$id,":token"=>$code));
@@ -17,7 +17,9 @@ if(isset($_GET['id']) && isset($_GET['code']))
         if(isset($_POST['btn-reset-pass']))
         {
             $pass = $_POST['pass'];
+		$pass = md5($pass);
             $cpass = $_POST['confirm-pass'];
+		$cpass = md5($cpass);
             if($cpass!==$pass)
             {
                 $msg = "<div class='alert alert-block'>

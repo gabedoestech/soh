@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once 'class.user.php';
 $reg_user = new USER();
@@ -32,26 +32,26 @@ if(isset($_POST['btn-signup']))
         {
             if ($reg_user->register($uname, $email, $upass, $code))
             {
+                
                 $stmt = $reg_user->runQuery("SELECT MAX(userID) FROM users");
                 $stmt->execute();
                 $userID = $stmt->fetchColumn();
 
-                $id = $userID;
-                $key = base64_encode($id);
-                $id = $key;
                 $message = "
-                Hello $uname,
-                <br /><br />
-                Welcome to Seal of Health!<br/>
-                To complete your registration, please click on the following link
-                <br /><br />
-                <a href='https://www.sealofhealth.com/verify.php?id=$id&code=$code'>Click HERE to Activate</a>
-                <br /><br />
-                Thank You,
-                <br/>
+                Thanks for signing up!
+                Your account has been created, you can login with the following username and the password provided during account creation.
+
+                ------------------------
+                Username: '$uname'
+                ------------------------
+
+                Please click this link to activate your account:
+                https://sealofhealth.com/verify.php?id=$userID&code=$code
+
                 Seal of Health Development Team";
                 $subject = "Confirm Registration";
-                $reg_user->send_mail($email, $message, $subject);
+                $headers = 'From: noreply@sealofhealth.com' . "\r\n";
+                mail($email, $subject, $message, $headers);
                 $msg = "
                 <div class='alert alert-success'>
                 <button class='close' data-dismiss='alert'>&times;</button>
@@ -62,7 +62,7 @@ if(isset($_POST['btn-signup']))
 
                 if($reg_user->registerPatient($userID))
                 {
-                    echo " yay you did it";
+                    echo "$msg";
                 }
                 else
                 {
@@ -82,18 +82,14 @@ if(isset($_POST['btn-signup']))
                 $stmt->execute();
                 $userID = $stmt->fetchColumn();
 
-                $id = $userID;
-                $key = base64_encode($id);
-                $id = $key;
                 $message = "
             Hello,
-            <br /><br />
-            Please click on the following link to authenticate $uname ($email) as a doctor
-            <br /><br />
-            <a href='https://www.sealofhealth.com/verify.php?id=$id&code=$code'>Click HERE to Authenticate</a>
+            Please click on the following link to authenticate $uname ($email) as a Doctor
+            https://sealofhealth.com/verify.php?id=$userID&code=$code
             ";
                 $subject = "Authentice Doctor Registration";
-                $reg_user->send_mail("sealofhealth@gmail.com",$message,$subject);
+                $headers = 'From: noreply@sealofhealth.com' . "\r\n";
+                mail("sealofhealth@gmail.com",$subject,$message, $headers);
                 $msg = "
             <div class='alert alert-success'>
                 <button class='close' data-dismiss='alert'>&times;</button>
@@ -104,7 +100,7 @@ if(isset($_POST['btn-signup']))
 
                 if($reg_user->registerDoctor($userID))
                 {
-                    echo " yay you did it";
+                    echo "$msg";
                 }
                 else
                 {
@@ -119,50 +115,54 @@ if(isset($_POST['btn-signup']))
     }
 }
 ?>
+
 <!DOCTYPE html>
+ 
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv-"X-UA-Compatible" content="IE=edge">
 
     <title>Seal of Health</title>
 
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+     <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- CSS Files -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/soh.css" rel="stylesheet"/>
-    <link href="assets/css/material-kit.css" rel="stylesheet"/>
+        <!-- Latest compiled and minified JavaScript -->       
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+            <!--personalized CSS file by Maria -->
+    <link rel="stylesheet" href="main2.css">
+    
+     <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+    .container > form > #signinform{
+    color: grey;
+    font-family:Lucida Sans Unicode;
+    }
+
+</style>
+
+
 </head>
 <body id="login">
-<div class="container">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><h4>Seal of Health</h4></a>
-            </div>
-        </div>
-    </nav>
-<div class="container">
-    <center>
-
-        </br></br></br></br></br>
-        <?php if(isset($msg)) echo $msg;  ?>
+<div class="container">     
+ 
+    <form action ="" class="form-signin" method="POST">
+        
+        <div id="signinform">
+        <center>
         <form class="form-signin" method="post">
+          <img src="Design2.png" width="50%">
             <h2 class="form-signin-heading">Sign Up</h2><br>
             <input type="text" class="input-block-level" placeholder="Username" name="txtuname" required />
             <br><br>
@@ -175,14 +175,21 @@ if(isset($_POST['btn-signup']))
                 <option value="doctor">Doctor</option>
             </select>
             <br><br>
-            <button class="btn btn-large btn-primary" type="submit" name="btn-signup">Sign Up</button>
-            <a href="index.php" class="btn btn-large">Sign In</a>
-            </br></br></br>
+            <button class="btn btn-lg btn-info" type="submit" name="btn-signup">Sign Up</button>
+            </br><br>
+            <a id="cc" href="index.php" class="btn btn-large">Already a member? Sign In</a>
+            </br></br></br></br></br></br></br></br></br>
         </form>
-    </center>
+        <center>
+        </div>
 
+    </form>
+
+   
 </div> <!-- /container -->
-<script src="vendors/jquery-1.9.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+
+ <center><footer class="container-fluid" id="footer">
+    <p><h4>Copyright © Software Seals, 2017.</h4></p>
+  </footer></center>
 </body>
 </html>

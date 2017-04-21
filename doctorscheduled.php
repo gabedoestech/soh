@@ -1,6 +1,7 @@
-<?php
+﻿<?php
 session_start();
 require_once 'class.user.php';
+require_once 'functions.php';
 $user_home = new USER();
 if(!$user_home->is_logged_in())
 {
@@ -219,10 +220,33 @@ $query2->execute(array($_SESSION['userSession']));
 
                     if(isset($_POST[$button1]))
                     {
+				$stmt = queryMysql("SELECT A.*, P.userID, U.userEmail FROM patient P, appointment A, doctor D, users U, sees S WHERE P.userID = S.userID_patient AND S.userID_doctor = D.userID AND A.appointment_id = '$appID' AND U.userID = P.userID AND A.userID = D.userID AND S.appointment_id = A.appointment_id");
+                	
+                		$row = $stmt->fetch_array();
+				$app_name = $row['app_name'];
+				$date = $row['app_date'];
+				$email = $row['userEmail'];
+				
+                		$message = "
+                		Your Appointment has been canceled!
+
+				--------------------------------------
+				Appointment name: $app_name
+				Date: $date
+				--------------------------------------
+					";
+                $subject = "Appointment Canceled!";
+                $headers = 'From: noreply@sealofhealth.com' . "\r\n";
+                mail($email, $subject, $message, $headers);
+                $msg = "
+                <div class='alert alert-success'>
+                <button class='close' data-dismiss='alert'>&times;</button>
+                <strong>Success!</strong> Appointment has been canceled. We've sent an email to your patient.</div>
+                ";
                         if($user_home->deleteAppointment($appID))
                         {
-                            echo " yay you did it";
-                            $user_home->redirect('doctorunscheduled.php');
+                            echo "$msg";
+                            $user_home->redirect('doctorscheduled.php');
                         }
                         else
                         {
@@ -295,15 +319,6 @@ $query2->execute(array($_SESSION['userSession']));
         </div>
     </ol>
 </div>
-
-
-
-
-<center><footer class="container-fluid" id="footer">
-        <p><h4>Copyright © Software Seals, 2017.</h4></p>
-    </footer></center>
-
-
 
 <!-- Export a Table to PDF - END -->
 

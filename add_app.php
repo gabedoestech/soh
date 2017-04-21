@@ -204,7 +204,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     $result = $user_home->runQuery("SELECT A.*, D.specialty, U.firstName, U.lastName, U.userID, S.userID_patient
                         FROM appointment A, users U, doctor D, sees S
-                        WHERE S.userID_patient='$id' AND S.appointment_id='$app_id' AND S.userID_doctor = '$userID'
+                        WHERE S.userID_patient='$id' AND S.appointment_id='$app_id' AND S.userID_doctor = '$userID' AND U.userID = '$userID'
                         AND A.appointment_id = '$app_id'");
     $result->execute(array($_SESSION['userSession']));
     $row3 = $result->fetch(PDO::FETCH_ASSOC);
@@ -347,7 +347,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
                                 <tr>
                                     <td><?php echo $start_time;?></td>
                                     <td><?php echo $end_time;?></td>
-                                    <td><?php echo $price;?></td>
+                                    <td><?php echo "$".$price;?></td>
                                 </tr>
                             </table>
                             </table>

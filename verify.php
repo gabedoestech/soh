@@ -1,18 +1,18 @@
-<?php
+﻿<?php
 require_once 'class.user.php';
 $user = new USER();
-if(empty($_GET['id']) && empty($_GET['code']))
+if(empty($_GET['id']) || empty($_GET['code']))
 {
     $user->redirect('index.php');
 }
 if(isset($_GET['id']) && isset($_GET['code']))
 {
-    $id = base64_decode($_GET['id']);
+    $userID = $_GET['id'];
     $code = $_GET['code'];
     $statusY = "Y";
     $statusN = "N";
-    $stmt = $user->runQuery("SELECT userID,userStatus FROM users WHERE userID=:uID AND tokenCode=:code LIMIT 1");
-    $stmt->execute(array(":uID"=>$id,":code"=>$code));
+    $stmt = $user->runQuery("SELECT userID,userStatus FROM users WHERE userID=:uID AND tokenCode=:code");
+    $stmt->execute(array(":uID"=>$userID,":code"=>$code));
     $row=$stmt->fetch(PDO::FETCH_ASSOC);
     if($stmt->rowCount() > 0)
     {
@@ -20,12 +20,12 @@ if(isset($_GET['id']) && isset($_GET['code']))
         {
             $stmt = $user->runQuery("UPDATE users SET userStatus=:status WHERE userID=:uID");
             $stmt->bindparam(":status",$statusY);
-            $stmt->bindparam(":uID",$id);
+            $stmt->bindparam(":uID",$userID);
             $stmt->execute();
             $msg = "
              <div class='alert alert-success'>
        <button class='close' data-dismiss='alert'>&times;</button>
-       <strong>Yay!</strong> Your account is now activated: <a href='index.php'>Login here</a>
+       <strong>Yay!</strong> Account has been activated! <a href='index.php'>Home Page</a>
           </div>
           ";
         }
@@ -34,7 +34,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
             $msg = "
              <div class='alert alert-error'>
        <button class='close' data-dismiss='alert'>&times;</button>
-       <strong>Oops!</strong> It looks like your account is already activated: <a href='https://notdevin.com/index.php'>Login here</a>
+       <strong>Oops!</strong> It looks like your account is already activated!
           </div>
           ";
         }
@@ -44,7 +44,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
         $msg = "
          <div class='alert alert-error'>
       <button class='close' data-dismiss='alert'>&times;</button>
-      <strong>Sorry!</strong> It looks like you haven't registered yet: <a href='https://notdevin.com/signup.php'>Signup here</a>
+      <strong>Sorry!</strong> It looks like you haven't registered yet! <a href='https:sealofhealth.com/signup.php'>Signup here</a>
       </div>
       ";
     }

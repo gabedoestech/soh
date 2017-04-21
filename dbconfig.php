@@ -1,10 +1,10 @@
 <?php
 class Database
 {
-    private $host = "127.0.0.1";
-    private $db_name = "sealofhealth";
-    private $username = "root";
-    private $password = "root";
+    private $host = "localhost";
+    private $db_name = "sealofhe_sealofhealth";
+    private $username = "sealofhe_root";
+    private $password = "D1eT2b7}aTzy";
     public $conn;
     public function dbConnection()
     {

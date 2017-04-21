@@ -226,15 +226,7 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
     <br> 
    
-</div>
-
-
- <center><footer class="container-fluid" id="footer">
-    <p><h4>Copyright © Software Seals, 2017.</h4></p>
-  </footer></center>
-
-
-  
+</div>  
 
 </body>
 

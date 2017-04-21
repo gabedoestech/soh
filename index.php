@@ -34,9 +34,9 @@ if(isset($_POST['btn-login']))
  
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta http-equiv-"X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Seal of Health</title>
 
@@ -52,9 +52,18 @@ if(isset($_POST['btn-login']))
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-
+            <!--personalized CSS file by Maria -->
+    <link rel="stylesheet" href="main2.css">
+    
      <!-- reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+    .container > form > #signinform{
+    color: grey;
+    font-family:Lucida Sans Unicode;
+}</style>
+
 
 </head>
 <body id="login">
@@ -91,27 +100,35 @@ if(isset($_POST['btn-login']))
             <?php
         }
         ?>
-     
+        
+        <div id="signinform">
         <center>
-            </br></br></br></br></br>
-            <h2 class="form-signin-heading">Sign In</h2><br><br>
+            </br>
+            <img src="Design2.png" width="50%">
+            <h2 class="form-signin-heading">Sign In</h2><br>
             <input type="email" class="input-block-level" placeholder="Email address" name="txtemail" required />
             <br><br>
             <input type="password" class="input-block-level" placeholder="Password" name="txtupass" required />
             <br><br>              
              <div class="g-recaptcha" data-sitekey="6LfgShsUAAAAAE7Q65POO5f3emf8KnEB93g7LUs-"></div>                
             <br>
-            <button class="btn btn-large btn-inverse" type="submit" name="btn-login">Sign in</button>
+            <button class="btn btn-lg btn-info" type="submit" name="btn-login">Sign in</button>
+            <br><br>
+            <a href="terms.php" >Sign up</button></a>
             <br>
-            <a href="terms.php" >Sign Up</a>
-            <br>
-            <a href="fpass.php">Lost your Password?</a>
+            <a href="fpass.php">Forgot your password?</a>
             <br>
             <a href="faq.php">FAQ Page</a>
             </center>
-    </form>
-    
+            <br>
+        </div>
+        <br>
+        <br><br>
 
+    </form>
+
+   
 </div> <!-- /container -->
+ 
 </body>
 </html>

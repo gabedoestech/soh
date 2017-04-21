@@ -6,7 +6,6 @@ if(!$user_home->is_logged_in())
 {
     $user_home->redirect('index.php');
 }
-
 date_default_timezone_set('America/New_York');
 $info = getdate();
 $day = $info['mday'];
@@ -14,25 +13,20 @@ $month = $info['mon'];
 $year = $info['year'];
 $hour = $info['hours'];
 $min = $info['minutes'];
-
 $currentdate = "$year-$month-$day";
 $currenttime = "$hour:$min:00";
-
 $userID = $_SESSION['userSession'];
 $i = 1;
-
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
 $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
-
 $query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.firstName AS doc_firstname, U.lastName AS doc_lastname, U.phone_no AS doc_phone_no, U2.firstName, U2.lastName, U2.userEmail, U2.phone_no, U2.userID
                                     FROM appointment A, users U, users U2, doctor D, sees S
                                     WHERE S.userID_doctor=$userID AND S.userID_patient=U2.userID AND U.userID=$userID
-                                    AND S.appointment_id=A.appointment_id AND D.userID=$userID 
+                                    AND S.appointment_id=A.appointment_id AND D.userID=$userID
                                     AND (A.app_date < CAST('$currentdate' as DATE) OR (A.app_date = CAST('$currentdate' as DATE) AND A.end_time < CAST('$currenttime' as TIME)))
                                     GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
 $query2->execute(array($_SESSION['userSession']));
@@ -73,69 +67,55 @@ $query2->execute(array($_SESSION['userSession']));
             background-color: #ffffff;
             border-color: #fefefe;
         }
-
         .navbar-default .navbar-brand {
             color: #03ccfe;
         }
-
         .navbar-default .navbar-brand:hover,
         .navbar-default .navbar-brand:focus {
             color: #000000;
         }
-
         .navbar-default .navbar-text {
             color: #03ccfe;
         }
-
         .navbar-default .navbar-nav > li > a {
             color: #03ccfe;
         }
-
         .navbar-default .navbar-nav > li > a:hover,
         .navbar-default .navbar-nav > li > a:focus {
             color: #000000;
         }
-
         .navbar-default .navbar-nav > .active > a,
         .navbar-default .navbar-nav > .active > a:hover,
         .navbar-default .navbar-nav > .active > a:focus {
             color: #000000;
             background-color: #fefefe;
         }
-
         .navbar-default .navbar-nav > .open > a,
         .navbar-default .navbar-nav > .open > a:hover,
         .navbar-default .navbar-nav > .open > a:focus {
             color: #000000;
             background-color: #fefefe;
         }
-
         .navbar-default .navbar-toggle {
             border-color: #fefefe;
         }
-
         .navbar-default .navbar-toggle:hover,
         .navbar-default .navbar-toggle:focus {
             background-color: #fefefe;
         }
-
         .navbar-default .navbar-toggle .icon-bar {
             background-color: #03ccfe;
         }
-
         .navbar-default .navbar-collapse,
         .navbar-default .navbar-form {
             border-color: #03ccfe;
         }
-
         .navbar-default .navbar-link {
             color: #03ccfe;
         }
-
         .navbar-default .navbar-link:hover {
             color: #000000;
         }
-
         @media only screen
         and (min-device-width : 320px)
         and (max-device-width : 568px){
@@ -271,8 +251,7 @@ $query2->execute(array($_SESSION['userSession']));
 
                     <div align="right">
                         <form action="" method="POST">
-                            <?php echo "<a href='viewpatienthistory.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info' style='color:white'>View Medical History</a>";?>
-                            <?php echo "<a href='add_app.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info' style='color:white'>Add App. Summary</a>";?>
+                            <?php echo "<a href='add_app.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info'>Add App. Summary</a>";?>
                         </form>
                     </div><br><br>
 
@@ -283,15 +262,6 @@ $query2->execute(array($_SESSION['userSession']));
         </div>
     </ol>
 </div>
-
-
-
-
-<center><footer class="container-fluid" id="footer">
-        <p><h4>Copyright © Software Seals, 2017.</h4></p>
-    </footer></center>
-
-
 
 <!-- Export a Table to PDF - END -->
 

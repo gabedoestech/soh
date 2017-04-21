@@ -1,0 +1,65 @@
+[16-Apr-2017 14:45:48 Etc/UTC] PHP Fatal error:  Call to a member function prepare() on null in /home/sealofhe/public_html/class.user.php on line 213
+[16-Apr-2017 14:59:27 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sealofhe_sealofhealth.users' doesn't exist' in /home/sealofhe/public_html/signup.php:17
+Stack trace:
+#0 /home/sealofhe/public_html/signup.php(17): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/signup.php on line 17
+[16-Apr-2017 14:59:38 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sealofhe_sealofhealth.users' doesn't exist' in /home/sealofhe/public_html/signup.php:17
+Stack trace:
+#0 /home/sealofhe/public_html/signup.php(17): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/signup.php on line 17
+[20-Apr-2017 23:41:03 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'U.name' in 'field list'' in /home/sealofhe/public_html/home.php:31
+Stack trace:
+#0 /home/sealofhe/public_html/home.php(31): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/home.php on line 31
+[21-Apr-2017 00:00:11 Etc/UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/sealofhe/public_html/search.php on line 20
+[21-Apr-2017 00:00:13 Etc/UTC] PHP Parse error:  syntax error, unexpected 'if' (T_IF) in /home/sealofhe/public_html/search.php on line 20
+[21-Apr-2017 01:21:11 Etc/UTC] PHP Fatal error:  Call to a member function prepare() on null in /home/sealofhe/public_html/class.user.php on line 343
+[20-Apr-2017 22:46:31 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 22:54:04 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 22:54:15 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 22:55:21 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 22:55:55 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 22:56:06 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 22:57:29 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 23:01:31 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 23:02:35 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 23:04:14 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 23:05:43 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 23:08:41 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[21-Apr-2017 03:09:53 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/searchapp_styleupdated.php:22
+Stack trace:
+#0 /home/sealofhe/public_html/searchapp_styleupdated.php(22): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/searchapp_styleupdated.php on line 22
+[20-Apr-2017 23:09:55 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[21-Apr-2017 03:11:05 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/searchapp_styleupdated.php:22
+Stack trace:
+#0 /home/sealofhe/public_html/searchapp_styleupdated.php(22): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/searchapp_styleupdated.php on line 22
+[20-Apr-2017 23:12:46 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 223
+[20-Apr-2017 23:14:33 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 226
+[20-Apr-2017 23:15:10 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 226
+[20-Apr-2017 23:19:25 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 226
+[20-Apr-2017 23:20:50 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 222
+[20-Apr-2017 23:21:44 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 222
+[20-Apr-2017 23:22:28 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 222
+[20-Apr-2017 23:24:34 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 222
+[20-Apr-2017 23:25:09 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/doctorscheduled.php on line 222
+[21-Apr-2017 03:28:41 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:29:14 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:30:04 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:30:20 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:30:55 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:31:39 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:31:42 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[21-Apr-2017 03:31:56 Etc/UTC] PHP Fatal error:  require_once(): Failed opening required '‘functionsphp’' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/sealofhe/public_html/doctorscheduled.php on line 4
+[20-Apr-2017 23:47:45 America/New_York] PHP Fatal error:  Call to undefined function queryMysql() in /home/sealofhe/public_html/scheduledapp.php on line 221
+[21-Apr-2017 03:47:57 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/searchapp.php:22
+Stack trace:
+#0 /home/sealofhe/public_html/searchapp.php(22): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/searchapp.php on line 22
