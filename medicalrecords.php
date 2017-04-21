@@ -41,7 +41,7 @@
   $row4 = $query2->fetch_array();
 
   $result = queryMysql("SELECT V.* FROM vitals V, patient P WHERE V.vitalsId = P.userID
-                        AND P.userID = '$id' ORDER BY P1.startDate ASC");
+                        AND P.userID = '$id'");
 
   if ($result->num_rows)
   {
@@ -56,7 +56,7 @@
   }
 
   $result = queryMysql("SELECT P1.* FROM prescription P1, prescribes P2
-                        WHERE P1.drugId=P2.drugId AND P2.userID_patient = '$id'");
+                        WHERE P1.drugId=P2.drugId AND P2.userID_patient = '$id' ORDER BY P1.startDate ASC");
 
 ?>
 
