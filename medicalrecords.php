@@ -247,7 +247,7 @@ $result = queryMysql("SELECT P1.* FROM prescription P1, prescribes P2
 
                             <tr>
                                 <th>Blood pressure</th>
-                                <?php echo "<td>$bp</td>";?>
+                                <?php echo "<td>$bp mmHg</td>";?>
                             </tr>
 
                         </table>
