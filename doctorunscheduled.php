@@ -261,7 +261,7 @@ $query2->execute(array($_SESSION['userSession']));
 
                         <div align="right">
                             <form action="" method="POST">
-                                <button class="btn btn-medium btn-info" type="submit" name="btn-edit<?php echo $i; ?>" style="text-align:right" color="green">Edit</button>
+                                <?php echo "<a href='editapp.php?appID=$appID' class='btn btn-medium btn-info' style='color:white'>Edit</a>";?>
                                 <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Delete</button>
                             </form>
                         </div><br><br>
