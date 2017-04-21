@@ -147,6 +147,31 @@ class USER
             echo $ex->getMessage();
         }
     }
+    
+    public function updateAppointment($appointment_id, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE appointment SET app_name=:app_name, streetAddress=:streetAddress,city=:city, 
+                                                state=:state,zipcode=:zipcode,app_date=:app_date,start_time=:start_time, 
+                                                end_time=:end_time,price=:price WHERE appointment_id=:appointment_id");
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->bindparam(":app_name",$app_name);
+            $stmt->bindparam(":streetAddress",$streetAddress);
+            $stmt->bindparam(":city",$city);
+            $stmt->bindparam(":state",$state);
+            $stmt->bindparam(":zipcode",$zipcode);
+            $stmt->bindparam(":app_date",$app_date);
+            $stmt->bindparam(":start_time",$start_time);
+            $stmt->bindparam(":end_time",$end_time);
+            $stmt->bindparam(":price",$price);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert create appointment into the database.");
+            echo $ex->getMessage();
+        }
+    }
 
     public function scheduleAppointment($userID_patient, $userID_doctor, $appointment_id)
     {
