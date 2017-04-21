@@ -271,7 +271,8 @@ $query2->execute(array($_SESSION['userSession']));
 
                     <div align="right">
                         <form action="" method="POST">
-                            <?php echo "<a href='add_app.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info'>Add App. Summary</a>";?>
+                            <?php echo "<a href='viewpatienthistory.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info' style='color:white'>View Medical History</a>";?>
+                            <?php echo "<a href='add_app.php?id=$patientID&app_id=$app_id' class='btn btn-medium btn-info' style='color:white'>Add App. Summary</a>";?>
                         </form>
                     </div><br><br>
 
