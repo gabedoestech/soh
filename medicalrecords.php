@@ -311,13 +311,13 @@ $result = queryMysql("SELECT P1.* FROM prescription P1, prescribes P2
                                 $name    = $row6['firstName'] . " ". $row6['lastName'];
                                 ?>
                                 <tr>
-                                    <th>Doctor</th>
                                     <th>Date</th>
+                                    <th>Doctor</th>
                                     <th>Summary</th>
                                 </tr>
                                 <tr>
-                                    <td><?php echo $name?></td>
                                     <td><?php echo $date?></td>
+                                    <td><?php echo $name?></td>
                                     <td><?php echo $summary?></td>
                                 </tr>
                             <?php } ?>
@@ -327,7 +327,7 @@ $result = queryMysql("SELECT P1.* FROM prescription P1, prescribes P2
                 </div>
 
                 <!-- Added -->
-                <button id="exportButton" class="btn btn-lg clearfix"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+                <button id="exportButton" class="btn btn-lg clearfix"><span class="fa fa-file-pdf-o"></span>Export to PDF</button>
                 <!-- Added -->
                 <div align='right'>
                     <?php
