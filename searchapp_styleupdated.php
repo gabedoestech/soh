@@ -403,7 +403,7 @@
                     $app_name = $row3['app_name'];
                     $name       = $row3['firstName'] ." ". $row3['lastName'];
                     $specialty  = $row3['specialty'];
-                    $address    = $row3['location'];
+                    $address    = $row3['streetAddress'].", ".$row3['city'].", ".$row3['state']." ".$row3['streetAddress'];
                     $phone_no   = $row3['phone_no'];
                     $app_date   = $row3['app_date'];
                     $start_time = $row3['start_time'];
@@ -442,7 +442,7 @@
                          <td><?php echo $app_date;?></td>
                          <td><?php echo $start_time;?></td>
                          <td><?php echo $end_time;?></td>
-                         <td><?php echo $price;?></td>
+                         <td><?php echo "$".$price;?></td>
                      </tr>
                    </table>
 

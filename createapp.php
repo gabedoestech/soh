@@ -32,7 +32,6 @@ if(isset($_POST['btn-create']))
     
     if($user_home->createAppointment($userID, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price, $taken))
     {
-        echo " yay you did it";
         $user_home->redirect('doctorhome.php');
     }
     else
