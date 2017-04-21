@@ -7,7 +7,19 @@ if(!$user_home->is_logged_in())
     $user_home->redirect('index.php');
 }
 
+date_default_timezone_set('America/New_York');
+$info = getdate();
+$day = $info['mday'];
+$month = $info['mon'];
+$year = $info['year'];
+$hour = $info['hours'];
+$min = $info['minutes'];
+
+$currentdate = "$year-$month-$day";
+$currenttime = "$hour:$min:00";
+
 $userID = $_SESSION['userSession'];
+$i = 1;
 
 $stmt = $user_home->runQuery("SELECT * FROM users WHERE userID=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['userSession']));
@@ -17,9 +29,12 @@ $query = $user_home->runQuery("SELECT * FROM users WHERE userID = $userID ");
 $query->execute(array($_SESSION['userSession']));
 $row2 = $query->fetch(PDO::FETCH_ASSOC);
 
-$query2 = $user_home->runQuery("SELECT * FROM doctor WHERE userID = $userID ");
+$query2 = $user_home->runQuery("SELECT A.*, D.specialty, U.userEmail, U.firstName, U.lastName, U.phone_no FROM appointment A, users U, doctor D, sees S 
+                                    WHERE U.userID = A.userID AND D.userID = U.userID AND D.userID=S.userID_doctor AND S.userID_patient=$userID
+                                    AND A.appointment_id=S.appointment_id 
+                                    AND (A.app_date > CAST('$currentdate' as DATE) OR (A.app_date = CAST('$currentdate' as DATE) AND A.end_time > CAST('$currenttime' as TIME)))
+                                    GROUP BY A.appointment_id ORDER BY A.app_date, A.start_time ASC");
 $query2->execute(array($_SESSION['userSession']));
-$row3 = $query2->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -143,117 +158,164 @@ $row3 = $query2->fetch(PDO::FETCH_ASSOC);
 
 <body>
 <!-- Logo -->
-<!-- added a class in css - logo-img -->
-<div class="mylogo">
-    <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
-</div>
+<div >
+    <div class="mylogo">
+        <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
+    </div>
 
     <!-- NEW NAVBAR -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-
             <ul class="nav navbar-nav inside-full-height">
-                <li><a href="doctorhome.php">Home</a></li>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="medicalrecords.php">Medical Records</a></li>
 
                 <!-- Dropdown for appointments -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                         Appointments <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="createapp.php">Create Appointment</a></li>
+                        <li><a href="searchapp_styleupdated.php">Search Appointments</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="doctorunscheduled.php">Unscheduled Appointments</a></li>
-                        <li><a href="doctorscheduled.php">Scheduled Appointments</a></li>
-                        <li><a href="pastapp.php">Past Appointments</a></li>
+                        <li><a href="scheduledapp.php">Scheduled Appointments</a></li>
                     </ul>
                 </li>
                 <!--End Dropdown for appointments -->
-                <li><a href="helpdoctor.php">Help</a></li>
+
+                <li><a href="help.php">Help</a></li>
             </ul>
 
-            <!--Logged in user-->
             <ul class="nav navbar-nav navbar-right" id="log">
                 <li><a  style="color:#03CCFE" href="#">Logged in as: <?php echo $row2['userName']; ?></a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
+
+            </div><!-- /.navbar-collapse --></b>
         </div> <!-- /.container-fluid -->
-    </nav> <!-- /.navbar -->
+    </nav>
 
 
     <!-- OLD NAVBAR -->
     <div class="container">
 
-        <ol class="breadcrumb ">
+        <ol class="breadcrumb" id="bc1">
             <br>
             <div class="panel panel-default">
-                <div class="panel-heading"><b>Profile Information</b></div>
+                <div class="panel-heading" id="ph"><b>Scheduled Appointments</b></div>
                 <div class="panel-body">
-                    <table class="table table-hover ">
-                        <tbody>
-                        <tr>
-                            <th scope="row ">Username:</th>
-                            <td colspan="2 ">
-                                <?php echo $row2['userName']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row ">Full Legal Name:</th>
-                            <td>
-                                <?php echo $row2['firstName']." "; ?>
-                                <?php echo $row2['lastName']." "; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row ">Specialty:</th>
-                            <td colspan="2 ">
-                                <?php echo $row3['specialty']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row ">Sex:</th>
-                            <td colspan="2 ">
-                                <?php echo $row2['sex']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row ">Address:</th>
-                            <td colspan="2 ">
-                                <?php echo $row2['address']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row ">Phone Number:</th>
-                            <td colspan="2 ">
-                                <?php echo $row2['phone_no']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row ">Email Adress:</th>
-                            <td colspan="2 ">
-                                <?php echo $row2['userEmail']; ?>
-                            </td>
-                        </tr>
-                        </tbody>
+
+                    <!-- Add carousel here for potential appointment candidates -->
+
+                    <br><br>
+
+                    <?php
+                while ($row3 = $query2->fetch(PDO::FETCH_ASSOC)) {
+                    $button1 = "btn-cancel".$i;
+                    $doctorID = $row3['userID'];
+                    $appID = $row3['appointment_id'];
+
+                if(isset($_POST[$button1]))
+                {
+                    if($user_home->patientCancelAppointment($userID, $doctorID, $appID) && $user_home->takenAppointment($appID, 0))
+                    {
+                        $name = $row3['app_name'];
+                        $stime = "".$row3['start_time'];
+                        $etime = "".$row3['end_time'];
+                        $date = "".$row3['app_date'];
+                        $email = "".$row3['userEmail'];
+                        /*$message = "
+                        Hello,
+                        <br /><br />
+                        The appointment, $name, scheduled from $stime to $etime on $date has been canceled and is available
+                        for selection by others. Please delete the appointment if you would not like others to be able
+                        to schedule it.
+                        <br /><br />
+                        Thank you,
+                            Seal of Health Team
+                        ";
+                        $subject = "Appointment Cancellation - ".$row4['app_name'];
+                        $reg_user->send_mail($email,$message,$subject);*/
+                        echo " yay you did it";
+                        $user_home->redirect('scheduledapp.php');
+                    }
+                    else
+                    {
+                        die("fml you failed");
+                    }
+                }
+                ?>
+                    <table class="table table-bordered">
+                        <h4><b><?php echo $row3['app_name'];?></b></h4>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Specialty</th>
+                                <th>Location</th>
+                                <th>Contact Phone Number</th>
+                            </tr>
+                            <tr>
+                                <td><?php echo $row3['firstName']." ";?><?php echo $row3['lastName'];?></td>
+                                <td><?php echo $row3['specialty'];?></td>
+                                <td><?php echo $row3['streetAddress'].", ";?><?php echo $row3['city'].", ";?><?php echo $row3['state']." ";?><?php echo $row3['zipcode'];?></td>
+                                <td><?php echo $row3['phone_no'];?></td>
+                            </tr>
+                        </table>
+
+                        <br>
+
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td><?php echo $row3['app_date'];?></td>
+                                <td><?php echo $row3['start_time'];?></td>
+                                <td><?php echo $row3['end_time'];?></td>
+                                <td><?php echo "$".$row3['price'];?></td>
+                            </tr>
+                        </table>
                     </table>
 
-                    <div align="right"><li><a href="editprofiledoctor.php"><button class="btn btn-medium btn-info"><b>Edit Profile Information</b></button></right></a></li>
-                    </div>
-                </div>
-            </div>
+                    <div align="right">
+                        <form action="" method="POST">
+                            <button class="btn btn-medium btn-info" type="submit" name="btn-cancel<?php echo $i; ?>" style="text-align:right" color="blue">Cancel
+                        </form>
+                    </div><br><br>
 
-      </ol>
-      <br>
+                    <?php $i++; } ?>
+                </div>
+
+
+            </div>
+        </ol>
     </div>
 
-    <center>
-      <footer class="container-fluid" id="footer">
-        <p>
-          <h4>Copyright © Software Seals, 2017.</h4></p>
-      </footer>
-    </center>
-  </body>
 
 
-  </html>
+
+    <center><footer class="container-fluid" id="footer">
+            <p><h4>Copyright © Software Seals, 2017.</h4></p>
+        </footer></center>
+
+
+
+    <!-- Export a Table to PDF - END -->
+
+
+</body>
+</html>
+
+
+  
+
+</body>
+
+
+
+
+</html>

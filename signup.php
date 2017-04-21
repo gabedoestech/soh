@@ -22,7 +22,7 @@ if(isset($_POST['btn-signup']))
     {
         $msg = "
         <div class='alert alert-danger'>
-     <strong>Sorry!</strong> that email allready exists. Please try a different email address.
+     <strong>Sorry!</strong> that email already exists. Please try a different email address.
      </div>
      ";
     }
@@ -36,7 +36,7 @@ if(isset($_POST['btn-signup']))
                 $stmt->execute();
                 $userID = $stmt->fetchColumn();
 
-                $id = $reg_user->lasdID();
+                $id = $userID;
                 $key = base64_encode($id);
                 $id = $key;
                 $message = "
@@ -45,7 +45,7 @@ if(isset($_POST['btn-signup']))
                 Welcome to Seal of Health!<br/>
                 To complete your registration, please click on the following link
                 <br /><br />
-                <a href='https://notdevin.com/verify.php?id=$id&code=$code'>Click HERE to Activate</a>
+                <a href='https://www.sealofhealth.com/verify.php?id=$id&code=$code'>Click HERE to Activate</a>
                 <br /><br />
                 Thank You,
                 <br/>
@@ -82,7 +82,7 @@ if(isset($_POST['btn-signup']))
                 $stmt->execute();
                 $userID = $stmt->fetchColumn();
 
-                $id = $reg_user->lasdID();
+                $id = $userID;
                 $key = base64_encode($id);
                 $id = $key;
                 $message = "
@@ -90,7 +90,7 @@ if(isset($_POST['btn-signup']))
             <br /><br />
             Please click on the following link to authenticate $uname ($email) as a doctor
             <br /><br />
-            <a href='https://notdevin.com/verify.php?id=$id&code=$code'>Click HERE to Authenticate</a>
+            <a href='https://www.sealofhealth.com/verify.php?id=$id&code=$code'>Click HERE to Authenticate</a>
             ";
                 $subject = "Authentice Doctor Registration";
                 $reg_user->send_mail("sealofhealth@gmail.com",$message,$subject);

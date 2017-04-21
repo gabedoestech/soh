@@ -20,29 +20,9 @@ $row2 = $query->fetch(PDO::FETCH_ASSOC);
 $query2 = $user_home->runQuery("SELECT * FROM patient WHERE userID = $userID ");
 $query2->execute(array($_SESSION['userSession']));
 $row3 = $query2->fetch(PDO::FETCH_ASSOC);
-
-if(isset($_POST['btn-save']))
-{
-    $firstName = trim($_POST['firstName']);
-    $lastName = trim($_POST['lastName']);
-    $birth_date = trim($_POST['birth_date']);
-    $ethnicity = trim($_POST['ethnicity']);
-    $age = trim($_POST['age']);
-    $sex = trim($_POST['sex']);
-    $address = trim($_POST['address']);
-    $phone_no = trim($_POST['phone_no']);
-
-    if($user_home->updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no) && $user_home->updatePatient($userID, $birth_date, $ethnicity, $age))
-    {
-        echo " yay you did it";
-        $user_home->redirect('home.php');
-    }
-    else
-    {
-        die("fml you failed");
-    }
-}
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -162,10 +142,10 @@ if(isset($_POST['btn-save']))
 
 </head>
 
-    <body>
+<body>
         <!-- Logo -->
         <div class="mylogo">
-            <center><img class="logo-img img-responsive" src="Design2.png" width="inherit"></center>
+            <center><img src="Design2.png" width="608" height="230"></center>
         </div>
 
         <!-- NEW NAVBAR -->
@@ -201,114 +181,46 @@ if(isset($_POST['btn-save']))
       </div> <!-- /.container-fluid -->
         </nav>
 
-
-        <!-- OLD NAVBAR -->
         <div class="container">
 
             <ol class="breadcrumb" id="bc1">
                 <br>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><b>Profile Information</b></div>
+                    <div class="panel-heading"><b>Frequently Asked Questions</b></div>
                     <div class="panel-body">
-                       <form action="" method="POST">
-        <!-- Profile Information: User input -->
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Username:</label>
-            <div class="col-sm-10">
-                <p class="form-control-static"><?php echo $row2['userName']; ?>
-                </p>
-                <small id="helpInline" class="text-muted">
-                    (If you need to change your username, please contact the administrator)
-                </small>
-            </div>
-        </div>
+                        
+                    <b> Do I have to create an account in order to search for doctors? </b><br>
+                    <p>In order for users to search for doctors and create appointments, we do require the creation of an account on
+                        Seal of Health. By creating an account, you allow us to streamline the search process and tailor the results to
+                        match your needs and requirements so that you, the user, gets the absolute best experience we can provide.</p><hr>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Email:</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static"><?php echo $row2['userEmail']; ?>
-                    </p>
-                    <small id="helpInline" class="text-muted">
-                        (If you need to change your email, please contact the administrator)
-                    </small>
-                </div>
-            </div>
+                    <b>Am I, as a patient, able to cancel an appointment after I select one? </b><br><br>
+                    <p>Absolutely! Our product aims to help patients connect with doctors whenever it is most convenient for you. Should you
+                        choose to cancel an appointment, we will make sure the doctor recieves a notification about your cancellation so that
+                        that spot may be choosen by another patient if needed.</p><hr>
 
-        <div class="form-group row">
-            <label for="nameInput" class="col-sm-2 col-sm-form-label">First Name:</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" placeholder="Enter your first name" name="firstName" required>
-            </div>
-        </div>
+                    <b>Am I, as a doctor, able to cancel an appointment after a patient schedules one?</b><br><br>
+                    <p>Our system currently does not allow for doctors to cancel appointments once a patient has scheduled one.
+                        if you do need to cancel a previously scheduled appointment, it is the doctor's responsibility to notify the patient. However,
+                        we do highly encourage doctors to verify the appointment times and dates they list in order to avoid these situations entirely.</p><hr>
 
-                           <div class="form-group row">
-                               <label for="nameInput" class="col-sm-2 col-sm-form-label">Last Name:</label>
-                               <div class="col-sm-4">
-                                   <input class="form-control" type="text" placeholder="Enter your last name" name="lastName" required>
-                               </div>
-                           </div>
+                    <b>I can't remember my password! What should I do?</b><br><br>
+                    <p>You can recover your password by clicking on the 'Forgot your password?' link at the bottom of the login page.
+                        If you find for any reason that you are unable to log into your account, please contact our support team at sealofhealth@gmail.com
+                        for further instructions.
+                    </p><hr>
 
-                           <div class="form-group row">
-                               <label for="ageInput" class="col-sm-2 col-sm-form-label">Age:</label>
-                               <div class="col-sm-4">
-                                   <input class="form-control" type="text" placeholder="Enter your age" name="age" required>
-                               </div>
-                           </div>
-                           <!-- ADD DATE PICKER LATER TO MAKE ENTRY FANCY -->
-        <div class="form-group row">
-            <label for="birthdayInput" class="col-sm-2 col-sm-form-label">Date of Birth:</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" name="birth_date" id="example-name-input" required>
-            </div>
-        </div>
+                    <b>I didn't recieve an appointment confirmation. Was my appointment still created?</b><br><br>
+                    <p>If you did not recieve an appointment confirmation email after scheduling an appointment, you should not assume that the appointment
+                        was created. Check your 'Current Appointments' tab in your profile and if you do not see the appointment, try to reschedule the appointment.
+                        If you continue to have issues, please contact our support team at sealofhealth@gmail.com.</p><br>
 
-        <div class="form-group row">
-            <label for="sexInput" class="col-sm-2 col-sm-form-label">Sex:</label>
-            <div class="col-sm-4">
-                <label class="radio-inline"><input type="radio" name="sex" <?php if (isset($sex) && $sex=="male") echo "checked";?> value="Male" required>Male</label>
-                <label class="radio-inline"><input type="radio" name="sex" <?php if (isset($sex) && $sex=="female") echo "checked";?> value="Female">Female</label>
-            </div>
-        </div>
-
-        <!-- COULD USE DROP DOWN MENU -->
-        <div class="form-group row">
-            <label for="REInput" class="col-sm-2 col-sm-form-label">Ethnicity:</label>
-
-            <div class="col-sm-4">
-                <select name="ethnicity">
-                    <option value="African">African</option>
-                    <option value="Hispanic/Latino">Hispanic/Latino</option>
-                    <option value="Native American">Native American</option>
-                    <option value="Pacific Islander/Hawaiian">Pacific Islander/Hawaiian</option>
-                    <option value="White">White</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="addressInput" class="col-sm-2 col-sm-form-label">Address:</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" name="address" placeholder="Enter your full address" id="example-name-input" required>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="phoneInput" class="col-sm-2 col-sm-form-label">Phone Number:</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" name="phone_no" placeholder="Enter your phone number" id="example-name-input" required>
-            </div>
-        </div>
-
-        <div align="right"><button class="btn btn-medium btn-info" type="submit" name='btn-save'><b>Save Profile</b></button></div>
-        </form>
-                
-             
                     </div>
                 </div>
 
 
                 <br>
+            
         
     </ol>
 

@@ -1,0 +1,123 @@
+.mylogo {
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+
+/* added by gabe to track keep logo size in check*/
+
+.logo-img {
+    max-height: 200px;
+}
+
+.mylogo::after {
+    content: "";
+    background-image: url("http://www.baptistmedicalgroup.org/sites/default/files/images/article/iStock_000009314470Medium_1.jpg") no-repeat center center fixed;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: relative;
+    width: 100%;
+    z-index: -1;
+}
+
+body {
+    background-repeat: no-repeat;
+    position: relative;
+    display: block;
+}
+
+body::after {
+    content: "";
+    background-image: url("http://www.baptistmedicalgroup.org/sites/default/files/images/article/iStock_000009314470Medium_1.jpg");
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.panel-headings {
+    background: #100;
+    background-image: url("http://res.freestockphotos.biz/pictures/9/9090-an-abstract-blue-background-pv.jpg");
+}
+
+.form-horizontal {
+    background-image: url("https://i2.wp.com/www.pptbackgroundstemplates.com/backgrounds/White-Grid-Powerpoint-Design.jpg");
+}
+
+.form-group row {
+    background-image: url("oNHaish.jpg");
+}
+
+.breadcrumb {
+    background-image: url("h.jpg");
+    opacity: .725;
+}
+
+.nav-tabs {
+    background-image: url("https://s-media-cache-ak0.pinimg.com/originals/72/21/1d/72211d6b555afea993fd8ddc39bc2172.jpg");
+}
+
+.table-responsive {
+    background-color: white;
+}
+
+#footer {
+    background-color: rgb(60, 228, 255);
+    opacity: 0.8;
+    color: white;
+}
+
+a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: darkslategrey;
+    background-color: rgb(109, 235, 255);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px rgb(109, 235, 255);
+}
+
+.button:hover {
+    background-color: rgb(109, 235, 255)
+}
+
+.button:active {
+    background-color: rgb(109, 235, 255);
+    box-shadow: 0 3px rgb(109, 235, 255);
+    transform: translateY(4px);
+}
+
+#log {
+    color: darkslategray;
+}
+
+#ph {
+    background-image: none;
+    color: dimgrey;
+    color: black;
+}

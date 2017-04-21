@@ -70,13 +70,14 @@ class USER
         }
     }
 
-    public function updateUser($userID, $name, $sex, $address, $phone_no)
+    public function updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no)
     {
         try{
-            $stmt = $this->conn->prepare("UPDATE users SET name=:name, sex=:sex, address=:address, phone_no=:phone_no
+            $stmt = $this->conn->prepare("UPDATE users SET firstName=:firstName, lastName=:lastName, sex=:sex, address=:address, phone_no=:phone_no
                                                     WHERE userID=:userID ");
             $stmt->bindparam(":userID",$userID);
-            $stmt->bindparam(":name",$name);
+            $stmt->bindparam(":firstName",$firstName);
+            $stmt->bindparam(":lastName",$lastName);
             $stmt->bindparam(":sex",$sex);
             $stmt->bindparam(":address",$address);
             $stmt->bindparam(":phone_no",$phone_no);
@@ -89,14 +90,15 @@ class USER
         }
     }
 
-    public function updatePatient($userID, $birth_date, $ethnicity)
+    public function updatePatient($userID, $birth_date, $ethnicity, $age)
     {
         try{
-            $stmt = $this->conn->prepare("UPDATE patient SET birth_date=:birth_date, ethnicity=:ethnicity
+            $stmt = $this->conn->prepare("UPDATE patient SET birth_date=:birth_date, ethnicity=:ethnicity, age=:age
                                                     WHERE userID=:userID");
             $stmt->bindparam(":userID",$userID);
             $stmt->bindparam(":birth_date",$birth_date);
             $stmt->bindparam(":ethnicity",$ethnicity);
+            $stmt->bindparam(":age",$age);
             $stmt->execute();
             return $stmt;
         }
@@ -121,14 +123,17 @@ class USER
         }
     }
 
-    public function createAppointment($userID, $app_name, $location, $app_date, $start_time, $end_time, $price, $taken)
+    public function createAppointment($userID, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price, $taken)
     {
         try{
-            $stmt = $this->conn->prepare("INSERT INTO appointment(userID,app_name,location,app_date,start_time,end_time,price,taken)
-                                                VALUES(:userID,:app_name,:location,:app_date,:start_time,:end_time,:price,:taken)");
+            $stmt = $this->conn->prepare("INSERT INTO appointment(userID,app_name,streetAddress,city,state,zipcode,app_date,start_time,end_time,price,taken)
+                                                VALUES(:userID,:app_name,:streetAddress,:city,:state,:zipcode,:app_date,:start_time,:end_time,:price,:taken)");
             $stmt->bindparam(":userID",$userID);
             $stmt->bindparam(":app_name",$app_name);
-            $stmt->bindparam(":location",$location);
+            $stmt->bindparam(":streetAddress",$streetAddress);
+            $stmt->bindparam(":city",$city);
+            $stmt->bindparam(":state",$state);
+            $stmt->bindparam(":zipcode",$zipcode);
             $stmt->bindparam(":app_date",$app_date);
             $stmt->bindparam(":start_time",$start_time);
             $stmt->bindparam(":end_time",$end_time);
@@ -206,6 +211,94 @@ class USER
         }
     }
 
+    public function addAppointmentSummary($appointment_id, $summary)
+    {
+        try{
+            $stmt = $this->conn->prepare("UPDATE appointment SET summary=:summary WHERE appointment_id=:appointment_id");
+            $stmt->bindparam(":appointment_id",$appointment_id);
+            $stmt->bindparam(":summary",$summary);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert update to appointment into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function addVitals($temperature, $heartrate, $bloodpressure, $height, $weight, $BMI)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO vitals(temperature, heartrate, bloodpressure, height, weight, BMI)
+                                                VALUES(:temperature,:heartrate,:bloodpressure,:height,:weight,:BMI)");
+            $stmt->bindparam(":temperature",$temperature);
+            $stmt->bindparam(":heartrate",$heartrate);
+            $stmt->bindparam(":bloodpressure",$bloodpressure);
+            $stmt->bindparam(":height",$height);
+            $stmt->bindparam(":weight",$weight);
+            $stmt->bindparam(":BMI",$BMI);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert vitals into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function updates($userID_patient, $vitalsId)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO updates(userID_patient, vitalsId)
+                                                VALUES(:userID_patient,:vitalsId)");
+            $stmt->bindparam(":userID_patient",$userID_patient);
+            $stmt->bindparam(":vitalsId",$vitalsId);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert vitals into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function addPrescription($drugName, $instructions, $dosage, $startDate, $endDate, $duration)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO prescription(drugName,instructions,dosage,startDate,endDate,duration)
+                                                VALUES(:drugName,:instructions,:dosage,:startDate,:endDate,:duration)");
+            $stmt->bindparam(":drugName",$drugName);
+            $stmt->bindparam(":instructions",$instructions);
+            $stmt->bindparam(":dosage",$dosage);
+            $stmt->bindparam(":startDate",$startDate);
+            $stmt->bindparam(":endDate",$endDate);
+            $stmt->bindparam(":duration",$duration);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert prescription into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
+    public function prescribe($userID_doctor, $userID_patient, $drugId)
+    {
+        try{
+            $stmt = $this->conn->prepare("INSERT INTO prescribes(userID_doctor,userID_patient,drugId)
+                                                VALUES(:userID_doctor,:userID_patient,:drugId)");
+            $stmt->bindparam(":userID_doctor",$userID_doctor);
+            $stmt->bindparam(":userID_patient",$userID_patient);
+            $stmt->bindparam(":drugId",$drugId);
+            $stmt->execute();
+            return $stmt;
+        }
+        catch(PDOException $ex) {
+            die("Wasn't able to insert prescribes into the database.");
+            echo $ex->getMessage();
+        }
+    }
+
     public function login($email,$upass)
     {
         try
@@ -279,19 +372,19 @@ class USER
         $mail = new PHPMailer; // fill in your email information here
         $mail->IsSMTP();
         $mail->SMTPDebug  = 0;
-        $mail->Host       = 'mail.google.com';
-        $mail->Port       = 587;
-        $mail->SMTPSecure = 'tls';
+        $mail->Host       = 'mail.notdevin.com';
+        $mail->Port       = 465;
+        $mail->SMTPSecure = 'ssl';
         $mail->SMTPAuth   = true;
-        $mail->Username="emailAccount_here@gmail.com";
-        $mail->Password="password_here";
+        $mail->Username="_mainaccount@notdevin.com";
+        $mail->Password="PJQ_E_sc3y07";
         $mail->AddAddress($email);
         $mail->SetFrom('NoReply@Group6.com','Group 6');
         $mail->AddReplyTo('NoReply@Group6.com','Group 6');
         $mail->Subject    = $subject;
         $mail->MsgHTML($message);
         if (!$mail->send()){
-            echo "Mailer Error: " .$mail->ErrorInfo;
+            echo "Mailer Error: ".$mail->ErrorInfo;
         } else {
             echo "Message sent!";
         }
