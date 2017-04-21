@@ -39,7 +39,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function registerPatient($userID)
     {
         try{
@@ -54,7 +53,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function registerDoctor($userID)
     {
         try{
@@ -69,7 +67,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function updateUser($userID, $firstName, $lastName, $sex, $address, $phone_no)
     {
         try{
@@ -89,7 +86,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function updatePatient($userID, $birth_date, $ethnicity, $age)
     {
         try{
@@ -107,7 +103,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function updateDoctor($userID, $specialty)
     {
         try{
@@ -122,7 +117,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function createAppointment($userID, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price, $taken)
     {
         try{
@@ -147,7 +141,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-    
     public function updateAppointment($appointment_id, $app_name, $streetAddress, $city, $state, $zipcode, $app_date, $start_time, $end_time, $price)
     {
         try{
@@ -172,7 +165,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function scheduleAppointment($userID_patient, $userID_doctor, $appointment_id)
     {
         try{
@@ -189,7 +181,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function patientCancelAppointment($userID_patient, $userID_doctor, $appointment_id)
     {
         try{
@@ -206,7 +197,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function deleteAppointment($appointment_id)
     {
         try{
@@ -220,7 +210,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function takenAppointment($appointment_id, $taken)
     {
         try{
@@ -235,7 +224,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function addAppointmentSummary($appointment_id, $summary)
     {
         try{
@@ -250,7 +238,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function addVitals($temperature, $heartrate, $bloodpressure, $height, $weight, $BMI)
     {
         try{
@@ -270,7 +257,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function updates($userID_patient, $vitalsId)
     {
         try{
@@ -286,7 +272,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function addPrescription($drugName, $instructions, $dosage, $startDate, $endDate, $duration)
     {
         try{
@@ -306,7 +291,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function prescribe($userID_doctor, $userID_patient, $drugId)
     {
         try{
@@ -323,7 +307,6 @@ class USER
             echo $ex->getMessage();
         }
     }
-
     public function login($email,$upass)
     {
         try
@@ -368,12 +351,10 @@ class USER
         $adminCheck = $this->conn->prepare("SELECT * FROM doctor WHERE userID = :user_id");
         $adminCheck->execute(array(":user_id"=>$_SESSION['userSession']));
         $row2 = $adminCheck->fetch(PDO::FETCH_ASSOC);
-
         if($adminCheck->rowCount() > 0)
         {
             return true;
         }
-
     }
     public function is_logged_in()
     {
