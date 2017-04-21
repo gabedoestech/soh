@@ -63,3 +63,39 @@ Stack trace:
 #0 /home/sealofhe/public_html/searchapp.php(22): PDOStatement->execute(Array)
 #1 {main}
   thrown in /home/sealofhe/public_html/searchapp.php on line 22
+[21-Apr-2017 06:15:30 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/home.php:21
+Stack trace:
+#0 /home/sealofhe/public_html/home.php(21): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/home.php on line 21
+[21-Apr-2017 06:42:01 Etc/UTC] PHP Fatal error:  Call to undefined method USER::updateAppointment() in /home/sealofhe/public_html/editapp.php on line 49
+[21-Apr-2017 03:27:56 America/New_York] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/doctorscheduled.php:30
+Stack trace:
+#0 /home/sealofhe/public_html/doctorscheduled.php(30): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/doctorscheduled.php on line 30
+[21-Apr-2017 08:04:15 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/home.php:21
+Stack trace:
+#0 /home/sealofhe/public_html/home.php(21): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/home.php on line 21
+[21-Apr-2017 08:17:18 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/doctorhome.php:17
+Stack trace:
+#0 /home/sealofhe/public_html/doctorhome.php(17): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/doctorhome.php on line 17
+[21-Apr-2017 16:20:35 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/searchapp_styleupdated.php:22
+Stack trace:
+#0 /home/sealofhe/public_html/searchapp_styleupdated.php(22): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/searchapp_styleupdated.php on line 22
+[21-Apr-2017 16:47:04 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/searchapp_styleupdated.php:22
+Stack trace:
+#0 /home/sealofhe/public_html/searchapp_styleupdated.php(22): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/searchapp_styleupdated.php on line 22
+[21-Apr-2017 20:18:15 Etc/UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1' in /home/sealofhe/public_html/editprofilepatient.php:17
+Stack trace:
+#0 /home/sealofhe/public_html/editprofilepatient.php(17): PDOStatement->execute(Array)
+#1 {main}
+  thrown in /home/sealofhe/public_html/editprofilepatient.php on line 17
